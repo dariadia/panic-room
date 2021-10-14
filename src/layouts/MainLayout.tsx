@@ -16,6 +16,7 @@ export const Body: React.FC<{ theme: Theme }> = styled('div')`
     }
     &:hover {
       color: ${({ theme }) => theme.accent};
+      transition: color 0.2s;
     }
   }
 `

@@ -4,7 +4,7 @@ import { isClient } from './env'
 import { Preferences } from 'types'
 
 const lightTheme = {
-  text: '#302119',
+  text: '#030623',
   alert: '#4c1130',
   accent: '#073763',
   background: '#fafbfc',

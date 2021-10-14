@@ -28,7 +28,7 @@ type ApplicationProps = AppProps & {
 const App: React.FC<ApplicationProps> = ({ Component, pageProps }) => {
   const Layout: ComponentType = Component.Layout || React.Fragment
   const { t } = useTranslation(['common'])
-  const userTheme = isDarkMode() ? theme.darkTheme : theme.lightTheme
+  const userTheme = !isDarkMode() ? theme.darkTheme : theme.lightTheme
 
   return (
     <>
