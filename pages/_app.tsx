@@ -2,10 +2,11 @@ import React, { ComponentType } from 'react'
 import Head from 'next/head'
 import { AppProps } from 'next/app'
 
+import { appWithTranslation, useTranslation } from 'next-i18next'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import { normalize } from 'styled-normalize'
 
-import { appWithTranslation, useTranslation } from 'next-i18next'
+import { theme } from '../utils/theme'
 
 const GlobalStyle = createGlobalStyle`
  ${normalize}
@@ -22,12 +23,6 @@ const GlobalStyle = createGlobalStyle`
 
 type ApplicationProps = AppProps & {
   Component: AppProps['Component'] & { Layout?: React.FC }
-}
-
-const theme = {
-  colors: {
-    primary: '#0070f3',
-  },
 }
 
 const App: React.FC<ApplicationProps> = ({ Component, pageProps }) => {
