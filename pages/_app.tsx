@@ -2,7 +2,6 @@ import React, { ComponentType } from 'react'
 import Head from 'next/head'
 import { AppProps } from 'next/app'
 
-import { ChakraProvider } from "@chakra-ui/react"
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import { normalize } from 'styled-normalize'
 
@@ -52,7 +51,6 @@ const App: React.FC<ApplicationProps> = ({ Component, pageProps }) => {
         <link rel="icon" href="/favicon/favicon.ico" />
         <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png" />
       </Head>
-      <ChakraProvider>
         <ThemeProvider theme={theme}>
           {Component.Layout ? (
             <Layout {...pageProps}>
@@ -62,7 +60,6 @@ const App: React.FC<ApplicationProps> = ({ Component, pageProps }) => {
             <Component {...pageProps} />
           )}
         </ThemeProvider>
-        </ChakraProvider>
       <GlobalStyle />
     </>
   )
