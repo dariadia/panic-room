@@ -1,5 +1,7 @@
-import { PANIC_ROOM_PREFERENCES } from "constants/theme"
-import { isClient } from "./env"
+import { PANIC_ROOM_PREFERENCES } from 'constants/theme'
+import { isClient } from './env'
+
+import { Preferences } from 'types'
 
 const lightTheme = {
   text: '#302119',
@@ -15,7 +17,8 @@ const darkTheme = {
   background: '#302119',
 }
 
-export const isDarkMode = () => window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+export const isDarkMode = () =>
+  window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
 
 export const theme = {
   lightTheme,
@@ -24,10 +27,14 @@ export const theme = {
 
 export const defaultTheme = darkTheme
 
-
 export const hasUserPreferences = (): boolean => {
   if (!isClient()) return false
-  
+
   const userPreferences = localStorage.getItem(PANIC_ROOM_PREFERENCES)
   return Boolean(userPreferences)
+}
+
+export const setUserPreferences = (preferences: Preferences): void => {
+  if (!isClient()) return
+  localStorage.setItem(PANIC_ROOM_PREFERENCES, JSON.stringify(preferences))
 }
