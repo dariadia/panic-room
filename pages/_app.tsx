@@ -35,13 +35,13 @@ const App: React.FC<ApplicationProps> = ({ Component, pageProps }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
         <title>{t('app_title')}</title>
-        {/* <meta name="description" content={t('app_description')} /> */}
-        {/* <meta
+        <meta name="description" content={t('app_description')} />
+        <meta
           name="og:image"
           property="og:image"
-          content="/assets/share.png"
-        /> */}
-        {/* <meta name="twitter:image" content="/assets/share-avatar-v2.png" /> */}
+          content="/assets/panic-room.png"
+        />
+        <meta name="twitter:image" content="/assets/panic-room.png" />
         <link rel="manifest" href="/favicon/site.webmanifest.json" />
         <link rel="icon" href="/favicon/favicon.ico" />
         <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png" />
