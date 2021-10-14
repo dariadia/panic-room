@@ -6,7 +6,7 @@ import { appWithTranslation, useTranslation } from 'next-i18next'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import { normalize } from 'styled-normalize'
 
-import { theme } from '../utils/theme'
+import { theme, isDarkMode } from '../utils/theme'
 
 const GlobalStyle = createGlobalStyle`
  ${normalize}
@@ -28,6 +28,7 @@ type ApplicationProps = AppProps & {
 const App: React.FC<ApplicationProps> = ({ Component, pageProps }) => {
   const Layout: ComponentType = Component.Layout || React.Fragment
   const { t } = useTranslation(['common'])
+  const userTheme = isDarkMode() ? theme.darkTheme : theme.lightTheme
 
   return (
     <>
@@ -46,7 +47,7 @@ const App: React.FC<ApplicationProps> = ({ Component, pageProps }) => {
         <link rel="icon" href="/favicon/favicon.ico" />
         <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png" />
       </Head>
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={userTheme}>
           {Component.Layout ? (
             <Layout {...pageProps}>
               <Component {...pageProps} />
