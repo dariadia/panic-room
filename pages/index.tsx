@@ -1,10 +1,38 @@
-import styled from 'styled-components'
+import React from 'react'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
-const Title = styled.h1`
-  font-size: 50px;
-  color: ${({ theme }) => theme.colors.primary};
-`
+import { hasUserPreferences } from 'utils/theme'
+import { MainLayout } from '@/layouts'
 
-export default function Home() {
-  return <Title>Hello World</Title>
+import type { Locale, Page, SinglePage as SinglePageProps } from 'types'
+
+const HomePage: Page<SinglePageProps> = () => {
+  let hasSavedPreferences = false
+
+  hasSavedPreferences = hasUserPreferences()
+
+  return hasSavedPreferences ? <MainScreen /> : <WelcomeScreen />
 }
+
+const WelcomeScreen = () => <div>welcome</div>
+
+const MainScreen = () => <div>main</div>
+
+HomePage.Layout = ({ children, ...props }) => (
+  <MainLayout {...props}>{children}</MainLayout>
+)
+
+export async function getStaticProps({
+  locale,
+}: {
+  locale: Locale
+}): Promise<{ props: SinglePageProps }> {
+  return {
+    props: {
+      locale,
+      ...(await serverSideTranslations(locale, ['common'])),
+    },
+  }
+}
+
+export default HomePage
