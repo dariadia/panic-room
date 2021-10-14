@@ -6,7 +6,8 @@ import { appWithTranslation, useTranslation } from 'next-i18next'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import { normalize } from 'styled-normalize'
 
-import { theme, isDarkMode } from '../utils/theme'
+import { theme, isDarkMode, defaultTheme } from 'utils/theme'
+import { isClient } from 'utils/env'
 
 const GlobalStyle = createGlobalStyle`
  ${normalize}
@@ -28,7 +29,10 @@ type ApplicationProps = AppProps & {
 const App: React.FC<ApplicationProps> = ({ Component, pageProps }) => {
   const Layout: ComponentType = Component.Layout || React.Fragment
   const { t } = useTranslation(['common'])
-  const userTheme = isDarkMode() ? theme.darkTheme : theme.lightTheme
+  let userTheme = defaultTheme
+  if (isClient()) {
+    userTheme = isDarkMode() ? theme.darkTheme : theme.lightTheme
+  }
 
   return (
     <>

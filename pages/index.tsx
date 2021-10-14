@@ -1,11 +1,21 @@
 import React from 'react'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
+import { hasUserPreferences } from 'utils/theme'
+
 import type { Locale, Page, SinglePage as SinglePageProps } from 'types'
 
 const HomePage: Page<SinglePageProps> = () => {
-  return <h1>Hello World</h1>
+  let hasSavedPreferences = false
+
+  hasSavedPreferences = hasUserPreferences()
+
+  return hasSavedPreferences ? <MainScreen /> : <WelcomeScreen />
 }
+
+const WelcomeScreen = () => <div>welcome</div>
+
+const MainScreen = () => <div>main</div>
 
 export async function getStaticProps({
   locale,
