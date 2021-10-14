@@ -13,19 +13,19 @@ const lightTheme = {
 const darkTheme = {
   text: '#fafbfc',
   alert: '#4c1130',
-  accent: '#76a5af', // or try #d0e0e3
-  background: '#302119',
+  accent: '#76a5af',
+  background: '#030623',
 }
 
-export const isDarkMode = () =>
-  window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+export const isDarkMode = (): boolean =>
+  isClient() &&
+  window.matchMedia &&
+  window.matchMedia('(prefers-color-scheme: dark)').matches
 
 export const theme = {
   lightTheme,
   darkTheme,
 }
-
-export const defaultTheme = darkTheme
 
 export const hasUserPreferences = (): boolean => {
   if (!isClient()) return false
