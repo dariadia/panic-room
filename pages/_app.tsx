@@ -51,15 +51,15 @@ const App: React.FC<ApplicationProps> = ({ Component, pageProps }) => {
         <link rel="icon" href="/favicon/favicon.ico" />
         <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png" />
       </Head>
-        <ThemeProvider theme={userTheme}>
-          {Component.Layout ? (
-            <Layout {...pageProps}>
-              <Component {...pageProps} />
-            </Layout>
-          ) : (
+      <ThemeProvider theme={userTheme}>
+        {Component.Layout ? (
+          <Layout {...pageProps}>
             <Component {...pageProps} />
-          )}
-        </ThemeProvider>
+          </Layout>
+        ) : (
+          <Component {...pageProps} />
+        )}
+      </ThemeProvider>
       <GlobalStyle />
     </>
   )
