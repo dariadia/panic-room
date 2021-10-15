@@ -18,6 +18,7 @@ const GlobalStyle = createGlobalStyle`
   html {
     height: 100%;
     white-space: pre-line;
+    font-family: monospace;
     -webkit-font-smoothing: antialiased;
   }
 `

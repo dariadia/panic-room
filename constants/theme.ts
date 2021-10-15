@@ -1,4 +1,4 @@
-import { Preferences } from "types";
+import { Preferences } from 'types'
 
 export const defaultPreferences: Preferences = {
   allowMotion: true,
@@ -6,3 +6,6 @@ export const defaultPreferences: Preferences = {
 } as const
 
 export const PANIC_ROOM_PREFERENCES = 'panic-room-preferences'
+
+export const LIGHT = 'light'
+export const DARK = 'dark'

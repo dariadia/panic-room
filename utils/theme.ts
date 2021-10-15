@@ -1,4 +1,4 @@
-import { PANIC_ROOM_PREFERENCES } from 'constants/theme'
+import { DARK, LIGHT, PANIC_ROOM_PREFERENCES } from 'constants/theme'
 import { isClient } from './env'
 
 import { Preferences } from 'types'
@@ -21,6 +21,8 @@ export const theme = {
   lightTheme,
   darkTheme,
 }
+
+export const AVAILABLE_MODES = [DARK, LIGHT]
 
 export const hasUserPreferences = (): boolean => {
   if (!isClient()) return false
