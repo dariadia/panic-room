@@ -47,6 +47,7 @@ const WelcomeMessage = () => {
         i18nKey={`common:greeting`}
         components={{
           branding: <span />,
+          focused: <span />,
         }}
       />
     </section>

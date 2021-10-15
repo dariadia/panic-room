@@ -10,6 +10,8 @@ type ModeIconProps = {
   onClick?: () => void
 }
 
+const ICON_HEIGHT = FOOTER_HEIGHT * 2
+
 const ModeIcon: React.FC<ModeIconProps> = styled('input').attrs({
   type: 'radio',
 })<ModeIconProps>`
@@ -23,8 +25,8 @@ const ModeIcon: React.FC<ModeIconProps> = styled('input').attrs({
     position: absolute;
     top: -40px;
     left: -40px;
-    height: ${FOOTER_HEIGHT * 2}px;
-    width: ${FOOTER_HEIGHT * 2}px;
+    height: ${ICON_HEIGHT}px;
+    width: ${ICON_HEIGHT}px;
     transition: transform 600ms cubic-bezier(0.02, 0.94, 0.09, 0.97);
     background: url(../assets/${({ isDarkMode }) =>
       isDarkMode ? 'dark.svg' : 'light.svg'});
