@@ -5,6 +5,8 @@ import { DANNI_GITHUB, DANNI_LOGIN } from 'constants/locations'
 const PROJECT_START_YEAR = 2021
 const currentYear = new Date().getFullYear()
 
+export const FOOTER_HEIGHT = 24
+
 export const Footer: React.FC = styled('footer').attrs({
   children: (
     <>
@@ -16,4 +18,6 @@ export const Footer: React.FC = styled('footer').attrs({
       </span>
     </>
   ),
-})``
+})`
+  height: ${FOOTER_HEIGHT}px;
+`
