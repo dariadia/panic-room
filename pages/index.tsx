@@ -33,6 +33,9 @@ const WelcomeScreen: React.FC<{ theme: Theme }> = styled('div')<{
   margin: auto;
   filter: drop-shadow(1px 2px 8px hsl(220deg 60% 50%));
   background: ${({ theme }) => theme.accent};
+  border-radius: 4px;
+  padding: 16px;
+  color: #fafbfc;
 `
 
 const MainScreen = () => <div>main</div>
