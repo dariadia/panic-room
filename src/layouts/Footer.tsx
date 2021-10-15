@@ -1,6 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
+
 import { DANNI_GITHUB, DANNI_LOGIN } from 'constants/locations'
+
+import { ModeSwitcher } from '@/components'
 
 const PROJECT_START_YEAR = 2021
 const currentYear = new Date().getFullYear()
@@ -17,6 +20,7 @@ export const Footer: React.FC = styled('footer').attrs({
         {PROJECT_START_YEAR}
         {currentYear !== PROJECT_START_YEAR && ` – ${currentYear}`}
       </span>
+      <ModeSwitcher />
     </>
   ),
 })`
