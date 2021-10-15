@@ -27,4 +27,5 @@ export const Footer: React.FC = styled('footer').attrs({
   height: ${FOOTER_HEIGHT}px;
   display: flex;
   justify-content: space-between;
+  align-items: end;
 `
