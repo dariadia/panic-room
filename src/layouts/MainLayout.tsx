@@ -1,8 +1,11 @@
 import React, { useContext } from 'react'
 import styled, { ThemeContext } from 'styled-components'
-import { Theme } from 'types'
 
 import { Footer } from '.'
+
+import { isDarkMode } from 'utils/theme'
+
+import { Theme } from 'types'
 
 export const Body: React.FC<{ theme: Theme }> = styled('div')`
   background: ${({ theme }) => theme.background};
@@ -23,8 +26,10 @@ export const Body: React.FC<{ theme: Theme }> = styled('div')`
 
 export const MainLayout: React.FC = ({ children }) => {
   const theme = useContext(ThemeContext)
+  const userTheme = isDarkMode() ? theme.darkTheme : theme.lightTheme
+
   return (
-    <Body theme={theme}>
+    <Body theme={userTheme}>
       <main>{children}</main> <Footer />
     </Body>
   )

@@ -18,7 +18,9 @@ const darkTheme = {
 }
 
 export const isDarkMode = (): boolean =>
-  window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  isClient() &&
+  window.matchMedia &&
+  window.matchMedia('(prefers-color-scheme: dark)').matches
 
 export const theme = {
   lightTheme,
