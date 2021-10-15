@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import styled, { ThemeContext } from 'styled-components'
 
-import { Trans } from 'react-i18next'
+import { Trans, useTranslation } from 'react-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 import { hasUserPreferences } from 'utils/theme'
@@ -41,6 +41,7 @@ const WelcomeScreen: React.FC<{ theme: Theme }> = styled('div')<{
 `
 
 const WelcomeMessage = () => {
+  const { t } = useTranslation('common')
   return (
     <section>
       <Trans
@@ -50,6 +51,16 @@ const WelcomeMessage = () => {
           focused: <span />,
         }}
       />
+      <article>
+        <div>
+          <input type="checkbox" id={t('motion')} name={t('motion')} />
+          <label htmlFor={t('motion')}>{t('motion')}</label>
+        </div>
+        <div>
+          <input type="checkbox" id={t('sounds')} name={t('sounds')} />
+          <label htmlFor={t('sounds')}>{t('sounds')}</label>
+        </div>
+      </article>
     </section>
   )
 }
