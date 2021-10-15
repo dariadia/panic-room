@@ -1,4 +1,6 @@
 import React from 'react'
+import styled from 'styled-components'
+
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'react-i18next'
 
@@ -6,9 +8,16 @@ import { MainLayout } from '@/layouts'
 
 import type { Locale, Page, SinglePage as SinglePageProps } from 'types'
 
+const Title = styled('h1')`
+  display: block;
+  width: fit-content;
+  margin: auto;
+  padding-top: calc((100vh - 36px) / 2);
+`
+
 const Page404: Page<SinglePageProps> = () => {
   const { t } = useTranslation('error')
-  return <h1>{t('something_went_wrong')}</h1>
+  return <Title>{t('something_went_wrong')}</Title>
 }
 
 Page404.Layout = ({ children, ...props }) => (
