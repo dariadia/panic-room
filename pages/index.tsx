@@ -1,5 +1,7 @@
 import React, { useContext } from 'react'
 import styled, { ThemeContext } from 'styled-components'
+
+import { Trans } from 'react-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 import { hasUserPreferences } from 'utils/theme'
@@ -21,7 +23,7 @@ const HomePage: Page<SinglePageProps> = () => {
   )
 }
 
-const WelcomeMessage = () => <span>welcome</span>
+const MainScreen = () => <span>welcome</span>
 
 const WelcomeScreen: React.FC<{ theme: Theme }> = styled('div')<{
   theme: Theme
@@ -38,7 +40,18 @@ const WelcomeScreen: React.FC<{ theme: Theme }> = styled('div')<{
   color: #fafbfc;
 `
 
-const MainScreen = () => <div>main</div>
+const WelcomeMessage = () => {
+  return (
+    <section>
+      <Trans
+        i18nKey={`common:greeting`}
+        components={{
+          branding: <span />,
+        }}
+      />
+    </section>
+  )
+}
 
 HomePage.Layout = ({ children, ...props }) => (
   <MainLayout {...props}>{children}</MainLayout>

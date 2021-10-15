@@ -1,7 +1,7 @@
 {
   "app_title": "Panic Room",
   "app_description": "Centre your heart and find inner peace 💙",
-  "greeting": "Hi! Welcome <branding>to the Panic Room<branding>. First off, we want to know which of these you're comfortable with. You can change your preferences later in <focused>the menu</focused> in the bottom right corner",
+  "greeting": "Hi! Welcome <branding>to the Panic Room<branding>. \nFirst off, we want to know which of these you're comfortable with. You can change your preferences later in <focused>the menu</focused> in the bottom right corner",
   "motion": "moving items",
   "sounds": "sounds",
   "select_theme": "Choose a theme",
