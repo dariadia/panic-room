@@ -1,2 +1,2 @@
 export { MainLayout } from './MainLayout'
-export { Footer } from './Footer'
+export * from './Footer'
