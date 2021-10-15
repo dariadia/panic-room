@@ -3,8 +3,6 @@ import styled, { ThemeContext } from 'styled-components'
 
 import { Footer, FOOTER_HEIGHT } from './Footer'
 
-import { isDarkMode } from 'utils/theme'
-
 import { Theme } from 'types'
 
 const MAIN_PADDING = 24
@@ -32,11 +30,10 @@ const Main = styled('main')`
 `
 
 export const MainLayout: React.FC = ({ children }) => {
-  const theme = useContext(ThemeContext)
-  const userTheme = isDarkMode() ? theme.darkTheme : theme.lightTheme
+  const { darkModeActive, theme } = useContext(ThemeContext)
 
   return (
-    <Body theme={userTheme}>
+    <Body theme={darkModeActive ? theme.darkTheme : theme.lightTheme}>
       <Main>{children}</Main> <Footer />
     </Body>
   )
