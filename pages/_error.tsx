@@ -21,8 +21,8 @@ const ErrorPage = ({ statusCode }: ErrorPageProps): JSX.Element => {
   )
 }
 
-ErrorPage.getInitialProps = ({ res, err }: InitialProps) => {
-  const statusCode = res ? res.statusCode : err ? err.statusCode : 404
+ErrorPage.getInitialProps = ({ err }: InitialProps) => {
+  const statusCode = err ? err.statusCode : 'Something went wrong'
   return { statusCode }
 }
 export default ErrorPage
