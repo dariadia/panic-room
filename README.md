@@ -5,7 +5,7 @@
 
 ### To launch locally
 
-#### Requirments
+#### Requirements
 - Node v14
 
 #### Run
