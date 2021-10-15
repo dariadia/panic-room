@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from 'styled-components'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 import { hasUserPreferences } from 'utils/theme'
@@ -11,10 +12,18 @@ const HomePage: Page<SinglePageProps> = () => {
 
   hasSavedPreferences = hasUserPreferences()
 
-  return hasSavedPreferences ? <MainScreen /> : <WelcomeScreen />
+  return hasSavedPreferences ? (
+    <MainScreen />
+  ) : (
+    <WelcomeScreen>
+      <WelcomeMessage />
+    </WelcomeScreen>
+  )
 }
 
-const WelcomeScreen = () => <div>welcome</div>
+const WelcomeMessage = () => <div>welcome</div>
+
+const WelcomeScreen = styled('div')``
 
 const MainScreen = () => <div>main</div>
 
