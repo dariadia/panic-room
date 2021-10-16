@@ -32,6 +32,7 @@ const Main = styled('main')`
 
 export const MainLayout: React.FC = ({ children }) => {
   const { darkModeActive, theme } = useContext(ThemeContext)
+  console.log('MainLayout', darkModeActive)
 
   return (
     <Body theme={darkModeActive ? theme.darkTheme : theme.lightTheme}>
