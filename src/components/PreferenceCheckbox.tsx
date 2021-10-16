@@ -1,7 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export const PreferenceCheckbox: React.FC = styled('label')`
+export const PreferenceCheckbox: React.FC<{ htmlFor?: string }> = styled(
+  'label',
+)`
   display: flex;
   align-items: center;
   position: relative;

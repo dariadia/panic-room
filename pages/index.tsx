@@ -20,6 +20,7 @@ import {
 import { MainLayout } from '@/layouts'
 
 import type { Locale, Page, SinglePage as SinglePageProps, Theme } from 'types'
+import { Checkmark, PreferenceCheckbox } from '@/components'
 
 const Menu = styled('button')`
   :focus {
@@ -122,7 +123,7 @@ const WelcomeMessage: React.FC<{
         />
       </p>
       <article>
-        <div>
+        <PreferenceCheckbox htmlFor={t('motion')}>
           <input
             type="checkbox"
             id={t('motion')}
@@ -131,9 +132,10 @@ const WelcomeMessage: React.FC<{
               onCheckboxChange(event.target)
             }
           />
-          <label htmlFor={t('motion')}>{t('motion')}</label>
-        </div>
-        <div>
+          {t('motion')}
+          <Checkmark />
+        </PreferenceCheckbox>
+        <PreferenceCheckbox htmlFor={t('sounds')}>
           <input
             type="checkbox"
             id={t('sounds')}
@@ -142,8 +144,9 @@ const WelcomeMessage: React.FC<{
               onCheckboxChange(event.target)
             }
           />
-          <label htmlFor={t('sounds')}>{t('sounds')}</label>
-        </div>
+          {t('sounds')}
+          <Checkmark />
+        </PreferenceCheckbox>
         <Button onClick={() => setUserPreferences(preferences)}>
           {t('save')}
         </Button>
@@ -155,6 +158,7 @@ const WelcomeMessage: React.FC<{
 const Button = styled('button')`
   cursor: pointer;
   margin-top: 16px;
+  display: block;
 `
 
 HomePage.Layout = ({ children, ...props }) => (
