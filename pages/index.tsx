@@ -1,4 +1,12 @@
-import React, { ChangeEvent, useContext, useState } from 'react'
+import React, {
+  ChangeEvent,
+  useContext,
+  useState,
+  useRef,
+  useEffect,
+  Dispatch,
+  SetStateAction,
+} from 'react'
 import styled, { ThemeContext } from 'styled-components'
 
 import { Trans, useTranslation } from 'react-i18next'
@@ -16,13 +24,18 @@ import type { Locale, Page, SinglePage as SinglePageProps, Theme } from 'types'
 const HomePage: Page<SinglePageProps> = () => {
   const hasSavedPreferences = hasUserPreferences()
 
+  const [isMenuFocused, triggerMenuFocus] = useState(false)
+
   const { darkModeActive, theme } = useContext(ThemeContext)
 
   return hasSavedPreferences ? (
     <MainScreen />
   ) : (
     <WelcomeScreen theme={darkModeActive ? theme.darkTheme : theme.lightTheme}>
-      <WelcomeMessage />
+      <WelcomeMessage
+        triggerMenuFocus={triggerMenuFocus}
+        isMenuFocused={isMenuFocused}
+      />
     </WelcomeScreen>
   )
 }
@@ -54,13 +67,23 @@ const Branding = styled('span')`
   color: ${({ color }) => color};
 `
 
-const WelcomeMessage = () => {
+const WelcomeMessage: React.FC<{
+  triggerMenuFocus: Dispatch<SetStateAction<boolean>>
+  isMenuFocused: boolean
+}> = ({ triggerMenuFocus, isMenuFocused }) => {
   const { t } = useTranslation('common')
   const { darkModeActive, theme } = useContext(ThemeContext)
 
   const [preferences, setPreferences] = useState(defaultPreferences)
   const onCheckboxChange = (target: EventTarget & HTMLInputElement) =>
     setPreferences({ ...preferences, [target.name]: target.checked })
+
+  const menuButtonRef = useRef<HTMLButtonElement>(null)
+  useEffect(() => {
+    if (isMenuFocused && menuButtonRef.current) {
+      menuButtonRef.current.focus()
+    }
+  }, [isMenuFocused])
 
   return (
     <WelcomeSection>
@@ -84,7 +107,12 @@ const WelcomeMessage = () => {
         <Trans
           i18nKey={`common:greeting_intro`}
           components={{
-            focused: <span />,
+            focused: (
+              <button
+                onClick={() => triggerMenuFocus(true)}
+                ref={menuButtonRef}
+              />
+            ),
           }}
         />
       </p>
