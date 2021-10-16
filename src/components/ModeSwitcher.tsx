@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import styled, { ThemeContext } from 'styled-components'
 
 type ModeIconProps = {
@@ -35,12 +35,17 @@ export const ModeSwitcher: React.FC = () => {
   )
   const [isDarkMode, toggleMode] = useState(darkModeActive)
 
+  useEffect(() => {
+    console.log(isDarkMode, darkModeActive)
+    if (isDarkMode !== darkModeActive) {
+      console.log(377778)
+    }
+  }, [darkModeActive, isDarkMode])
+
   const onModeClick = () => {
     toggleMode(!isDarkMode)
     return isDarkMode ? switchToLightMode() : switchToDarkMode()
   }
-
-  console.log('ModeSwitcher', darkModeActive, isDarkMode)
 
   return <ModeIcon isDarkMode={isDarkMode} onClick={onModeClick} />
 }
