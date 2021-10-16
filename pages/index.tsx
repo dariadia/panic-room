@@ -123,7 +123,12 @@ const WelcomeMessage: React.FC<{
         />
       </p>
       <article>
-        <PreferenceCheckbox htmlFor={t('motion')}>
+        <PreferenceCheckbox
+          htmlFor={t('motion')}
+          color={
+            darkModeActive ? theme.darkTheme.brand : theme.lightTheme.brand
+          }
+        >
           <input
             type="checkbox"
             id={t('motion')}
@@ -135,7 +140,12 @@ const WelcomeMessage: React.FC<{
           {t('motion')}
           <Checkmark />
         </PreferenceCheckbox>
-        <PreferenceCheckbox htmlFor={t('sounds')}>
+        <PreferenceCheckbox
+          htmlFor={t('sounds')}
+          color={
+            darkModeActive ? theme.darkTheme.brand : theme.lightTheme.brand
+          }
+        >
           <input
             type="checkbox"
             id={t('sounds')}

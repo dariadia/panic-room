@@ -1,9 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export const PreferenceCheckbox: React.FC<{ htmlFor?: string }> = styled(
-  'label',
-)`
+export const PreferenceCheckbox: React.FC<{
+  htmlFor?: string
+  color?: string
+}> = styled('label')`
   display: flex;
   align-items: center;
   position: relative;
@@ -20,5 +21,11 @@ export const PreferenceCheckbox: React.FC<{ htmlFor?: string }> = styled(
     cursor: pointer;
     height: 0;
     width: 0;
+  }
+  input:checked ~ span:after {
+    display: block;
+  }
+  input:checked ~ span {
+    background-color: ${({ color }) => color};
   }
 `
