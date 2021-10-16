@@ -111,13 +111,18 @@ const WelcomeMessage = () => {
           />
           <label htmlFor={t('sounds')}>{t('sounds')}</label>
         </div>
-        <button onClick={() => setUserPreferences(preferences)}>
+        <Button onClick={() => setUserPreferences(preferences)}>
           {t('save')}
-        </button>
+        </Button>
       </article>
     </WelcomeSection>
   )
 }
+
+const Button = styled('button')`
+  cursor: pointer;
+  margin-top: 16px;
+`
 
 HomePage.Layout = ({ children, ...props }) => (
   <MainLayout {...props}>{children}</MainLayout>
