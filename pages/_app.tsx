@@ -46,9 +46,9 @@ const App: React.FC<ApplicationProps> = ({
         <meta
           name="og:image"
           property="og:image"
-          content="/assets/panic-room.png"
+          content="/assets/panic-room_v2.png"
         />
-        <meta name="twitter:image" content="/assets/panic-room.png" />
+        <meta name="twitter:image" content="/assets/panic-room_v2.png" />
         <link rel="manifest" href="/favicon/site.webmanifest.json" />
         <link rel="icon" href="/favicon/favicon.ico" />
         <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png" />

@@ -48,6 +48,12 @@ const WelcomeSection = styled('section')`
   font: 18px/24px monospace;
 `
 
+const Branding = styled('span')`
+  font-weight: bold;
+  font-family: fantasy;
+  color: blue;
+`
+
 const WelcomeMessage = () => {
   const { t } = useTranslation('common')
   const [preferences, setPreferences] = useState(defaultPreferences)
@@ -60,7 +66,7 @@ const WelcomeMessage = () => {
         <Trans
           i18nKey={`common:greeting`}
           components={{
-            branding: <span />,
+            branding: <Branding />,
           }}
         />
       </p>
