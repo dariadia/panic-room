@@ -60,6 +60,7 @@ const WelcomeMessage = () => {
           <input type="checkbox" id={t('sounds')} name={t('sounds')} />
           <label htmlFor={t('sounds')}>{t('sounds')}</label>
         </div>
+        <button>{t('save')}</button>
       </article>
     </section>
   )
