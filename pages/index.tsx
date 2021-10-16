@@ -21,6 +21,12 @@ import { MainLayout } from '@/layouts'
 
 import type { Locale, Page, SinglePage as SinglePageProps, Theme } from 'types'
 
+const Menu = styled('button')`
+  :focus {
+    background: red;
+  }
+`
+
 const HomePage: Page<SinglePageProps> = () => {
   const hasSavedPreferences = hasUserPreferences()
 
@@ -28,15 +34,27 @@ const HomePage: Page<SinglePageProps> = () => {
 
   const { darkModeActive, theme } = useContext(ThemeContext)
 
-  return hasSavedPreferences ? (
-    <MainScreen />
-  ) : (
-    <WelcomeScreen theme={darkModeActive ? theme.darkTheme : theme.lightTheme}>
-      <WelcomeMessage
-        triggerMenuFocus={triggerMenuFocus}
-        isMenuFocused={isMenuFocused}
-      />
-    </WelcomeScreen>
+  const menuRef = useRef<HTMLButtonElement>(null)
+  useEffect(() => {
+    if (isMenuFocused && menuRef.current) {
+      menuRef.current.focus()
+      console.log(isMenuFocused)
+    }
+  }, [isMenuFocused])
+
+  return (
+    <>
+      <Menu ref={menuRef}>menu here</Menu>
+      {hasSavedPreferences ? (
+        <MainScreen />
+      ) : (
+        <WelcomeScreen
+          theme={darkModeActive ? theme.darkTheme : theme.lightTheme}
+        >
+          <WelcomeMessage triggerMenuFocus={triggerMenuFocus} />
+        </WelcomeScreen>
+      )}
+    </>
   )
 }
 
@@ -69,21 +87,13 @@ const Branding = styled('span')`
 
 const WelcomeMessage: React.FC<{
   triggerMenuFocus: Dispatch<SetStateAction<boolean>>
-  isMenuFocused: boolean
-}> = ({ triggerMenuFocus, isMenuFocused }) => {
+}> = ({ triggerMenuFocus }) => {
   const { t } = useTranslation('common')
   const { darkModeActive, theme } = useContext(ThemeContext)
 
   const [preferences, setPreferences] = useState(defaultPreferences)
   const onCheckboxChange = (target: EventTarget & HTMLInputElement) =>
     setPreferences({ ...preferences, [target.name]: target.checked })
-
-  const menuButtonRef = useRef<HTMLButtonElement>(null)
-  useEffect(() => {
-    if (isMenuFocused && menuButtonRef.current) {
-      menuButtonRef.current.focus()
-    }
-  }, [isMenuFocused])
 
   return (
     <WelcomeSection>
@@ -107,12 +117,7 @@ const WelcomeMessage: React.FC<{
         <Trans
           i18nKey={`common:greeting_intro`}
           components={{
-            focused: (
-              <button
-                onClick={() => triggerMenuFocus(true)}
-                ref={menuButtonRef}
-              />
-            ),
+            focused: <button onClick={() => triggerMenuFocus(true)} />,
           }}
         />
       </p>
