@@ -41,4 +41,5 @@ export const hasUserPreferences = (): boolean => {
 export const setUserPreferences = (preferences: Preferences): void => {
   if (!isClient()) return
   localStorage.setItem(PANIC_ROOM_PREFERENCES, JSON.stringify(preferences))
+  window.location.reload()
 }
