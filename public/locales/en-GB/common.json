@@ -7,5 +7,6 @@
   "select_theme": "Choose a theme",
   "current_theme": "Currently, you have the <theme>{themeName}</theme>",
   "dark_theme": "dark theme",
-  "light_theme": "light theme"
+  "light_theme": "light theme",
+  "save": "save"
 }
