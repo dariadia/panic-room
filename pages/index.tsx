@@ -1,10 +1,14 @@
-import React, { useContext } from 'react'
+import React, { ChangeEvent, useContext, useState } from 'react'
 import styled, { ThemeContext } from 'styled-components'
 
 import { Trans, useTranslation } from 'react-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
-import { hasUserPreferences } from 'utils/theme'
+import {
+  defaultPreferences,
+  hasUserPreferences,
+  setUserPreferences,
+} from 'utils/theme'
 import { MainLayout } from '@/layouts'
 
 import type { Locale, Page, SinglePage as SinglePageProps, Theme } from 'types'
@@ -42,6 +46,10 @@ const WelcomeScreen: React.FC<{ theme: Theme }> = styled('div')<{
 
 const WelcomeMessage = () => {
   const { t } = useTranslation('common')
+  const [preferences, setPreferences] = useState(defaultPreferences)
+  const onCheckboxChange = (target: EventTarget & HTMLInputElement) =>
+    setPreferences({ ...preferences, [target.name]: target.checked })
+
   return (
     <section>
       <Trans
@@ -53,14 +61,30 @@ const WelcomeMessage = () => {
       />
       <article>
         <div>
-          <input type="checkbox" id={t('motion')} name={t('motion')} />
+          <input
+            type="checkbox"
+            id={t('motion')}
+            name="allowMotion"
+            onChange={(event: ChangeEvent<HTMLInputElement>) =>
+              onCheckboxChange(event.target)
+            }
+          />
           <label htmlFor={t('motion')}>{t('motion')}</label>
         </div>
         <div>
-          <input type="checkbox" id={t('sounds')} name={t('sounds')} />
+          <input
+            type="checkbox"
+            id={t('sounds')}
+            name="allowSounds"
+            onChange={(event: ChangeEvent<HTMLInputElement>) =>
+              onCheckboxChange(event.target)
+            }
+          />
           <label htmlFor={t('sounds')}>{t('sounds')}</label>
         </div>
-        <button>{t('save')}</button>
+        <button onClick={() => setUserPreferences(preferences)}>
+          {t('save')}
+        </button>
       </article>
     </section>
   )
