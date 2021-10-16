@@ -8,7 +8,7 @@ const lightTheme = {
   alert: '#4c1130',
   accent: '#073763',
   background: '#fafbfc',
-  brand: 'aliceblue',
+  brand: 'aqua',
 }
 
 const darkTheme = {
