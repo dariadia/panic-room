@@ -22,8 +22,24 @@ import { MainLayout } from '@/layouts'
 import type { Locale, Page, SinglePage as SinglePageProps, Theme } from 'types'
 import { Checkmark, PreferenceCheckbox } from '@/components'
 
+const MenuWrapper = () => {
+  const [isMenuOpen, triggerMenuOpen] = useState(false)
+  return (
+    <>
+      <span onClick={() => triggerMenuOpen(!isMenuOpen)}>⚙️</span>
+      {isMenuOpen && <MenuDropdown>hello</MenuDropdown>}
+    </>
+  )
+}
+
+const MenuDropdown = styled('div')`
+  position: absolute;
+  padding: 16px;
+  background: red;
+`
+
 export const Menu = styled('button').attrs({
-  children: '⚙️',
+  children: <MenuWrapper />,
 })`
   background: transparent;
   border: none;
