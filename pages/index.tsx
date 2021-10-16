@@ -38,7 +38,6 @@ const HomePage: Page<SinglePageProps> = () => {
   useEffect(() => {
     if (isMenuFocused && menuRef.current) {
       menuRef.current.focus()
-      console.log(isMenuFocused)
     }
   }, [isMenuFocused])
 
