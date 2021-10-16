@@ -114,7 +114,7 @@ const WelcomeMessage: React.FC<{
           }}
         />
       </p>
-      <p>
+      <p style={{ marginBottom: '32px' }}>
         <Trans
           i18nKey={`common:greeting_intro`}
           components={{
@@ -167,7 +167,7 @@ const WelcomeMessage: React.FC<{
 
 const Button = styled('button')`
   cursor: pointer;
-  margin-top: 16px;
+  margin-top: 36px;
   display: block;
 `
 
