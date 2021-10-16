@@ -24,6 +24,11 @@ export const theme = {
 
 export const AVAILABLE_MODES = [DARK, LIGHT]
 
+export const defaultPreferences = {
+  allowMotion: true,
+  allowSounds: true,
+}
+
 export const hasUserPreferences = (): boolean => {
   if (!isClient()) return false
 
