@@ -36,9 +36,8 @@ export const ModeSwitcher: React.FC = () => {
   const [isDarkMode, toggleMode] = useState(darkModeActive)
 
   useEffect(() => {
-    console.log(isDarkMode, darkModeActive)
     if (isDarkMode !== darkModeActive) {
-      console.log(377778)
+      toggleMode(darkModeActive)
     }
   }, [darkModeActive, isDarkMode])
 
