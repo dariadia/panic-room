@@ -118,7 +118,12 @@ const WelcomeMessage: React.FC<{
         <Trans
           i18nKey={`common:greeting_intro`}
           components={{
-            focused: <button onClick={() => triggerMenuFocus(true)} />,
+            focused: (
+              <button
+                onClick={() => triggerMenuFocus(true)}
+                style={{ cursor: 'pointer' }}
+              />
+            ),
           }}
         />
       </p>
