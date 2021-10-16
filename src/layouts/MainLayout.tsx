@@ -9,6 +9,7 @@ const MAIN_PADDING = 24
 
 export const Body: React.FC<{ theme: Theme }> = styled('div')`
   background: ${({ theme }) => theme.background};
+  transition: background-color 400ms ease;
   color: ${({ theme }) => theme.text};
   min-width: 100vw;
   min-height: 100vh;
