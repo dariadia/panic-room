@@ -1,3 +1,10 @@
+export interface EventTarget {
+  id?: string
+  parentNode?: { id: string }
+  name?: { value: string }
+}
+
 export interface Event {
-  [key: string]: any
+  preventDefault: () => void
+  target: EventTarget
 }
