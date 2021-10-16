@@ -1,7 +1,5 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
-
-import { useDarkMode } from 'next-dark-mode'
+import React, { useState, useContext } from 'react'
+import styled, { ThemeContext } from 'styled-components'
 
 type ModeIconProps = {
   isDarkMode: boolean
@@ -32,7 +30,9 @@ const ModeIcon: React.FC<ModeIconProps> = styled('input').attrs({
 `
 
 export const ModeSwitcher: React.FC = () => {
-  const { darkModeActive, switchToDarkMode, switchToLightMode } = useDarkMode()
+  const { darkModeActive, switchToDarkMode, switchToLightMode } = useContext(
+    ThemeContext,
+  )
   const [isDarkMode, toggleMode] = useState(darkModeActive)
 
   const onModeClick = () => {
