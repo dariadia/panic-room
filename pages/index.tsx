@@ -44,6 +44,10 @@ const WelcomeScreen: React.FC<{ theme: Theme }> = styled('div')<{
   color: #fafbfc;
 `
 
+const WelcomeSection = styled('section')`
+  font: 18px/24px monospace;
+`
+
 const WelcomeMessage = () => {
   const { t } = useTranslation('common')
   const [preferences, setPreferences] = useState(defaultPreferences)
@@ -51,14 +55,23 @@ const WelcomeMessage = () => {
     setPreferences({ ...preferences, [target.name]: target.checked })
 
   return (
-    <section>
-      <Trans
-        i18nKey={`common:greeting`}
-        components={{
-          branding: <span />,
-          focused: <span />,
-        }}
-      />
+    <WelcomeSection>
+      <p>
+        <Trans
+          i18nKey={`common:greeting`}
+          components={{
+            branding: <span />,
+          }}
+        />
+      </p>
+      <p>
+        <Trans
+          i18nKey={`common:greeting_intro`}
+          components={{
+            focused: <span />,
+          }}
+        />
+      </p>
       <article>
         <div>
           <input
@@ -86,7 +99,7 @@ const WelcomeMessage = () => {
           {t('save')}
         </button>
       </article>
-    </section>
+    </WelcomeSection>
   )
 }
 
