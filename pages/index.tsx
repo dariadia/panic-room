@@ -67,7 +67,7 @@ const WelcomeScreen: React.FC<{ theme: Theme }> = styled('div')<{
   min-width: 260px;
   width: fit-content;
   max-width: calc(100% - 32px);
-  min-height: 70vh;
+  min-height: 50vh;
   margin: auto;
   filter: drop-shadow(1px 2px 8px hsl(220deg 60% 50%));
   background: ${({ theme }) => theme.accent};
