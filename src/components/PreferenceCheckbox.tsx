@@ -15,6 +15,10 @@ export const PreferenceCheckbox: React.FC<{
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  &: hover {
+    filter: drop-shadow(1px 2px 8px hsl(220deg 60% 50%));
+    transition: filter 0.2s;
+  }
   > input {
     position: absolute;
     opacity: 0;
