@@ -51,11 +51,13 @@ const WelcomeSection = styled('section')`
 const Branding = styled('span')`
   font-weight: bold;
   font-family: fantasy;
-  color: blue;
+  color: ${({ color }) => color};
 `
 
 const WelcomeMessage = () => {
   const { t } = useTranslation('common')
+  const { darkModeActive, theme } = useContext(ThemeContext)
+
   const [preferences, setPreferences] = useState(defaultPreferences)
   const onCheckboxChange = (target: EventTarget & HTMLInputElement) =>
     setPreferences({ ...preferences, [target.name]: target.checked })
@@ -66,7 +68,15 @@ const WelcomeMessage = () => {
         <Trans
           i18nKey={`common:greeting`}
           components={{
-            branding: <Branding />,
+            branding: (
+              <Branding
+                color={
+                  darkModeActive
+                    ? theme.darkTheme.brand
+                    : theme.lightTheme.brand
+                }
+              />
+            ),
           }}
         />
       </p>

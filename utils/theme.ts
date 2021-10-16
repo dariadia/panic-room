@@ -8,6 +8,7 @@ const lightTheme = {
   alert: '#4c1130',
   accent: '#073763',
   background: '#fafbfc',
+  brand: 'aliceblue',
 }
 
 const darkTheme = {
@@ -15,6 +16,7 @@ const darkTheme = {
   alert: '#4c1130',
   accent: '#76a5af',
   background: '#030623',
+  brand: 'blue',
 }
 
 export const theme = {
