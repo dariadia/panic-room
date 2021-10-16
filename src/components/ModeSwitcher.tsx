@@ -40,5 +40,7 @@ export const ModeSwitcher: React.FC = () => {
     return isDarkMode ? switchToLightMode() : switchToDarkMode()
   }
 
+  console.log(isDarkMode)
+
   return <ModeIcon isDarkMode={isDarkMode} onClick={onModeClick} />
 }
