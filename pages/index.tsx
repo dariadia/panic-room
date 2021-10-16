@@ -22,9 +22,19 @@ import { MainLayout } from '@/layouts'
 import type { Locale, Page, SinglePage as SinglePageProps, Theme } from 'types'
 import { Checkmark, PreferenceCheckbox } from '@/components'
 
-const Menu = styled('button')`
+export const Menu = styled('button').attrs({
+  children: '⚙️',
+})`
+  background: transparent;
+  border: none;
+  padding: 8px;
+  border-radius: 100%;
+  position: absolute;
+  top: 14px;
   :focus {
-    background: red;
+    outline: none;
+    filter: drop-shadow(1px 2px 8px hsl(220deg 60% 50%));
+    background: gold;
   }
 `
 
@@ -45,7 +55,7 @@ const HomePage: Page<SinglePageProps> = () => {
 
   return (
     <>
-      <Menu ref={menuRef}>menu here</Menu>
+      <Menu ref={menuRef} />
       {hasSavedPreferences ? (
         <MainScreen />
       ) : (
@@ -68,7 +78,7 @@ const WelcomeScreen: React.FC<{ theme: Theme }> = styled('div')<{
   width: fit-content;
   max-width: calc(100% - 32px);
   min-height: 50vh;
-  margin: auto;
+  margin: 8px auto 0;
   filter: drop-shadow(1px 2px 8px hsl(220deg 60% 50%));
   background: ${({ theme }) => theme.accent};
   border-radius: 4px;
