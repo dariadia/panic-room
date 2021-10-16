@@ -6,6 +6,7 @@ export const PreferenceCheckbox: React.FC<{
   color?: string
 }> = styled('label')`
   display: flex;
+  width: fit-content;
   align-items: center;
   position: relative;
   padding-left: 35px;
