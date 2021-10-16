@@ -22,13 +22,28 @@ import { MainLayout } from '@/layouts'
 import type { Locale, Page, SinglePage as SinglePageProps, Theme } from 'types'
 import { Checkmark, PreferenceCheckbox } from '@/components'
 
-const MenuWrapper = () => {
+const MenuWrapper = ({
+  isMenuFocused,
+  triggerMenuFocus,
+}: {
+  isMenuFocused: boolean
+  triggerMenuFocus: Dispatch<SetStateAction<boolean>>
+}) => {
   const [isMenuOpen, triggerMenuOpen] = useState(false)
+
+  const menuRef = useRef<HTMLButtonElement>(null)
+  useEffect(() => {
+    if (isMenuFocused && menuRef.current) {
+      menuRef.current.focus()
+      triggerMenuFocus(false)
+    }
+  }, [isMenuFocused, triggerMenuFocus])
+
   return (
-    <>
-      <span onClick={() => triggerMenuOpen(!isMenuOpen)}>⚙️</span>
+    <Menu ref={menuRef} onClick={() => triggerMenuOpen(!isMenuOpen)}>
+      <span>⚙️</span>
       {isMenuOpen && <MenuDropdown>hello</MenuDropdown>}
-    </>
+    </Menu>
   )
 }
 
@@ -38,9 +53,7 @@ const MenuDropdown = styled('div')`
   background: red;
 `
 
-export const Menu = styled('button').attrs({
-  children: <MenuWrapper />,
-})`
+export const Menu = styled('button')`
   background: transparent;
   border: none;
   padding: 8px;
@@ -61,17 +74,12 @@ const HomePage: Page<SinglePageProps> = () => {
 
   const { darkModeActive, theme } = useContext(ThemeContext)
 
-  const menuRef = useRef<HTMLButtonElement>(null)
-  useEffect(() => {
-    if (isMenuFocused && menuRef.current) {
-      menuRef.current.focus()
-      triggerMenuFocus(false)
-    }
-  }, [isMenuFocused])
-
   return (
     <>
-      <Menu ref={menuRef} />
+      <MenuWrapper
+        isMenuFocused={isMenuFocused}
+        triggerMenuFocus={triggerMenuFocus}
+      />
       {hasSavedPreferences ? (
         <MainScreen />
       ) : (
