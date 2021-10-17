@@ -36,6 +36,7 @@ const MenuWrapper = ({
     if (isMenuFocused && menuRef.current) {
       menuRef.current.focus()
       triggerMenuFocus(false)
+      setTimeout(() => menuRef.current?.blur(), 800)
     }
   }, [isMenuFocused, triggerMenuFocus])
 
