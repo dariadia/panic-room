@@ -40,7 +40,7 @@ const Checkbox: React.FC<{
 type PreferenceCheckboxProps = {
   id: string
   name: string
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void
+  onChange: (target: EventTarget & HTMLInputElement) => void
   color: string
 }
 
