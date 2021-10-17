@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { ChangeEvent } from 'react'
 import styled from 'styled-components'
 
-export const PreferenceCheckbox: React.FC<{
+import { Checkmark } from '.'
+
+const Checkbox: React.FC<{
   htmlFor?: string
   color?: string
 }> = styled('label')`
@@ -34,3 +36,30 @@ export const PreferenceCheckbox: React.FC<{
     background-color: ${({ color }) => color};
   }
 `
+
+type PreferenceCheckboxProps = {
+  id: string
+  name: string
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void
+  color: string
+}
+
+export const PreferenceCheckbox: React.FC<PreferenceCheckboxProps> = ({
+  id,
+  name,
+  onChange,
+  color,
+}) => (
+  <Checkbox htmlFor={id} color={color}>
+    <input
+      type="checkbox"
+      id={id}
+      name={name}
+      onChange={(event: ChangeEvent<HTMLInputElement>) =>
+        onChange(event.target)
+      }
+    />
+    {id}
+    <Checkmark />
+  </Checkbox>
+)

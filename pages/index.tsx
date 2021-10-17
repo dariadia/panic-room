@@ -1,5 +1,4 @@
 import React, {
-  ChangeEvent,
   useContext,
   useState,
   useRef,
@@ -19,7 +18,7 @@ import {
 } from 'utils/theme'
 import { MainLayout } from '@/layouts'
 
-import { Checkmark, PreferenceCheckbox } from '@/components'
+import { PreferenceCheckbox } from '@/components'
 
 import type {
   Event,
@@ -184,39 +183,21 @@ const WelcomeMessage: React.FC<{
       </p>
       <article>
         <PreferenceCheckbox
-          htmlFor={t('motion')}
+          id={t('motion')}
+          name="allowMotion"
+          onChange={onCheckboxChange}
           color={
             darkModeActive ? theme.darkTheme.brand : theme.lightTheme.brand
           }
-        >
-          <input
-            type="checkbox"
-            id={t('motion')}
-            name="allowMotion"
-            onChange={(event: ChangeEvent<HTMLInputElement>) =>
-              onCheckboxChange(event.target)
-            }
-          />
-          {t('motion')}
-          <Checkmark />
-        </PreferenceCheckbox>
+        />
         <PreferenceCheckbox
-          htmlFor={t('sounds')}
+          id={t('sounds')}
+          name="allowSounds"
+          onChange={onCheckboxChange}
           color={
             darkModeActive ? theme.darkTheme.brand : theme.lightTheme.brand
           }
-        >
-          <input
-            type="checkbox"
-            id={t('sounds')}
-            name="allowSounds"
-            onChange={(event: ChangeEvent<HTMLInputElement>) =>
-              onCheckboxChange(event.target)
-            }
-          />
-          {t('sounds')}
-          <Checkmark />
-        </PreferenceCheckbox>
+        />
         <Button onClick={() => setUserPreferences(preferences)}>
           {t('save')}
         </Button>
