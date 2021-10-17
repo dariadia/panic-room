@@ -50,9 +50,14 @@ const MenuWrapper = ({
   }, [isMenuFocused, triggerMenuFocus])
 
   const MENU_ID = 'menu-dropdown'
+  const MENU_OPTION_MOTION = 'menu-option-motion'
+  const MENU_OPTION_SOUNDS = 'meun-option-sounds'
+
+  const MENU_IDs = [MENU_ID, MENU_OPTION_MOTION, MENU_OPTION_SOUNDS]
   const onMenuClick = (targetId?: string) => {
     setTimeout(() => menuRef.current?.blur(), 800)
-    if (targetId !== MENU_ID) {
+    console.log(targetId)
+    if (!MENU_IDs.includes(targetId as string)) {
       triggerMenuOpen(!isMenuOpen)
     }
   }
@@ -75,6 +80,7 @@ const MenuWrapper = ({
           theme={darkModeActive ? theme.darkTheme : theme.lightTheme}
         >
           <PreferenceCheckbox
+            labelId={MENU_OPTION_MOTION}
             id={t('motion')}
             name="allowMotion"
             onChange={onCheckboxChange}
@@ -85,6 +91,7 @@ const MenuWrapper = ({
             <span>{t('motion')}</span>
           </PreferenceCheckbox>
           <PreferenceCheckbox
+            labelId={MENU_OPTION_SOUNDS}
             id={t('sounds')}
             name="allowSounds"
             onChange={onCheckboxChange}

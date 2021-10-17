@@ -6,6 +6,7 @@ import { Checkmark } from '.'
 const Checkbox: React.FC<{
   htmlFor?: string
   color?: string
+  id?: string
 }> = styled('label')`
   display: flex;
   width: fit-content;
@@ -39,6 +40,7 @@ const Checkbox: React.FC<{
 
 type PreferenceCheckboxProps = {
   id: string
+  labelId?: string
   name: string
   onChange: (target: EventTarget & HTMLInputElement) => void
   color: string
@@ -46,12 +48,13 @@ type PreferenceCheckboxProps = {
 
 export const PreferenceCheckbox: React.FC<PreferenceCheckboxProps> = ({
   id,
+  labelId,
   name,
   onChange,
   color,
   children,
 }) => (
-  <Checkbox htmlFor={id} color={color}>
+  <Checkbox htmlFor={id} color={color} id={labelId}>
     <input
       type="checkbox"
       id={id}
