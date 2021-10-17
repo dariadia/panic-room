@@ -19,8 +19,15 @@ import {
 } from 'utils/theme'
 import { MainLayout } from '@/layouts'
 
-import type { Locale, Page, SinglePage as SinglePageProps, Theme } from 'types'
 import { Checkmark, PreferenceCheckbox } from '@/components'
+
+import type {
+  Event,
+  Locale,
+  Page,
+  SinglePage as SinglePageProps,
+  Theme,
+} from 'types'
 
 const MenuWrapper = ({
   isMenuFocused,
@@ -40,10 +47,23 @@ const MenuWrapper = ({
     }
   }, [isMenuFocused, triggerMenuFocus])
 
+  const MENU_ID = 'menu-dropdown'
+  const onMenuClick = (targetId?: string) => {
+    setTimeout(() => menuRef.current?.blur(), 800)
+    if (targetId !== MENU_ID) {
+      triggerMenuOpen(!isMenuOpen)
+    }
+  }
+
   return (
-    <Menu ref={menuRef} onClick={() => triggerMenuOpen(!isMenuOpen)}>
+    <Menu
+      ref={menuRef}
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      onClick={(event: Event) => onMenuClick(event.target?.id)}
+    >
       <span>⚙️</span>
-      {isMenuOpen && <MenuDropdown>hello</MenuDropdown>}
+      {isMenuOpen && <MenuDropdown id={MENU_ID}>hello</MenuDropdown>}
     </Menu>
   )
 }
