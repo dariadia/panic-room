@@ -49,6 +49,7 @@ export const PreferenceCheckbox: React.FC<PreferenceCheckboxProps> = ({
   name,
   onChange,
   color,
+  children,
 }) => (
   <Checkbox htmlFor={id} color={color}>
     <input
@@ -59,7 +60,7 @@ export const PreferenceCheckbox: React.FC<PreferenceCheckboxProps> = ({
         onChange(event.target)
       }
     />
-    {id}
+    {children}
     <Checkmark />
   </Checkbox>
 )

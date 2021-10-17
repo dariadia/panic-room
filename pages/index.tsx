@@ -81,7 +81,9 @@ const MenuWrapper = ({
             color={
               darkModeActive ? theme.darkTheme.brand : theme.lightTheme.brand
             }
-          />
+          >
+            <span>{t('motion')}</span>
+          </PreferenceCheckbox>
           <PreferenceCheckbox
             id={t('sounds')}
             name="allowSounds"
@@ -89,7 +91,9 @@ const MenuWrapper = ({
             color={
               darkModeActive ? theme.darkTheme.brand : theme.lightTheme.brand
             }
-          />
+          >
+            <span style={{ lineHeight: 2 }}>{t('sounds')}</span>
+          </PreferenceCheckbox>
         </MenuDropdown>
       )}
     </Menu>
@@ -110,6 +114,7 @@ export const Menu = styled('button')`
   padding: 8px;
   border-radius: 100%;
   position: absolute;
+  z-index: 2;
   top: 14px;
   :focus {
     outline: none;
@@ -220,7 +225,9 @@ const WelcomeMessage: React.FC<{
           color={
             darkModeActive ? theme.darkTheme.brand : theme.lightTheme.brand
           }
-        />
+        >
+          <span>{t('motion')}</span>
+        </PreferenceCheckbox>
         <PreferenceCheckbox
           id={t('sounds')}
           name="allowSounds"
@@ -228,7 +235,9 @@ const WelcomeMessage: React.FC<{
           color={
             darkModeActive ? theme.darkTheme.brand : theme.lightTheme.brand
           }
-        />
+        >
+          <span>{t('sounds')}</span>
+        </PreferenceCheckbox>
         <Button onClick={() => setUserPreferences(preferences)}>
           {t('save')}
         </Button>
