@@ -35,6 +35,9 @@ const MenuWrapper = ({
   isMenuFocused: boolean
   triggerMenuFocus: Dispatch<SetStateAction<boolean>>
 }) => {
+  const { darkModeActive, theme } = useContext(ThemeContext)
+  const { t } = useTranslation('common')
+
   const [isMenuOpen, triggerMenuOpen] = useState(false)
 
   const menuRef = useRef<HTMLButtonElement>(null)
@@ -54,6 +57,10 @@ const MenuWrapper = ({
     }
   }
 
+  const [preferences, setPreferences] = useState(defaultPreferences)
+  const onCheckboxChange = (target: EventTarget & HTMLInputElement) =>
+    setPreferences({ ...preferences, [target.name]: target.checked })
+
   return (
     <Menu
       ref={menuRef}
@@ -62,7 +69,29 @@ const MenuWrapper = ({
       onClick={(event: Event) => onMenuClick(event.target?.id)}
     >
       <span>⚙️</span>
-      {isMenuOpen && <MenuDropdown id={MENU_ID}>hello</MenuDropdown>}
+      {isMenuOpen && (
+        <MenuDropdown
+          id={MENU_ID}
+          theme={darkModeActive ? theme.darkTheme : theme.lightTheme}
+        >
+          <PreferenceCheckbox
+            id={t('motion')}
+            name="allowMotion"
+            onChange={onCheckboxChange}
+            color={
+              darkModeActive ? theme.darkTheme.brand : theme.lightTheme.brand
+            }
+          />
+          <PreferenceCheckbox
+            id={t('sounds')}
+            name="allowSounds"
+            onChange={onCheckboxChange}
+            color={
+              darkModeActive ? theme.darkTheme.brand : theme.lightTheme.brand
+            }
+          />
+        </MenuDropdown>
+      )}
     </Menu>
   )
 }
@@ -70,7 +99,9 @@ const MenuWrapper = ({
 const MenuDropdown = styled('div')`
   position: absolute;
   padding: 16px;
-  background: red;
+  background: ${({ theme }) => theme.brand};
+  color: ${({ theme }) => theme.text};
+  border-radius: 4px;
 `
 
 export const Menu = styled('button')`
