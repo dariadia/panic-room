@@ -51,13 +51,21 @@ const MenuWrapper = ({
 
   const MENU_ID = 'menu-dropdown'
   const MENU_OPTION_MOTION = 'menu-option-motion'
-  const MENU_OPTION_SOUNDS = 'meun-option-sounds'
+  const MENU_OPTION_SOUNDS = 'menu-option-sounds'
 
   const MENU_IDs = [MENU_ID, MENU_OPTION_MOTION, MENU_OPTION_SOUNDS]
-  const onMenuClick = (targetId?: string) => {
+  const onMenuClick = (target?: EventTarget & HTMLInputElement) => {
+    if (!target) return
     setTimeout(() => menuRef.current?.blur(), 800)
-    console.log(targetId)
-    if (!MENU_IDs.includes(targetId as string)) {
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    const parentNodeId = target.parentNode?.id
+    const targetId = target?.id
+
+    if (!parentNodeId && !targetId) {
+      triggerMenuOpen(!isMenuOpen)
+    } else if (parentNodeId && !MENU_IDs.includes(parentNodeId as string)) {
       triggerMenuOpen(!isMenuOpen)
     }
   }
@@ -71,7 +79,7 @@ const MenuWrapper = ({
       ref={menuRef}
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      onClick={(event: Event) => onMenuClick(event.target?.id)}
+      onClick={(event: Event) => onMenuClick(event.target)}
     >
       <span>⚙️</span>
       {isMenuOpen && (
