@@ -92,9 +92,7 @@ const MenuWrapper = ({
             id={t('motion')}
             name="allowMotion"
             onChange={onCheckboxChange}
-            color={
-              darkModeActive ? theme.darkTheme.brand : theme.lightTheme.brand
-            }
+            color="gold"
           >
             <span>{t('motion')}</span>
           </PreferenceCheckbox>
@@ -103,9 +101,7 @@ const MenuWrapper = ({
             id={t('sounds')}
             name="allowSounds"
             onChange={onCheckboxChange}
-            color={
-              darkModeActive ? theme.darkTheme.brand : theme.lightTheme.brand
-            }
+            color="gold"
           >
             <span style={{ lineHeight: 2 }}>{t('sounds')}</span>
           </PreferenceCheckbox>
