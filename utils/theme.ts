@@ -3,6 +3,9 @@ import { isClient } from './env'
 
 import { Preferences } from 'types'
 
+export const GOLDEN_SHADOW = 'hsl(46deg,65%,52%)'
+export const BLUE_SHADOW = 'hsl(220deg 60% 50%)'
+
 const lightTheme = {
   text: '#030623',
   alert: '#4c1130',

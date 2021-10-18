@@ -12,7 +12,9 @@ import { Trans, useTranslation } from 'react-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 import {
+  BLUE_SHADOW,
   defaultPreferences,
+  GOLDEN_SHADOW,
   hasUserPreferences,
   setUserPreferences,
 } from 'utils/theme'
@@ -93,6 +95,7 @@ const MenuWrapper = ({
             name="allowMotion"
             onChange={onCheckboxChange}
             color="gold"
+            shadow={darkModeActive ? GOLDEN_SHADOW : BLUE_SHADOW}
           >
             <span>{t('motion')}</span>
           </PreferenceCheckbox>
@@ -102,6 +105,7 @@ const MenuWrapper = ({
             name="allowSounds"
             onChange={onCheckboxChange}
             color="gold"
+            shadow={darkModeActive ? GOLDEN_SHADOW : BLUE_SHADOW}
           >
             <span style={{ lineHeight: 2 }}>{t('sounds')}</span>
           </PreferenceCheckbox>
@@ -236,6 +240,7 @@ const WelcomeMessage: React.FC<{
           color={
             darkModeActive ? theme.darkTheme.brand : theme.lightTheme.brand
           }
+          shadow={darkModeActive ? BLUE_SHADOW : GOLDEN_SHADOW}
         >
           <span>{t('motion')}</span>
         </PreferenceCheckbox>
@@ -246,6 +251,7 @@ const WelcomeMessage: React.FC<{
           color={
             darkModeActive ? theme.darkTheme.brand : theme.lightTheme.brand
           }
+          shadow={darkModeActive ? BLUE_SHADOW : GOLDEN_SHADOW}
         >
           <span>{t('sounds')}</span>
         </PreferenceCheckbox>

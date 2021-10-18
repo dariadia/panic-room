@@ -1,13 +1,17 @@
 import React, { ChangeEvent } from 'react'
 import styled from 'styled-components'
 
+import { BLUE_SHADOW } from 'utils/theme'
 import { Checkmark } from '.'
 
-const Checkbox: React.FC<{
+type CheckboxProps = {
   htmlFor?: string
   color?: string
   id?: string
-}> = styled('label')`
+  shadow?: string
+}
+
+const Checkbox: React.FC<CheckboxProps> = styled('label')<CheckboxProps>`
   display: flex;
   width: fit-content;
   align-items: center;
@@ -19,8 +23,8 @@ const Checkbox: React.FC<{
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  &: hover {
-    filter: drop-shadow(1px 2px 8px hsl(220deg 60% 50%));
+  &:hover {
+    filter: drop-shadow(1px 2px 8px ${({ shadow = BLUE_SHADOW }) => shadow});
     transition: filter 0.2s;
   }
   > input {
@@ -44,6 +48,7 @@ type PreferenceCheckboxProps = {
   name: string
   onChange: (target: EventTarget & HTMLInputElement) => void
   color: string
+  shadow?: string
 }
 
 export const PreferenceCheckbox: React.FC<PreferenceCheckboxProps> = ({
@@ -53,8 +58,9 @@ export const PreferenceCheckbox: React.FC<PreferenceCheckboxProps> = ({
   onChange,
   color,
   children,
+  shadow,
 }) => (
-  <Checkbox htmlFor={id} color={color} id={labelId}>
+  <Checkbox htmlFor={id} color={color} id={labelId} shadow={shadow}>
     <input
       type="checkbox"
       id={id}
