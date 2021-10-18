@@ -30,10 +30,10 @@ const Checkbox: React.FC<{
     height: 0;
     width: 0;
   }
-  input:checked ~ span:after {
+  input:checked ~ div:after {
     display: block;
   }
-  input:checked ~ span {
+  input:checked ~ div {
     background-color: ${({ color }) => color};
   }
 `
