@@ -1,5 +1,4 @@
 import React, {
-  ChangeEvent,
   useContext,
   useState,
   useRef,
@@ -13,18 +12,136 @@ import { Trans, useTranslation } from 'react-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 import {
+  BLUE_SHADOW,
   defaultPreferences,
+  GOLDEN_SHADOW,
   hasUserPreferences,
   setUserPreferences,
 } from 'utils/theme'
 import { MainLayout } from '@/layouts'
 
-import type { Locale, Page, SinglePage as SinglePageProps, Theme } from 'types'
-import { Checkmark, PreferenceCheckbox } from '@/components'
+import { PreferenceCheckbox } from '@/components'
 
-const Menu = styled('button')`
+import type {
+  Event,
+  Locale,
+  Page,
+  SinglePage as SinglePageProps,
+  Theme,
+} from 'types'
+
+const MenuWrapper = ({
+  isMenuFocused,
+  triggerMenuFocus,
+}: {
+  isMenuFocused: boolean
+  triggerMenuFocus: Dispatch<SetStateAction<boolean>>
+}) => {
+  const { darkModeActive, theme } = useContext(ThemeContext)
+  const { t } = useTranslation('common')
+
+  const [isMenuOpen, triggerMenuOpen] = useState(false)
+
+  const menuRef = useRef<HTMLButtonElement>(null)
+  useEffect(() => {
+    if (isMenuFocused && menuRef.current) {
+      menuRef.current.focus()
+      triggerMenuFocus(false)
+      setTimeout(() => menuRef.current?.blur(), 800)
+    }
+  }, [isMenuFocused, triggerMenuFocus])
+
+  const MENU_ID = 'menu-dropdown'
+  const MENU_OPTION_MOTION = 'menu-option-motion'
+  const MENU_OPTION_SOUNDS = 'menu-option-sounds'
+
+  const MENU_IDs = [MENU_ID, MENU_OPTION_MOTION, MENU_OPTION_SOUNDS]
+  const onMenuClick = (target?: EventTarget & HTMLInputElement) => {
+    if (!target) return
+    setTimeout(() => menuRef.current?.blur(), 800)
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    const parentNodeId = target.parentNode?.id
+    const targetId = target?.id
+
+    if (!parentNodeId && !targetId) {
+      triggerMenuOpen(!isMenuOpen)
+    } else if (parentNodeId && !MENU_IDs.includes(parentNodeId as string)) {
+      triggerMenuOpen(!isMenuOpen)
+    }
+  }
+
+  const [preferences, setPreferences] = useState(defaultPreferences)
+  const onCheckboxChange = (target: EventTarget & HTMLInputElement) =>
+    setPreferences({ ...preferences, [target.name]: target.checked })
+
+  return (
+    <Menu
+      ref={menuRef}
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      onClick={(event: Event) => onMenuClick(event.target)}
+    >
+      <span>⚙️</span>
+      {isMenuOpen && (
+        <MenuDropdown
+          id={MENU_ID}
+          theme={darkModeActive ? theme.darkTheme : theme.lightTheme}
+        >
+          <PreferenceCheckbox
+            labelId={MENU_OPTION_MOTION}
+            id={t('motion')}
+            name="allowMotion"
+            onChange={onCheckboxChange}
+            color="gold"
+            shadow={darkModeActive ? GOLDEN_SHADOW : BLUE_SHADOW}
+          >
+            <span>{t('motion')}</span>
+          </PreferenceCheckbox>
+          <PreferenceCheckbox
+            labelId={MENU_OPTION_SOUNDS}
+            id={t('sounds')}
+            name="allowSounds"
+            onChange={onCheckboxChange}
+            color="gold"
+            shadow={darkModeActive ? GOLDEN_SHADOW : BLUE_SHADOW}
+          >
+            <span style={{ lineHeight: 2 }}>{t('sounds')}</span>
+          </PreferenceCheckbox>
+          <Button
+            onClick={() => setUserPreferences(preferences)}
+            marginTop={24}
+            as="span"
+          >
+            {t('save')}
+          </Button>
+        </MenuDropdown>
+      )}
+    </Menu>
+  )
+}
+
+const MenuDropdown = styled('div')`
+  position: absolute;
+  padding: 16px;
+  background: ${({ theme }) => theme.brand};
+  color: ${({ theme }) => theme.text};
+  border-radius: 4px;
+`
+
+export const Menu = styled('button')`
+  background: transparent;
+  border: none;
+  padding: 8px;
+  border-radius: 100%;
+  position: absolute;
+  z-index: 2;
+  top: 14px;
   :focus {
-    background: red;
+    outline: none;
+    filter: drop-shadow(1px 2px 8px hsl(220deg 60% 50%));
+    background: gold;
   }
 `
 
@@ -35,17 +152,12 @@ const HomePage: Page<SinglePageProps> = () => {
 
   const { darkModeActive, theme } = useContext(ThemeContext)
 
-  const menuRef = useRef<HTMLButtonElement>(null)
-  useEffect(() => {
-    if (isMenuFocused && menuRef.current) {
-      menuRef.current.focus()
-      triggerMenuFocus(false)
-    }
-  }, [isMenuFocused])
-
   return (
     <>
-      <Menu ref={menuRef}>menu here</Menu>
+      <MenuWrapper
+        isMenuFocused={isMenuFocused}
+        triggerMenuFocus={triggerMenuFocus}
+      />
       {hasSavedPreferences ? (
         <MainScreen />
       ) : (
@@ -67,8 +179,8 @@ const WelcomeScreen: React.FC<{ theme: Theme }> = styled('div')<{
   min-width: 260px;
   width: fit-content;
   max-width: calc(100% - 32px);
-  min-height: 70vh;
-  margin: auto;
+  min-height: 50vh;
+  margin: 8px auto 0;
   filter: drop-shadow(1px 2px 8px hsl(220deg 60% 50%));
   background: ${({ theme }) => theme.accent};
   border-radius: 4px;
@@ -129,38 +241,26 @@ const WelcomeMessage: React.FC<{
       </p>
       <article>
         <PreferenceCheckbox
-          htmlFor={t('motion')}
+          id={t('motion')}
+          name="allowMotion"
+          onChange={onCheckboxChange}
           color={
             darkModeActive ? theme.darkTheme.brand : theme.lightTheme.brand
           }
+          shadow={darkModeActive ? BLUE_SHADOW : GOLDEN_SHADOW}
         >
-          <input
-            type="checkbox"
-            id={t('motion')}
-            name="allowMotion"
-            onChange={(event: ChangeEvent<HTMLInputElement>) =>
-              onCheckboxChange(event.target)
-            }
-          />
-          {t('motion')}
-          <Checkmark />
+          <span>{t('motion')}</span>
         </PreferenceCheckbox>
         <PreferenceCheckbox
-          htmlFor={t('sounds')}
+          id={t('sounds')}
+          name="allowSounds"
+          onChange={onCheckboxChange}
           color={
             darkModeActive ? theme.darkTheme.brand : theme.lightTheme.brand
           }
+          shadow={darkModeActive ? BLUE_SHADOW : GOLDEN_SHADOW}
         >
-          <input
-            type="checkbox"
-            id={t('sounds')}
-            name="allowSounds"
-            onChange={(event: ChangeEvent<HTMLInputElement>) =>
-              onCheckboxChange(event.target)
-            }
-          />
-          {t('sounds')}
-          <Checkmark />
+          <span>{t('sounds')}</span>
         </PreferenceCheckbox>
         <Button onClick={() => setUserPreferences(preferences)}>
           {t('save')}
@@ -170,10 +270,32 @@ const WelcomeMessage: React.FC<{
   )
 }
 
-const Button = styled('button')`
+type ButtonProps = {
+  marginTop?: number
+  onClick: () => void
+  as?: 'span'
+}
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+const Button: React.FC<ButtonProps> = styled('button').attrs(
+  (props: ButtonProps) => ({
+    as: props.as,
+  }),
+)<ButtonProps>`
   cursor: pointer;
-  margin-top: 36px;
+  margin-top: ${({ marginTop = '36' }) => `${marginTop}px`};
   display: block;
+  ${({ as }) =>
+    as
+      ? `border: 1px solid gold;
+      border-radius: 4px;
+      padding: 4px;
+      &:hover {
+    filter: drop-shadow(1px 2px 8px ${GOLDEN_SHADOW}) invert(0.3);
+    transition: filter 0.2s;
+  }`
+      : ''}
 `
 
 HomePage.Layout = ({ children, ...props }) => (

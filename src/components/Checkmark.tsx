@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export const Checkmark: React.FC = styled('span')`
+export const Checkmark: React.FC = styled('div')`
   position: absolute;
   top: 0;
   left: 0;

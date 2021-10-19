@@ -1,11 +1,19 @@
-import React from 'react'
+import React, { ChangeEvent } from 'react'
 import styled from 'styled-components'
 
-export const PreferenceCheckbox: React.FC<{
+import { BLUE_SHADOW } from 'utils/theme'
+import { Checkmark } from '.'
+
+type CheckboxProps = {
   htmlFor?: string
   color?: string
-}> = styled('label')`
+  id?: string
+  shadow?: string
+}
+
+const Checkbox: React.FC<CheckboxProps> = styled('label')<CheckboxProps>`
   display: flex;
+  width: fit-content;
   align-items: center;
   position: relative;
   padding-left: 35px;
@@ -15,8 +23,8 @@ export const PreferenceCheckbox: React.FC<{
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  &: hover {
-    filter: drop-shadow(1px 2px 8px hsl(220deg 60% 50%));
+  &:hover {
+    filter: drop-shadow(1px 2px 8px ${({ shadow = BLUE_SHADOW }) => shadow});
     transition: filter 0.2s;
   }
   > input {
@@ -26,10 +34,42 @@ export const PreferenceCheckbox: React.FC<{
     height: 0;
     width: 0;
   }
-  input:checked ~ span:after {
+  input:checked ~ div:after {
     display: block;
   }
-  input:checked ~ span {
+  input:checked ~ div {
     background-color: ${({ color }) => color};
   }
 `
+
+type PreferenceCheckboxProps = {
+  id: string
+  labelId?: string
+  name: string
+  onChange: (target: EventTarget & HTMLInputElement) => void
+  color: string
+  shadow?: string
+}
+
+export const PreferenceCheckbox: React.FC<PreferenceCheckboxProps> = ({
+  id,
+  labelId,
+  name,
+  onChange,
+  color,
+  children,
+  shadow,
+}) => (
+  <Checkbox htmlFor={id} color={color} id={labelId} shadow={shadow}>
+    <input
+      type="checkbox"
+      id={id}
+      name={name}
+      onChange={(event: ChangeEvent<HTMLInputElement>) =>
+        onChange(event.target)
+      }
+    />
+    {children}
+    <Checkmark />
+  </Checkbox>
+)
