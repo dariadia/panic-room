@@ -9,6 +9,7 @@ import { MainLayout } from '@/layouts'
 import { MenuWrapper, WelcomeMessage, WelcomeScreen } from '@/components'
 
 import type { Locale, Page, SinglePage as SinglePageProps } from 'types'
+import { HomeScreen } from '@/components/HomeScreen'
 
 const HomePage: Page<SinglePageProps> = () => {
   const hasSavedPreferences = hasUserPreferences()
@@ -24,7 +25,7 @@ const HomePage: Page<SinglePageProps> = () => {
         triggerMenuFocus={triggerMenuFocus}
       />
       {hasSavedPreferences ? (
-        <MainScreen />
+        <HomeScreen />
       ) : (
         <WelcomeScreen
           theme={darkModeActive ? theme.darkTheme : theme.lightTheme}
@@ -35,8 +36,6 @@ const HomePage: Page<SinglePageProps> = () => {
     </>
   )
 }
-
-const MainScreen = () => <span>welcome</span>
 
 HomePage.Layout = ({ children, ...props }) => (
   <MainLayout {...props}>{children}</MainLayout>
