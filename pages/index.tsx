@@ -109,7 +109,11 @@ const MenuWrapper = ({
           >
             <span style={{ lineHeight: 2 }}>{t('sounds')}</span>
           </PreferenceCheckbox>
-          <Button onClick={() => setUserPreferences(preferences)} marginTop={8}>
+          <Button
+            onClick={() => setUserPreferences(preferences)}
+            marginTop={24}
+            as="span"
+          >
             {t('save')}
           </Button>
         </MenuDropdown>
@@ -269,13 +273,29 @@ const WelcomeMessage: React.FC<{
 type ButtonProps = {
   marginTop?: number
   onClick: () => void
-  as: 'button' | 'span'
+  as?: 'span'
 }
 
-const Button: React.FC<ButtonProps> = styled('button')<ButtonProps>`
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+const Button: React.FC<ButtonProps> = styled('button').attrs(
+  (props: ButtonProps) => ({
+    as: props.as || 'button',
+  }),
+)<ButtonProps>`
   cursor: pointer;
   margin-top: ${({ marginTop = '36' }) => `${marginTop}px`};
   display: block;
+  ${({ as }) =>
+    as
+      ? `border: 1px solid gold;
+      border-radius: 4px;
+      padding: 4px;
+      &:hover {
+    filter: drop-shadow(1px 2px 8px ${GOLDEN_SHADOW}) invert(0.3);
+    transition: filter 0.2s;
+  }`
+      : ''}
 `
 
 HomePage.Layout = ({ children, ...props }) => (
