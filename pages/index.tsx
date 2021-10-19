@@ -280,7 +280,7 @@ type ButtonProps = {
 // @ts-ignore
 const Button: React.FC<ButtonProps> = styled('button').attrs(
   (props: ButtonProps) => ({
-    as: props.as || 'button',
+    as: props.as,
   }),
 )<ButtonProps>`
   cursor: pointer;
