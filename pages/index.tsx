@@ -109,6 +109,9 @@ const MenuWrapper = ({
           >
             <span style={{ lineHeight: 2 }}>{t('sounds')}</span>
           </PreferenceCheckbox>
+          <Button onClick={() => setUserPreferences(preferences)} marginTop={8}>
+            {t('save')}
+          </Button>
         </MenuDropdown>
       )}
     </Menu>
@@ -263,9 +266,15 @@ const WelcomeMessage: React.FC<{
   )
 }
 
-const Button = styled('button')`
+type ButtonProps = {
+  marginTop?: number
+  onClick: () => void
+  as: 'button' | 'span'
+}
+
+const Button: React.FC<ButtonProps> = styled('button')<ButtonProps>`
   cursor: pointer;
-  margin-top: 36px;
+  margin-top: ${({ marginTop = '36' }) => `${marginTop}px`};
   display: block;
 `
 
