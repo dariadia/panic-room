@@ -46,3 +46,10 @@ export const setUserPreferences = (preferences: Preferences): void => {
   localStorage.setItem(PANIC_ROOM_PREFERENCES, JSON.stringify(preferences))
   window.location.reload()
 }
+
+export const getUserPreferences = (): Preferences | null => {
+  if (!isClient()) return null
+  const userPreferences = localStorage.getItem(PANIC_ROOM_PREFERENCES)
+  if (!userPreferences) return null
+  return JSON.parse(userPreferences)
+}
