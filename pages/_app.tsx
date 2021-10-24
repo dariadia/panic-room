@@ -56,7 +56,7 @@ const App: React.FC<ApplicationProps> = ({
       <ThemeProvider theme={{ ...darkMode, theme }}>
         {Component.Layout ? (
           <Layout {...pageProps}>
-            <Component {...pageProps} />
+            <Component {...pageProps} p={2} />
           </Layout>
         ) : (
           <Component {...pageProps} />

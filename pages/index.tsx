@@ -41,11 +41,13 @@ HomePage.Layout = ({ children, ...props }) => (
   <MainLayout {...props}>{children}</MainLayout>
 )
 
-export async function getStaticProps({
+export async function getServerSideProps({
   locale,
+  ...props
 }: {
   locale: Locale
 }): Promise<{ props: SinglePageProps }> {
+  console.log(props)
   return {
     props: {
       locale,
