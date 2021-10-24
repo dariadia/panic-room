@@ -4,7 +4,7 @@ export const TEXTS = {
   greeting: 'Hi! Welcome to',
   panic_room: 'the Panic Room',
   greeting_intro:
-    "First off, we want to know which of these you're comfortable with. \nYou can change your preferences later in",
+    "First off, we want to know which of these you're comfortable with. \nYou can change your preferences later in ",
   menu: 'the menu',
   motion: 'moving items',
   sounds: 'sounds',
