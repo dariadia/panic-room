@@ -10,6 +10,7 @@ import {
 
 import { Theme } from 'types'
 import { PreferenceCheckbox } from '.'
+import { TEXTS } from 'constants/texts'
 
 export const WelcomeScreen: React.FC<{ theme: Theme }> = styled('div')<{
   theme: Theme
@@ -30,11 +31,11 @@ const WelcomeSection = styled('section')`
   font: 18px/24px monospace;
 `
 
-// const Branding = styled('span')`
-//   font-weight: bold;
-//   font-family: fantasy;
-//   color: ${({ color }) => color};
-// `
+const Branding = styled('span')`
+  font-weight: bold;
+  font-family: fantasy;
+  color: ${({ color }) => color};
+`
 
 export const WelcomeMessage: React.FC<{
   triggerMenuFocus: Dispatch<SetStateAction<boolean>>
@@ -48,38 +49,27 @@ export const WelcomeMessage: React.FC<{
   return (
     <WelcomeSection>
       <p>
-        {triggerMenuFocus}
-        {/* <Trans
-          i18nKey={`common:greeting`}
-          components={{
-            branding: (
-              <Branding
-                color={
-                  darkModeActive
-                    ? theme.darkTheme.brand
-                    : theme.lightTheme.brand
-                }
-              />
-            ),
-          }}
-        /> */}
+        {TEXTS.greeting}{' '}
+        <Branding
+          color={
+            darkModeActive ? theme.darkTheme.brand : theme.lightTheme.brand
+          }
+        >
+          {TEXTS.panic_room}
+        </Branding>
       </p>
       <p style={{ marginBottom: '32px' }}>
-        {/* <Trans
-          i18nKey={`common:greeting_intro`}
-          components={{
-            focused: (
-              <button
-                onClick={() => triggerMenuFocus(true)}
-                style={{ cursor: 'pointer' }}
-              />
-            ),
-          }}
-        /> */}
+        {TEXTS.greeting_intro}
+        <button
+          onClick={() => triggerMenuFocus(true)}
+          style={{ cursor: 'pointer' }}
+        >
+          {TEXTS.menu}
+        </button>
       </p>
       <article>
         <PreferenceCheckbox
-          id={'motion'}
+          id={TEXTS.motion}
           name="allowMotion"
           onChange={onCheckboxChange}
           color={
@@ -87,10 +77,10 @@ export const WelcomeMessage: React.FC<{
           }
           shadow={darkModeActive ? BLUE_SHADOW : GOLDEN_SHADOW}
         >
-          <span>{'motion'}</span>
+          <span>{TEXTS.motion}</span>
         </PreferenceCheckbox>
         <PreferenceCheckbox
-          id={'sounds'}
+          id={TEXTS.sounds}
           name="allowSounds"
           onChange={onCheckboxChange}
           color={
@@ -98,10 +88,10 @@ export const WelcomeMessage: React.FC<{
           }
           shadow={darkModeActive ? BLUE_SHADOW : GOLDEN_SHADOW}
         >
-          <span>{'sounds'}</span>
+          <span>{TEXTS.sounds}</span>
         </PreferenceCheckbox>
         <Button onClick={() => setUserPreferences(preferences)}>
-          {'save'}
+          {TEXTS.save}
         </Button>
       </article>
     </WelcomeSection>

@@ -3,6 +3,8 @@ import styled from 'styled-components'
 
 import { MainLayout } from '@/layouts'
 
+import { TEXTS } from 'constants/texts'
+
 import type { Page, SinglePage as SinglePageProps } from 'types'
 
 const Title = styled('h1')`
@@ -13,7 +15,7 @@ const Title = styled('h1')`
 `
 
 const Page404: Page<SinglePageProps> = () => {
-  return <Title>something_went_wrong</Title>
+  return <Title>{TEXTS.something_went_wrong}</Title>
 }
 
 Page404.Layout = ({ children, ...props }) => (

@@ -6,6 +6,7 @@ import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import { normalize } from 'styled-normalize'
 import withDarkMode from 'next-dark-mode'
 
+import { TEXTS } from 'constants/texts'
 import { theme } from 'utils/theme'
 
 const GlobalStyle = createGlobalStyle`
@@ -39,8 +40,8 @@ const App: React.FC<ApplicationProps> = ({
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>{'app_title'}</title>
-        <meta name="description" content={'app_description'} />
+        <title>{TEXTS.app_title}</title>
+        <meta name="description" content={TEXTS.app_description} />
         <meta
           name="og:image"
           property="og:image"
@@ -54,7 +55,7 @@ const App: React.FC<ApplicationProps> = ({
       <ThemeProvider theme={{ ...darkMode, theme }}>
         {Component.Layout ? (
           <Layout {...pageProps}>
-            <Component {...pageProps} p={2} />
+            <Component {...pageProps} />
           </Layout>
         ) : (
           <Component {...pageProps} />
