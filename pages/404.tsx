@@ -24,7 +24,7 @@ Page404.Layout = ({ children, ...props }) => (
   <MainLayout {...props}>{children}</MainLayout>
 )
 
-export async function getStaticProps({
+export async function getServerSideProps({
   locale,
 }: {
   locale: Locale
