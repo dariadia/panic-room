@@ -8,8 +8,6 @@ import React, {
 } from 'react'
 import styled, { ThemeContext } from 'styled-components'
 
-import { useTranslation } from 'next-i18next'
-
 import {
   defaultPreferences,
   GOLDEN_SHADOW,
@@ -23,7 +21,6 @@ export const MenuWrapper: React.FC<{
   triggerMenuFocus: Dispatch<SetStateAction<boolean>>
 }> = ({ isMenuFocused, triggerMenuFocus }) => {
   const { darkModeActive, theme } = useContext(ThemeContext)
-  const { t } = useTranslation('common')
 
   const [isMenuOpen, triggerMenuOpen] = useState(false)
 
@@ -76,30 +73,30 @@ export const MenuWrapper: React.FC<{
         >
           <PreferenceCheckbox
             labelId={MENU_OPTION_MOTION}
-            id={t('motion')}
+            id={'motion'}
             name="allowMotion"
             onChange={onCheckboxChange}
             color="gold"
             shadow={darkModeActive ? GOLDEN_SHADOW : BLUE_SHADOW}
           >
-            <span>{t('motion')}</span>
+            <span>{'motion'}</span>
           </PreferenceCheckbox>
           <PreferenceCheckbox
             labelId={MENU_OPTION_SOUNDS}
-            id={t('sounds')}
+            id={'sounds'}
             name="allowSounds"
             onChange={onCheckboxChange}
             color="gold"
             shadow={darkModeActive ? GOLDEN_SHADOW : BLUE_SHADOW}
           >
-            <span style={{ lineHeight: 2 }}>{t('sounds')}</span>
+            <span style={{ lineHeight: 2 }}>{'sounds'}</span>
           </PreferenceCheckbox>
           <Button
             onClick={() => setUserPreferences(preferences)}
             marginTop={24}
             as="span"
           >
-            {t('save')}
+            {'save'}
           </Button>
         </MenuDropdown>
       )}

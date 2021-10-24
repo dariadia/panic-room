@@ -2,7 +2,6 @@ import React, { ComponentType } from 'react'
 import Head from 'next/head'
 import { AppProps } from 'next/app'
 
-import { appWithTranslation, useTranslation } from 'next-i18next'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import { normalize } from 'styled-normalize'
 import withDarkMode from 'next-dark-mode'
@@ -34,15 +33,14 @@ const App: React.FC<ApplicationProps> = ({
   darkMode,
 }) => {
   const Layout: ComponentType = Component.Layout || React.Fragment
-  const { t } = useTranslation(['common'])
 
   return (
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>{t('app_title')}</title>
-        <meta name="description" content={t('app_description')} />
+        <title>{'app_title'}</title>
+        <meta name="description" content={'app_description'} />
         <meta
           name="og:image"
           property="og:image"
@@ -69,4 +67,4 @@ const App: React.FC<ApplicationProps> = ({
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-export default withDarkMode(appWithTranslation(App), { defaultMode: 'dark' })
+export default withDarkMode(App, { defaultMode: 'dark' })
