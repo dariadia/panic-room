@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import { MainLayout } from '@/layouts'
 
-import type { Locale, Page, SinglePage as SinglePageProps } from 'types'
+import type { Page, SinglePage as SinglePageProps } from 'types'
 
 const Title = styled('h1')`
   display: block;
@@ -19,17 +19,5 @@ const Page404: Page<SinglePageProps> = () => {
 Page404.Layout = ({ children, ...props }) => (
   <MainLayout {...props}>{children}</MainLayout>
 )
-
-export async function getStaticProps({
-  locale,
-}: {
-  locale: Locale
-}): Promise<{ props: SinglePageProps }> {
-  return {
-    props: {
-      locale,
-    },
-  }
-}
 
 export default Page404
