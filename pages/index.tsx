@@ -1,16 +1,18 @@
 import React, { useContext, useState } from 'react'
 import { ThemeContext } from 'styled-components'
+import Cookies from 'cookies'
 
-import { hasUserPreferences } from 'utils/theme'
+import { getUserPreferences } from 'utils/theme'
 import { MainLayout } from '@/layouts'
 
 import { MenuWrapper, WelcomeMessage, WelcomeScreen } from '@/components'
 
-import type { Locale, Page, SinglePage as SinglePageProps } from 'types'
+import type { Page, SinglePage as SinglePageProps } from 'types'
 import { HomeScreen } from '@/components/HomeScreen'
+import { PANIC_ROOM_PREFERENCES } from 'constants/theme'
 
 const HomePage: Page<SinglePageProps> = () => {
-  const hasSavedPreferences = hasUserPreferences()
+  const hasSavedPreferences = getUserPreferences()
 
   const [isMenuFocused, triggerMenuFocus] = useState(false)
 
@@ -40,15 +42,16 @@ HomePage.Layout = ({ children, ...props }) => (
 )
 
 export async function getServerSideProps({
-  locale,
-  ...props
-}: {
-  locale: Locale
+  req,
+  res,
 }): Promise<{ props: SinglePageProps }> {
-  console.log(props)
+  const cookies = new Cookies(req, res)
+  const preferences = cookies.get(PANIC_ROOM_PREFERENCES) || null
+
   return {
     props: {
-      locale,
+      locale: 'en-GB',
+      preferences,
     },
   }
 }

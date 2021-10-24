@@ -1,5 +1,4 @@
-import { DARK, LIGHT, PANIC_ROOM_PREFERENCES } from 'constants/theme'
-import { isClient } from './env'
+import { DARK, LIGHT } from 'constants/theme'
 
 import { Preferences } from 'types'
 
@@ -34,22 +33,7 @@ export const defaultPreferences = {
   allowSounds: true,
 }
 
-export const hasUserPreferences = (): boolean => {
-  if (!isClient()) return false
+export const setUserPreferences = (preferences: Preferences): void =>
+  console.log(preferences)
 
-  const userPreferences = localStorage.getItem(PANIC_ROOM_PREFERENCES)
-  return Boolean(userPreferences)
-}
-
-export const setUserPreferences = (preferences: Preferences): void => {
-  if (!isClient()) return
-  localStorage.setItem(PANIC_ROOM_PREFERENCES, JSON.stringify(preferences))
-  window.location.reload()
-}
-
-export const getUserPreferences = (): Preferences | null => {
-  if (!isClient()) return null
-  const userPreferences = localStorage.getItem(PANIC_ROOM_PREFERENCES)
-  if (!userPreferences) return null
-  return JSON.parse(userPreferences)
-}
+export const getUserPreferences = (): Preferences | null => null
