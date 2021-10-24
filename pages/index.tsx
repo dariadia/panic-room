@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { ThemeContext } from 'styled-components'
 
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+// import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 import { hasUserPreferences } from 'utils/theme'
 import { MainLayout } from '@/layouts'
@@ -51,7 +51,8 @@ export async function getServerSideProps({
   return {
     props: {
       locale,
-      ...(await serverSideTranslations(locale, ['common'])),
+      // eslint-disable-next-line spaced-comment
+      //...(await serverSideTranslations(locale, ['common'])),
     },
   }
 }
