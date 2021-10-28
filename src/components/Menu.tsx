@@ -8,12 +8,7 @@ import React, {
 } from 'react'
 import styled, { ThemeContext } from 'styled-components'
 
-import {
-  defaultPreferences,
-  GOLDEN_SHADOW,
-  BLUE_SHADOW,
-  setUserPreferences,
-} from 'utils/theme'
+import { defaultPreferences, GOLDEN_SHADOW, BLUE_SHADOW } from 'utils/theme'
 import { Button, PreferenceCheckbox } from '.'
 
 export const MenuWrapper: React.FC<{
@@ -92,7 +87,7 @@ export const MenuWrapper: React.FC<{
             <span style={{ lineHeight: 2 }}>{'sounds'}</span>
           </PreferenceCheckbox>
           <Button
-            onClick={() => setUserPreferences(preferences)}
+            onClick={() => console.log(preferences)}
             marginTop={24}
             as="span"
           >
