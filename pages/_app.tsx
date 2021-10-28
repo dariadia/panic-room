@@ -1,6 +1,8 @@
 import React, { ComponentType } from 'react'
 import Head from 'next/head'
+
 import { AppProps } from 'next/app'
+import { CookiesProvider } from 'react-cookie'
 
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import { normalize } from 'styled-normalize'
@@ -53,13 +55,15 @@ const App: React.FC<ApplicationProps> = ({
         <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png" />
       </Head>
       <ThemeProvider theme={{ ...darkMode, theme }}>
-        {Component.Layout ? (
-          <Layout {...pageProps}>
+        <CookiesProvider>
+          {Component.Layout ? (
+            <Layout {...pageProps}>
+              <Component {...pageProps} />
+            </Layout>
+          ) : (
             <Component {...pageProps} />
-          </Layout>
-        ) : (
-          <Component {...pageProps} />
-        )}
+          )}
+        </CookiesProvider>
       </ThemeProvider>
       <GlobalStyle />
     </>

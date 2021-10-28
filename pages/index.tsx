@@ -4,7 +4,6 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { ThemeContext } from 'styled-components'
 import Cookies from 'cookies'
 
-import { getUserPreferences } from 'utils/theme'
 import { MainLayout } from '@/layouts'
 
 import { MenuWrapper, WelcomeMessage, WelcomeScreen } from '@/components'
@@ -13,8 +12,9 @@ import { PANIC_ROOM_PREFERENCES } from 'constants/theme'
 
 import type { Page, Preferences, SinglePage as SinglePageProps } from 'types'
 
-const HomePage: Page<SinglePageProps> = () => {
-  const hasSavedPreferences = getUserPreferences()
+const HomePage: Page<SinglePageProps> = ({ preferences }) => {
+  const hasSavedPreferences = preferences
+  console.log(hasSavedPreferences)
 
   const [isMenuFocused, triggerMenuFocus] = useState(false)
 

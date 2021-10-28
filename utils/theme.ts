@@ -1,7 +1,5 @@
 import { DARK, LIGHT } from 'constants/theme'
 
-import { Preferences } from 'types'
-
 export const GOLDEN_SHADOW = 'hsl(46deg,65%,52%)'
 export const BLUE_SHADOW = 'hsl(220deg 60% 50%)'
 
@@ -32,8 +30,3 @@ export const defaultPreferences = {
   allowMotion: true,
   allowSounds: true,
 }
-
-export const setUserPreferences = (preferences: Preferences): void =>
-  console.log(preferences)
-
-export const getUserPreferences = (): Preferences | null => null

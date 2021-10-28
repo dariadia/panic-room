@@ -1,16 +1,14 @@
 import React, { Dispatch, SetStateAction, useContext, useState } from 'react'
 import styled, { ThemeContext } from 'styled-components'
 
-import {
-  defaultPreferences,
-  BLUE_SHADOW,
-  GOLDEN_SHADOW,
-  setUserPreferences,
-} from 'utils/theme'
-
-import { Theme } from 'types'
+import { useCookies } from 'react-cookie'
 import { PreferenceCheckbox } from '.'
 import { TEXTS } from 'constants/texts'
+import { PANIC_ROOM_PREFERENCES } from 'constants/theme'
+
+import { defaultPreferences, BLUE_SHADOW, GOLDEN_SHADOW } from 'utils/theme'
+
+import { Theme } from 'types'
 
 export const WelcomeScreen: React.FC<{ theme: Theme }> = styled('div')<{
   theme: Theme
@@ -43,6 +41,12 @@ export const WelcomeMessage: React.FC<{
   const { darkModeActive, theme } = useContext(ThemeContext)
 
   const [preferences, setPreferences] = useState(defaultPreferences)
+  const [, setCookie] = useCookies([PANIC_ROOM_PREFERENCES])
+
+  const savePreferences = () => {
+    setCookie(PANIC_ROOM_PREFERENCES, preferences)
+  }
+
   const onCheckboxChange = (target: EventTarget & HTMLInputElement) =>
     setPreferences({ ...preferences, [target.name]: target.checked })
 
@@ -90,9 +94,7 @@ export const WelcomeMessage: React.FC<{
         >
           <span>{TEXTS.sounds}</span>
         </PreferenceCheckbox>
-        <Button onClick={() => setUserPreferences(preferences)}>
-          {TEXTS.save}
-        </Button>
+        <Button onClick={savePreferences}>{TEXTS.save}</Button>
       </article>
     </WelcomeSection>
   )
