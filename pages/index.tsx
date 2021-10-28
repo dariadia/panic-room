@@ -14,7 +14,6 @@ import type { Page, Preferences, SinglePage as SinglePageProps } from 'types'
 
 const HomePage: Page<SinglePageProps> = ({ preferences }) => {
   const hasSavedPreferences = preferences
-  console.log(hasSavedPreferences)
 
   const [isMenuFocused, triggerMenuFocus] = useState(false)
 

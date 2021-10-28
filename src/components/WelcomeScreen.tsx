@@ -44,7 +44,8 @@ export const WelcomeMessage: React.FC<{
   const [, setCookie] = useCookies([PANIC_ROOM_PREFERENCES])
 
   const savePreferences = () => {
-    setCookie(PANIC_ROOM_PREFERENCES, preferences)
+    console.log(preferences, JSON.stringify(preferences))
+    setCookie(PANIC_ROOM_PREFERENCES, JSON.stringify(preferences))
   }
 
   const onCheckboxChange = (target: EventTarget & HTMLInputElement) =>
