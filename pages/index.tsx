@@ -1,4 +1,6 @@
 import React, { useContext, useState } from 'react'
+import { NextApiRequest, NextApiResponse } from 'next'
+
 import { ThemeContext } from 'styled-components'
 import Cookies from 'cookies'
 
@@ -6,10 +8,10 @@ import { getUserPreferences } from 'utils/theme'
 import { MainLayout } from '@/layouts'
 
 import { MenuWrapper, WelcomeMessage, WelcomeScreen } from '@/components'
-
-import type { Page, SinglePage as SinglePageProps } from 'types'
 import { HomeScreen } from '@/components/HomeScreen'
 import { PANIC_ROOM_PREFERENCES } from 'constants/theme'
+
+import type { Page, Preferences, SinglePage as SinglePageProps } from 'types'
 
 const HomePage: Page<SinglePageProps> = () => {
   const hasSavedPreferences = getUserPreferences()
@@ -44,14 +46,16 @@ HomePage.Layout = ({ children, ...props }) => (
 export async function getServerSideProps({
   req,
   res,
+}: {
+  req: NextApiRequest
+  res: NextApiResponse
 }): Promise<{ props: SinglePageProps }> {
   const cookies = new Cookies(req, res)
   const preferences = cookies.get(PANIC_ROOM_PREFERENCES) || null
 
   return {
     props: {
-      locale: 'en-GB',
-      preferences,
+      preferences: (preferences as unknown) as Preferences,
     },
   }
 }
