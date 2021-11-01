@@ -49,7 +49,7 @@ type PreferenceCheckboxProps = {
   onChange: (target: EventTarget & HTMLInputElement) => void
   color: string
   shadow?: string
-  checked: boolean
+  checked?: boolean
 }
 
 export const PreferenceCheckbox: React.FC<PreferenceCheckboxProps> = ({
