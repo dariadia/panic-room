@@ -9,6 +9,11 @@ const lightTheme = {
   accent: '#073763',
   background: '#fafbfc',
   brand: 'aqua',
+  stars: {
+    shine: ['#6a8eff', '#e9987e', '#f4aaaa', '#9eb6f7'],
+    line: 'rgba(0, 0, 0, 0.5)',
+    twinkle: 'white',
+  },
 }
 
 const darkTheme = {
@@ -17,6 +22,11 @@ const darkTheme = {
   accent: '#76a5af',
   background: '#030623',
   brand: 'blue',
+  stars: {
+    shine: ['#b6c8ff', '#f4ccbf', '#f4aaaa', '#b6c8f9'],
+    line: 'rgba(246, 218, 230, 0.65)',
+    twinkle: 'gold',
+  },
 }
 
 export const theme = {
