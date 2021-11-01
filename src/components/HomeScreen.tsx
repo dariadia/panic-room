@@ -28,7 +28,7 @@ const Background = styled('div')`
   justify-content: center;
   height: fit-content;
   width: 100%;
-  margin: 15% 0 0 10%;
+  margin: 15% 0 0 20%;
   padding: 0;
   overflow: hidden;
   position: absolute;
