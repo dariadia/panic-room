@@ -1,6 +1,6 @@
 import { Preferences } from 'types'
 
-export const defaultPreferences: Preferences = {
+export const DEFAULT_PREFERENCES: Preferences = {
   allowMotion: true,
   allowSounds: true,
 } as const

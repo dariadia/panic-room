@@ -4,9 +4,9 @@ import styled, { ThemeContext } from 'styled-components'
 import { useCookies } from 'react-cookie'
 import { PreferenceCheckbox } from '.'
 import { TEXTS } from 'constants/texts'
-import { PANIC_ROOM_PREFERENCES } from 'constants/theme'
+import { PANIC_ROOM_PREFERENCES, DEFAULT_PREFERENCES } from 'constants/theme'
 
-import { defaultPreferences, BLUE_SHADOW, GOLDEN_SHADOW } from 'utils/theme'
+import { BLUE_SHADOW, GOLDEN_SHADOW } from 'utils/theme'
 
 import { Theme } from 'types'
 
@@ -40,7 +40,7 @@ export const WelcomeMessage: React.FC<{
 }> = ({ triggerMenuFocus }) => {
   const { darkModeActive, theme } = useContext(ThemeContext)
 
-  const [preferences, setPreferences] = useState(defaultPreferences)
+  const [preferences, setPreferences] = useState(DEFAULT_PREFERENCES)
   const [, setCookie] = useCookies([PANIC_ROOM_PREFERENCES])
 
   const savePreferences = () => {

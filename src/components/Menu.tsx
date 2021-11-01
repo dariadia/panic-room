@@ -7,9 +7,12 @@ import React, {
   useEffect,
 } from 'react'
 import styled, { ThemeContext } from 'styled-components'
+import { useCookies } from 'react-cookie'
 
-import { defaultPreferences, GOLDEN_SHADOW, BLUE_SHADOW } from 'utils/theme'
+import { GOLDEN_SHADOW, BLUE_SHADOW } from 'utils/theme'
+import { PANIC_ROOM_PREFERENCES } from 'constants/theme'
 import { Button, PreferenceCheckbox } from '.'
+import { TEXTS } from 'constants/texts'
 
 export const MenuWrapper: React.FC<{
   isMenuFocused: boolean
@@ -49,9 +52,15 @@ export const MenuWrapper: React.FC<{
     }
   }
 
-  const [preferences, setPreferences] = useState(defaultPreferences)
+  const [cookies, setCookie] = useCookies([PANIC_ROOM_PREFERENCES])
+  const userPreferences = cookies[PANIC_ROOM_PREFERENCES]
+  const [preferences, setPreferences] = useState(userPreferences)
   const onCheckboxChange = (target: EventTarget & HTMLInputElement) =>
     setPreferences({ ...preferences, [target.name]: target.checked })
+
+  const savePreferences = () => {
+    setCookie(PANIC_ROOM_PREFERENCES, JSON.stringify(preferences))
+  }
 
   return (
     <Menu
@@ -67,31 +76,29 @@ export const MenuWrapper: React.FC<{
           theme={darkModeActive ? theme.darkTheme : theme.lightTheme}
         >
           <PreferenceCheckbox
+            checked={preferences.allowMotion}
             labelId={MENU_OPTION_MOTION}
-            id={'motion'}
+            id={TEXTS.motion}
             name="allowMotion"
             onChange={onCheckboxChange}
             color="gold"
             shadow={darkModeActive ? GOLDEN_SHADOW : BLUE_SHADOW}
           >
-            <span>{'motion'}</span>
+            <span>{TEXTS.motion}</span>
           </PreferenceCheckbox>
           <PreferenceCheckbox
+            checked={preferences.allowSounds}
             labelId={MENU_OPTION_SOUNDS}
-            id={'sounds'}
+            id={TEXTS.sounds}
             name="allowSounds"
             onChange={onCheckboxChange}
             color="gold"
             shadow={darkModeActive ? GOLDEN_SHADOW : BLUE_SHADOW}
           >
-            <span style={{ lineHeight: 2 }}>{'sounds'}</span>
+            <span style={{ lineHeight: 2 }}>{TEXTS.sounds}</span>
           </PreferenceCheckbox>
-          <Button
-            onClick={() => console.log(preferences)}
-            marginTop={24}
-            as="span"
-          >
-            {'save'}
+          <Button onClick={savePreferences} marginTop={24} as="span">
+            {TEXTS.save}
           </Button>
         </MenuDropdown>
       )}
