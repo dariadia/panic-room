@@ -60,6 +60,7 @@ export const MenuWrapper: React.FC<{
 
   const savePreferences = () => {
     setCookie(PANIC_ROOM_PREFERENCES, JSON.stringify(preferences))
+    window.location.reload()
   }
 
   return (
