@@ -127,4 +127,9 @@ export const Menu = styled('button')`
     filter: drop-shadow(1px 2px 8px hsl(220deg 60% 50%));
     background: gold;
   }
+  :hover {
+    background: rgb(100%, 84%, 0%, 0.8);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
 `
