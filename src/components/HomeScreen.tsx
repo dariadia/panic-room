@@ -235,17 +235,17 @@ const Background = styled('div')`
   }
 
   #line-4 {
-    height: 75px;
-    transform: rotate(-142deg);
-    top: 19%;
-    left: 43%;
+    height: 120px;
+    transform: rotate(-219deg);
+    top: 46%;
+    left: 24%;
   }
 
   #line-5 {
     height: 48px;
     transform: rotate(69deg);
     top: 38.2%;
-    left: 21.5%;
+    left: 19.5%;
   }
 
   #line-6 {
@@ -256,11 +256,12 @@ const Background = styled('div')`
   }
 
   #line-7 {
-    height: 8px;
-    transform: rotate(9deg);
-    top: 99.5%;
-    left: 29.8%;
+    height: 69px;
+    transform: rotate(38deg);
+    top: 76.5%;
+    left: 28%;
   }
+
   #line-8 {
     height: 215px;
     transform: rotate(-10deg);
