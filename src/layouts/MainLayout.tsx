@@ -28,6 +28,7 @@ export const Body: React.FC<{ theme: Theme }> = styled('div')`
 
 const Main = styled('main')`
   min-height: calc(100vh - ${FOOTER_HEIGHT}px - ${MAIN_PADDING * 2}px);
+  height: fit-content;
 `
 
 export const MainLayout: React.FC = ({ children }) => {
