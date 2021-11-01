@@ -1,5 +1,7 @@
-import React from 'react'
-import styled, { keyframes } from 'styled-components'
+import React, { useContext } from 'react'
+import styled, { keyframes, ThemeContext } from 'styled-components'
+
+import { Theme } from 'types'
 
 const twinkle = keyframes`
   0% {
@@ -22,7 +24,7 @@ const line = keyframes`
   }
 `
 
-const Background = styled('div')`
+const Background = styled('div')<{ theme: Theme; className?: string }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,7 +44,7 @@ const Background = styled('div')`
   }
   .star {
     position: absolute;
-    box-shadow: 0 0 3px #fff;
+    box-shadow: 0 0 3px ${({ theme }) => theme.stars.twinkle};
     border-radius: 50%;
   }
 
@@ -51,7 +53,7 @@ const Background = styled('div')`
     height: 6px;
     right: 32%;
     top: 30%;
-    background: #b6c8ff;
+    background: ${({ theme }) => theme.stars.shine[0]};
     -webkit-animation: ${twinkle} 0.5s alternate infinite;
     animation: ${twinkle} 0.5s alternate infinite;
     -webkit-animation-delay: 1.61404s;
@@ -63,7 +65,7 @@ const Background = styled('div')`
     top: 74.5%;
     width: 4px;
     height: 4px;
-    background: #f4ccbf;
+    background: ${({ theme }) => theme.stars.shine[1]};
     -webkit-animation: ${twinkle} 0.5s alternate infinite;
     animation: ${twinkle} 0.5s alternate infinite;
     -webkit-animation-delay: 4.09091s;
@@ -71,7 +73,7 @@ const Background = styled('div')`
   }
 
   #twinkle-star-3 {
-    background: #f4ccbf;
+    background: ${({ theme }) => theme.stars.shine[1]};
     width: 3px;
     height: 3px;
     left: 35%;
@@ -87,7 +89,7 @@ const Background = styled('div')`
     height: 5px;
     left: 14%;
     top: 13%;
-    background: #b6c8ff;
+    background: ${({ theme }) => theme.stars.shine[0]};
     -webkit-animation: ${twinkle} 0.5s alternate infinite;
     animation: ${twinkle} 0.5s alternate infinite;
     -webkit-animation-delay: 1.55357s;
@@ -95,7 +97,7 @@ const Background = styled('div')`
   }
 
   #twinkle-star-5 {
-    background: #f4aaaa;
+    background: ${({ theme }) => theme.stars.shine[2]};
     width: 4px;
     height: 4px;
     left: 92%;
@@ -107,7 +109,7 @@ const Background = styled('div')`
   }
 
   #twinkle-star-6 {
-    background: #f4aaaa;
+    background: ${({ theme }) => theme.stars.shine[2]};
     width: 3px;
     height: 3px;
     left: 10%;
@@ -119,10 +121,10 @@ const Background = styled('div')`
   }
 
   #twinkle-star-7 {
-    background: #b6c8f9;
-    width: 3px;
-    height: 3px;
-    left: 19%;
+    background: ${({ theme }) => theme.stars.shine[3]};
+    width: 5px;
+    height: 5px;
+    left: 20%;
     bottom: 4%;
     -webkit-animation: ${twinkle} 0.75s alternate infinite;
     animation: ${twinkle} 0.75s alternate infinite;
@@ -206,7 +208,7 @@ const Background = styled('div')`
     width: 1px;
     height: 1px;
     position: absolute;
-    background: rgba(246, 218, 230, 0.65);
+    background: ${({ theme }) => theme.stars.line};
     -webkit-animation: ${line} 7s alternate infinite;
     animation: ${line} 7s alternate infinite;
     -webkit-animation-delay: 1s;
@@ -306,9 +308,13 @@ const Background = styled('div')`
 `
 
 export const HomeScreen: React.FC = () => {
+  const { darkModeActive, theme } = useContext(ThemeContext)
   return (
     <>
-      <Background className="night-sky">
+      <Background
+        className="night-sky"
+        theme={darkModeActive ? theme.darkTheme : theme.lightTheme}
+      >
         <div className="star-box">
           <div className="star" id="twinkle-star-1"></div>
           <div className="star" id="twinkle-star-2"></div>

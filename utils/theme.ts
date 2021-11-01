@@ -12,7 +12,7 @@ const lightTheme = {
   stars: {
     shine: ['#6a8eff', '#e9987e', '#f4aaaa', '#9eb6f7'],
     line: 'rgba(0, 0, 0, 0.5)',
-    twinkle: 'white',
+    twinkle: 'gold',
   },
 }
 
@@ -25,7 +25,7 @@ const darkTheme = {
   stars: {
     shine: ['#b6c8ff', '#f4ccbf', '#f4aaaa', '#b6c8f9'],
     line: 'rgba(246, 218, 230, 0.65)',
-    twinkle: 'gold',
+    twinkle: 'white',
   },
 }
 
