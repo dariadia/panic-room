@@ -1,8 +1,11 @@
 import { Preferences } from 'types'
 
+export const ALLOW_MOTION = 'allowMotion'
+export const ALLOW_SOUNDS = 'allowSounds'
+
 export const DEFAULT_PREFERENCES: Preferences = {
-  allowMotion: true,
-  allowSounds: true,
+  [ALLOW_MOTION]: true,
+  [ALLOW_SOUNDS]: true,
 } as const
 
 export const PANIC_ROOM_PREFERENCES = 'panic-room-preferences'

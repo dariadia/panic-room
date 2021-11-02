@@ -2,7 +2,8 @@ import React, { useContext } from 'react'
 import { useCookies } from 'react-cookie'
 import styled, { keyframes, ThemeContext } from 'styled-components'
 
-import { PANIC_ROOM_PREFERENCES } from 'constants/theme'
+import { ALLOW_MOTION, PANIC_ROOM_PREFERENCES } from 'constants/theme'
+import { getValueFromCookieString } from 'utils/theme'
 
 import { Preferences, Theme } from 'types'
 
@@ -308,7 +309,7 @@ export const HomeScreen: React.FC<{ preferences: string }> = ({
     preferences || (cookies[PANIC_ROOM_PREFERENCES] as Preferences)
   const allowMotion =
     typeof userPreferences === 'string'
-      ? /(?<=allowMotion.{6})\w+/.exec(preferences)
+      ? getValueFromCookieString({ cookie: preferences, value: ALLOW_MOTION })
       : userPreferences.allowMotion
 
   return (

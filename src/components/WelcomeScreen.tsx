@@ -4,7 +4,12 @@ import styled, { ThemeContext } from 'styled-components'
 import { useCookies } from 'react-cookie'
 import { PreferenceCheckbox } from '.'
 import { TEXTS } from 'constants/texts'
-import { PANIC_ROOM_PREFERENCES, DEFAULT_PREFERENCES } from 'constants/theme'
+import {
+  PANIC_ROOM_PREFERENCES,
+  DEFAULT_PREFERENCES,
+  ALLOW_MOTION,
+  ALLOW_SOUNDS,
+} from 'constants/theme'
 
 import { BLUE_SHADOW, GOLDEN_SHADOW } from 'utils/theme'
 
@@ -75,7 +80,7 @@ export const WelcomeMessage: React.FC<{
       <article>
         <PreferenceCheckbox
           id={TEXTS.motion}
-          name="allowMotion"
+          name={ALLOW_MOTION}
           onChange={onCheckboxChange}
           color={
             darkModeActive ? theme.darkTheme.brand : theme.lightTheme.brand
@@ -86,7 +91,7 @@ export const WelcomeMessage: React.FC<{
         </PreferenceCheckbox>
         <PreferenceCheckbox
           id={TEXTS.sounds}
-          name="allowSounds"
+          name={ALLOW_SOUNDS}
           onChange={onCheckboxChange}
           color={
             darkModeActive ? theme.darkTheme.brand : theme.lightTheme.brand

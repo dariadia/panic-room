@@ -1,4 +1,4 @@
-import { DARK, LIGHT } from 'constants/theme'
+import { ALLOW_MOTION, ALLOW_SOUNDS, DARK, LIGHT } from 'constants/theme'
 
 export const GOLDEN_SHADOW = 'hsl(46deg,65%,52%)'
 export const BLUE_SHADOW = 'hsl(220deg 60% 50%)'
@@ -35,3 +35,21 @@ export const theme = {
 }
 
 export const AVAILABLE_MODES = [DARK, LIGHT]
+
+export const getValueFromCookieString = ({
+  cookie,
+  value,
+}: {
+  cookie: string
+  value: typeof ALLOW_MOTION | typeof ALLOW_SOUNDS
+}): boolean => {
+  let match
+  if (value === ALLOW_MOTION) {
+    match = /(?<=allowMotion.{6})\w+/.exec(cookie)
+  } else {
+    match = /(?<=allowSounds.{6})\w+/.exec(cookie)
+  }
+  const matchedString = match && match[0]
+
+  return matchedString === 'true'
+}

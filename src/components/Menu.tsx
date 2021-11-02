@@ -10,9 +10,14 @@ import styled, { ThemeContext } from 'styled-components'
 import { useCookies } from 'react-cookie'
 
 import { GOLDEN_SHADOW, BLUE_SHADOW } from 'utils/theme'
-import { PANIC_ROOM_PREFERENCES } from 'constants/theme'
-import { Button, PreferenceCheckbox } from '.'
+import {
+  ALLOW_MOTION,
+  ALLOW_SOUNDS,
+  PANIC_ROOM_PREFERENCES,
+} from 'constants/theme'
 import { TEXTS } from 'constants/texts'
+
+import { Button, PreferenceCheckbox } from '.'
 
 export const MenuWrapper: React.FC<{
   isMenuFocused: boolean
@@ -80,7 +85,7 @@ export const MenuWrapper: React.FC<{
             checked={preferences.allowMotion}
             labelId={MENU_OPTION_MOTION}
             id={TEXTS.motion}
-            name="allowMotion"
+            name={ALLOW_MOTION}
             onChange={onCheckboxChange}
             color="gold"
             shadow={darkModeActive ? GOLDEN_SHADOW : BLUE_SHADOW}
@@ -91,7 +96,7 @@ export const MenuWrapper: React.FC<{
             checked={preferences.allowSounds}
             labelId={MENU_OPTION_SOUNDS}
             id={TEXTS.sounds}
-            name="allowSounds"
+            name={ALLOW_SOUNDS}
             onChange={onCheckboxChange}
             color="gold"
             shadow={darkModeActive ? GOLDEN_SHADOW : BLUE_SHADOW}
