@@ -1,7 +1,10 @@
 import React, { useContext } from 'react'
+import { useCookies } from 'react-cookie'
 import styled, { keyframes, ThemeContext } from 'styled-components'
 
-import { Theme } from 'types'
+import { PANIC_ROOM_PREFERENCES } from 'constants/theme'
+
+import { Preferences, Theme } from 'types'
 
 const twinkle = keyframes`
   0% {
@@ -28,6 +31,7 @@ const Background = styled('div')<{
   theme: Theme
   className?: string
   margin?: string
+  allowMotion: boolean
 }>`
   display: flex;
   align-items: center;
@@ -58,8 +62,10 @@ const Background = styled('div')<{
     right: 32%;
     top: 30%;
     background: ${({ theme }) => theme.stars.shine[0]};
-    -webkit-animation: ${twinkle} 0.5s alternate infinite;
-    animation: ${twinkle} 0.5s alternate infinite;
+    -webkit-animation: ${({ allowMotion }) => allowMotion && twinkle} 0.5s
+      alternate infinite;
+    animation: ${({ allowMotion }) => allowMotion && twinkle} 0.5s alternate
+      infinite;
     -webkit-animation-delay: 1.61404s;
     animation-delay: 1.61404s;
   }
@@ -70,8 +76,10 @@ const Background = styled('div')<{
     width: 4px;
     height: 4px;
     background: ${({ theme }) => theme.stars.shine[1]};
-    -webkit-animation: ${twinkle} 0.5s alternate infinite;
-    animation: ${twinkle} 0.5s alternate infinite;
+    -webkit-animation: ${({ allowMotion }) => allowMotion && twinkle} 0.5s
+      alternate infinite;
+    animation: ${({ allowMotion }) => allowMotion && twinkle} 0.5s alternate
+      infinite;
     -webkit-animation-delay: 4.09091s;
     animation-delay: 4.09091s;
   }
@@ -82,8 +90,10 @@ const Background = styled('div')<{
     height: 3px;
     left: 35%;
     top: 77%;
-    -webkit-animation: ${twinkle} 0.75s alternate infinite;
-    animation: ${twinkle} 0.75s alternate infinite;
+    -webkit-animation: ${({ allowMotion }) => allowMotion && twinkle} 0.75s
+      alternate infinite;
+    animation: ${({ allowMotion }) => allowMotion && twinkle} 0.75s alternate
+      infinite;
     -webkit-animation-delay: 1.77143s;
     animation-delay: 1.77143s;
   }
@@ -94,8 +104,10 @@ const Background = styled('div')<{
     left: 14%;
     top: 13%;
     background: ${({ theme }) => theme.stars.shine[0]};
-    -webkit-animation: ${twinkle} 0.5s alternate infinite;
-    animation: ${twinkle} 0.5s alternate infinite;
+    -webkit-animation: ${({ allowMotion }) => allowMotion && twinkle} 0.5s
+      alternate infinite;
+    animation: ${({ allowMotion }) => allowMotion && twinkle} 0.5s alternate
+      infinite;
     -webkit-animation-delay: 1.55357s;
     animation-delay: 1.55357s;
   }
@@ -106,8 +118,10 @@ const Background = styled('div')<{
     height: 4px;
     left: 92%;
     top: 50%;
-    -webkit-animation: ${twinkle} 0.75s alternate infinite;
-    animation: ${twinkle} 0.75s alternate infinite;
+    -webkit-animation: ${({ allowMotion }) => allowMotion && twinkle} 0.75s
+      alternate infinite;
+    animation: ${({ allowMotion }) => allowMotion && twinkle} 0.75s alternate
+      infinite;
     -webkit-animation-delay: 0.88462s;
     animation-delay: 0.88462s;
   }
@@ -118,8 +132,10 @@ const Background = styled('div')<{
     height: 3px;
     left: 10%;
     top: 48%;
-    -webkit-animation: ${twinkle} 0.5s alternate infinite;
-    animation: ${twinkle} 0.5s alternate infinite;
+    -webkit-animation: ${({ allowMotion }) => allowMotion && twinkle} 0.5s
+      alternate infinite;
+    animation: ${({ allowMotion }) => allowMotion && twinkle} 0.5s alternate
+      infinite;
     -webkit-animation-delay: 0.66s;
     animation-delay: 0.66s;
   }
@@ -130,8 +146,10 @@ const Background = styled('div')<{
     height: 5px;
     left: 20%;
     bottom: 4%;
-    -webkit-animation: ${twinkle} 0.75s alternate infinite;
-    animation: ${twinkle} 0.75s alternate infinite;
+    -webkit-animation: ${({ allowMotion }) => allowMotion && twinkle} 0.75s
+      alternate infinite;
+    animation: ${({ allowMotion }) => allowMotion && twinkle} 0.75s alternate
+      infinite;
     -webkit-animation-delay: 0.03279s;
     animation-delay: 0.03279s;
   }
@@ -142,8 +160,10 @@ const Background = styled('div')<{
     width: 5px;
     height: 5px;
     background: ${({ theme }) => theme.stars.shine[3]};
-    -webkit-animation: ${twinkle} 0.5s alternate infinite;
-    animation: ${twinkle} 0.5s alternate infinite;
+    -webkit-animation: ${({ allowMotion }) => allowMotion && twinkle} 0.5s
+      alternate infinite;
+    animation: ${({ allowMotion }) => allowMotion && twinkle} 0.5s alternate
+      infinite;
     -webkit-animation-delay: 4.09091s;
     animation-delay: 4.09091s;
   }
@@ -154,8 +174,10 @@ const Background = styled('div')<{
     height: 3px;
     left: 30%;
     top: 97%;
-    -webkit-animation: ${twinkle} 0.75s alternate infinite;
-    animation: ${twinkle} 0.75s alternate infinite;
+    -webkit-animation: ${({ allowMotion }) => allowMotion && twinkle} 0.75s
+      alternate infinite;
+    animation: ${({ allowMotion }) => allowMotion && twinkle} 0.75s alternate
+      infinite;
     -webkit-animation-delay: 1.77143s;
     animation-delay: 1.77143s;
   }
@@ -166,8 +188,10 @@ const Background = styled('div')<{
     left: 53%;
     top: 16.8%;
     background: ${({ theme }) => theme.stars.shine[0]};
-    -webkit-animation: ${twinkle} 0.5s alternate infinite;
-    animation: ${twinkle} 0.5s alternate infinite;
+    -webkit-animation: ${({ allowMotion }) => allowMotion && twinkle} 0.5s
+      alternate infinite;
+    animation: ${({ allowMotion }) => allowMotion && twinkle} 0.5s alternate
+      infinite;
     -webkit-animation-delay: 1.55357s;
     animation-delay: 1.55357s;
   }
@@ -178,8 +202,10 @@ const Background = styled('div')<{
     height: 5px;
     left: 32%;
     top: 40%;
-    -webkit-animation: ${twinkle} 0.75s alternate infinite;
-    animation: ${twinkle} 0.75s alternate infinite;
+    -webkit-animation: ${({ allowMotion }) => allowMotion && twinkle} 0.75s
+      alternate infinite;
+    animation: ${({ allowMotion }) => allowMotion && twinkle} 0.75s alternate
+      infinite;
     -webkit-animation-delay: 0.88462s;
     animation-delay: 0.88462s;
   }
@@ -190,8 +216,10 @@ const Background = styled('div')<{
     height: 3px;
     left: 2%;
     top: 48%;
-    -webkit-animation: ${twinkle} 0.5s alternate infinite;
-    animation: ${twinkle} 0.5s alternate infinite;
+    -webkit-animation: ${({ allowMotion }) => allowMotion && twinkle} 0.5s
+      alternate infinite;
+    animation: ${({ allowMotion }) => allowMotion && twinkle} 0.5s alternate
+      infinite;
     -webkit-animation-delay: 0.66s;
     animation-delay: 0.66s;
   }
@@ -202,8 +230,10 @@ const Background = styled('div')<{
     height: 6px;
     left: 29%;
     top: 40%;
-    -webkit-animation: ${twinkle} 0.75s alternate infinite;
-    animation: ${twinkle} 0.75s alternate infinite;
+    -webkit-animation: ${({ allowMotion }) => allowMotion && twinkle} 0.75s
+      alternate infinite;
+    animation: ${({ allowMotion }) => allowMotion && twinkle} 0.75s alternate
+      infinite;
     -webkit-animation-delay: 0.03279s;
     animation-delay: 0.03279s;
   }
@@ -269,13 +299,24 @@ const Background = styled('div')<{
   }
 `
 
-export const HomeScreen: React.FC = () => {
+export const HomeScreen: React.FC<{ preferences: string }> = ({
+  preferences,
+}) => {
   const { darkModeActive, theme } = useContext(ThemeContext)
+  const [cookies] = useCookies([PANIC_ROOM_PREFERENCES])
+  const userPreferences =
+    preferences || (cookies[PANIC_ROOM_PREFERENCES] as Preferences)
+  const allowMotion =
+    typeof userPreferences === 'string'
+      ? /(?<=allowMotion.{6})\w+/.exec(preferences)
+      : userPreferences.allowMotion
+
   return (
     <>
       <Background
         className="night-sky"
         theme={darkModeActive ? theme.darkTheme : theme.lightTheme}
+        allowMotion={Boolean(allowMotion)}
       >
         <div className="star-box">
           <div className="star" id="twinkle-star-1"></div>
@@ -298,6 +339,7 @@ export const HomeScreen: React.FC = () => {
         className="night-sky"
         theme={darkModeActive ? theme.darkTheme : theme.lightTheme}
         margin="-5% 0 0 -30%"
+        allowMotion={Boolean(allowMotion)}
       >
         <div className="star-box">
           <div className="star" id="twinkle-star-8"></div>
