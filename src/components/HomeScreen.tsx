@@ -24,13 +24,17 @@ const line = keyframes`
   }
 `
 
-const Background = styled('div')<{ theme: Theme; className?: string }>`
+const Background = styled('div')<{
+  theme: Theme
+  className?: string
+  margin?: string
+}>`
   display: flex;
   align-items: center;
   justify-content: center;
   height: fit-content;
   width: 100%;
-  margin: 15% 0 0 20%;
+  margin: ${({ margin = '15% 0 0 20%' }) => margin};
   padding: 0;
   overflow: hidden;
   position: absolute;
@@ -133,11 +137,11 @@ const Background = styled('div')<{ theme: Theme; className?: string }>`
   }
 
   #twinkle-star-8 {
-    right: 32%;
+    right: 2%;
     top: 84.5%;
-    width: 4px;
-    height: 4px;
-    background: #f4ccbf;
+    width: 5px;
+    height: 5px;
+    background: ${({ theme }) => theme.stars.shine[3]};
     -webkit-animation: ${twinkle} 0.5s alternate infinite;
     animation: ${twinkle} 0.5s alternate infinite;
     -webkit-animation-delay: 4.09091s;
@@ -145,7 +149,7 @@ const Background = styled('div')<{ theme: Theme; className?: string }>`
   }
 
   #twinkle-star-9 {
-    background: #f4ccbf;
+    background: ${({ theme }) => theme.stars.shine[1]};
     width: 3px;
     height: 3px;
     left: 30%;
@@ -157,11 +161,11 @@ const Background = styled('div')<{ theme: Theme; className?: string }>`
   }
 
   #twinkle-star-10 {
-    width: 5px;
-    height: 5px;
+    width: 6px;
+    height: 6px;
     left: 53%;
     top: 16.8%;
-    background: #b6c8ff;
+    background: ${({ theme }) => theme.stars.shine[0]};
     -webkit-animation: ${twinkle} 0.5s alternate infinite;
     animation: ${twinkle} 0.5s alternate infinite;
     -webkit-animation-delay: 1.55357s;
@@ -169,9 +173,9 @@ const Background = styled('div')<{ theme: Theme; className?: string }>`
   }
 
   #twinkle-star-11 {
-    background: #f4aaaa;
-    width: 4px;
-    height: 4px;
+    background: ${({ theme }) => theme.stars.shine[2]};
+    width: 5px;
+    height: 5px;
     left: 32%;
     top: 40%;
     -webkit-animation: ${twinkle} 0.75s alternate infinite;
@@ -181,11 +185,11 @@ const Background = styled('div')<{ theme: Theme; className?: string }>`
   }
 
   #twinkle-star-12 {
-    background: #f4aaaa;
+    background: ${({ theme }) => theme.stars.shine[3]};
     width: 3px;
     height: 3px;
-    left: 10%;
-    top: 48.5%;
+    left: 2%;
+    top: 48%;
     -webkit-animation: ${twinkle} 0.5s alternate infinite;
     animation: ${twinkle} 0.5s alternate infinite;
     -webkit-animation-delay: 0.66s;
@@ -193,11 +197,11 @@ const Background = styled('div')<{ theme: Theme; className?: string }>`
   }
 
   #twinkle-star-13 {
-    background: #b6c8f9;
-    width: 3px;
-    height: 3px;
+    background: ${({ theme }) => theme.stars.shine[1]};
+    width: 6px;
+    height: 6px;
     left: 29%;
-    bottom: -4%;
+    top: 40%;
     -webkit-animation: ${twinkle} 0.75s alternate infinite;
     animation: ${twinkle} 0.75s alternate infinite;
     -webkit-animation-delay: 0.03279s;
@@ -263,48 +267,6 @@ const Background = styled('div')<{ theme: Theme; className?: string }>`
     top: 76.5%;
     left: 28%;
   }
-
-  #line-8 {
-    height: 215px;
-    transform: rotate(-10deg);
-    top: 21.5%;
-    left: 60.2%;
-  }
-
-  #line-9 {
-    height: 105px;
-    transform: rotate(-42deg);
-    top: 17%;
-    left: 68.5%;
-  }
-
-  #line-10 {
-    height: 119px;
-    transform: rotate(20deg);
-    top: 49%;
-    left: 75.5%;
-  }
-
-  #line-11 {
-    height: 75px;
-    transform: rotate(-142deg);
-    top: 19%;
-    left: 43%;
-  }
-
-  #line-12 {
-    height: 48px;
-    transform: rotate(69deg);
-    top: 38.2%;
-    left: 21.5%;
-  }
-
-  #line-13 {
-    height: 101px;
-    transform: rotate(69deg);
-    top: 77.5%;
-    left: 48%;
-  }
 `
 
 export const HomeScreen: React.FC = () => {
@@ -332,7 +294,11 @@ export const HomeScreen: React.FC = () => {
           <div className="line" id="line-7"></div>
         </div>
       </Background>
-      {/* <Background className="night-sky">
+      <Background
+        className="night-sky"
+        theme={darkModeActive ? theme.darkTheme : theme.lightTheme}
+        margin="-5% 0 0 -30%"
+      >
         <div className="star-box">
           <div className="star" id="twinkle-star-8"></div>
           <div className="star" id="twinkle-star-9"></div>
@@ -340,14 +306,8 @@ export const HomeScreen: React.FC = () => {
           <div className="star" id="twinkle-star-11"></div>
           <div className="star" id="twinkle-star-12"></div>
           <div className="star" id="twinkle-star-13"></div>
-          <div className="line" id="line-8"></div>
-          <div className="line" id="line-9"></div>
-          <div className="line" id="line-10"></div>
-          <div className="line" id="line-11"></div>
-          <div className="line" id="line-12"></div>
-          <div className="line" id="line-13"></div>
         </div>
-      </Background> */}
+      </Background>
     </>
   )
 }
