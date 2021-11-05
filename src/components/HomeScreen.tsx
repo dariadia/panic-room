@@ -31,15 +31,16 @@ const line = keyframes`
 const Background = styled('div')<{
   theme: Theme
   className?: string
-  margin?: string
+  position: { top: number; left: number }
   allowMotion: boolean
 }>`
   display: flex;
   align-items: center;
   justify-content: center;
   height: fit-content;
-  width: 100%;
-  margin: ${({ margin = '15% 0 0 20%' }) => margin};
+  width: fit-content;
+  top: ${({ position }) => `${position.top}%`};
+  left: ${({ position }) => `${position.left}%`};
   padding: 0;
   overflow: hidden;
   position: absolute;
@@ -318,6 +319,7 @@ export const HomeScreen: React.FC<{ preferences: string }> = ({
         className="night-sky"
         theme={darkModeActive ? theme.darkTheme : theme.lightTheme}
         allowMotion={Boolean(allowMotion)}
+        position={{ top: 60, left: 75 }}
       >
         <div className="star-box">
           <div className="star" id="twinkle-star-1"></div>
@@ -339,7 +341,7 @@ export const HomeScreen: React.FC<{ preferences: string }> = ({
       <Background
         className="night-sky"
         theme={darkModeActive ? theme.darkTheme : theme.lightTheme}
-        margin="-5% 0 0 -30%"
+        position={{ top: -10, left: 3 }}
         allowMotion={Boolean(allowMotion)}
       >
         <div className="star-box">
