@@ -8,7 +8,7 @@ const lightTheme = {
   alert: '#4c1130',
   accent: '#073763',
   background: '#fafbfc',
-  brand: 'aqua',
+  brand: '#57cbf5',
   stars: {
     shine: ['#6a8eff', '#e9987e', '#f4aaaa', '#9eb6f7'],
     line: 'rgba(0, 0, 0, 0.5)',
