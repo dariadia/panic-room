@@ -40,22 +40,15 @@ const App: React.FC<ApplicationProps> = ({
   const Layout: ComponentType = Component.Layout || React.Fragment
 
   const [loading, setLoading] = useState(false)
+  const startLoading = () => setLoading(true)
+  const stopLoading = () => setLoading(false)
+
   useEffect(() => {
-    const start = () => {
-      console.log('loading started')
-      setLoading(true)
-    }
-    const end = () => {
-      console.log('loading finished')
-      setLoading(false)
-    }
-    Router.events.on('routeChangeStart', start)
-    Router.events.on('routeChangeComplete', end)
-    Router.events.on('routeChangeError', end)
+    Router.events.on('routeChangeStart', startLoading)
+    Router.events.on('routeChangeComplete', stopLoading)
     return () => {
-      Router.events.off('routeChangeStart', start)
-      Router.events.off('routeChangeComplete', end)
-      Router.events.off('routeChangeError', end)
+      Router.events.off('routeChangeStart', startLoading)
+      Router.events.off('routeChangeComplete', stopLoading)
     }
   }, [])
 
