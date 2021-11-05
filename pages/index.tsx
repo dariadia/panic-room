@@ -7,7 +7,12 @@ import Cookies from 'cookies'
 
 import { MainLayout } from '@/layouts'
 
-import { MenuWrapper, WelcomeMessage, WelcomeScreen } from '@/components'
+import {
+  Loader,
+  MenuWrapper,
+  WelcomeMessage,
+  WelcomeScreen,
+} from '@/components'
 import { HomeScreen } from '@/components/HomeScreen'
 import { PANIC_ROOM_PREFERENCES } from 'constants/theme'
 
@@ -40,7 +45,7 @@ const HomePage: Page<SinglePageProps> = ({ preferences }) => {
         triggerMenuFocus={triggerMenuFocus}
       />
       {loading ? (
-        <img src="/assets/loading.svg" alt="loading" />
+        <Loader />
       ) : hasSavedPreferences ? (
         <HomeScreen preferences={preferences} />
       ) : (
