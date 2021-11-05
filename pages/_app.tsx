@@ -1,4 +1,5 @@
-import React, { ComponentType } from 'react'
+import React, { ComponentType, useState, useEffect } from 'react'
+import Router from 'next/router'
 import Head from 'next/head'
 
 import { AppProps } from 'next/app'
@@ -10,6 +11,7 @@ import withDarkMode from 'next-dark-mode'
 
 import { TEXTS } from 'constants/texts'
 import { theme } from 'utils/theme'
+import { Loader } from '@/components'
 
 const GlobalStyle = createGlobalStyle`
  ${normalize}
@@ -37,6 +39,26 @@ const App: React.FC<ApplicationProps> = ({
 }) => {
   const Layout: ComponentType = Component.Layout || React.Fragment
 
+  const [loading, setLoading] = useState(false)
+  useEffect(() => {
+    const start = () => {
+      console.log('loading started')
+      setLoading(true)
+    }
+    const end = () => {
+      console.log('loading finished')
+      setLoading(false)
+    }
+    Router.events.on('routeChangeStart', start)
+    Router.events.on('routeChangeComplete', end)
+    Router.events.on('routeChangeError', end)
+    return () => {
+      Router.events.off('routeChangeStart', start)
+      Router.events.off('routeChangeComplete', end)
+      Router.events.off('routeChangeError', end)
+    }
+  }, [])
+
   return (
     <>
       <Head>
@@ -58,7 +80,7 @@ const App: React.FC<ApplicationProps> = ({
         <CookiesProvider>
           {Component.Layout ? (
             <Layout {...pageProps}>
-              <Component {...pageProps} />
+              {loading ? <Loader /> : <Component {...pageProps} />}
             </Layout>
           ) : (
             <Component {...pageProps} />
