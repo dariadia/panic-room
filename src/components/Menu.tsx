@@ -82,7 +82,7 @@ export const MenuWrapper: React.FC<{
           theme={darkModeActive ? theme.darkTheme : theme.lightTheme}
         >
           <PreferenceCheckbox
-            checked={preferences.allowMotion}
+            checked={preferences?.allowMotion || false}
             labelId={MENU_OPTION_MOTION}
             id={TEXTS.motion}
             name={ALLOW_MOTION}
@@ -93,7 +93,7 @@ export const MenuWrapper: React.FC<{
             <span>{TEXTS.motion}</span>
           </PreferenceCheckbox>
           <PreferenceCheckbox
-            checked={preferences.allowSounds}
+            checked={preferences?.allowSounds || false}
             labelId={MENU_OPTION_SOUNDS}
             id={TEXTS.sounds}
             name={ALLOW_SOUNDS}
