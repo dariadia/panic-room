@@ -112,7 +112,7 @@ export const MenuWrapper: React.FC<{
   )
 }
 
-const MenuDropdown = styled('div')`
+const MenuDropdown = styled('nav')`
   position: absolute;
   padding: 16px;
   background: ${({ theme }) => theme.brand};
