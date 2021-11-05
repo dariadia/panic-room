@@ -1,4 +1,5 @@
-import React, { useContext, useState } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import Router from 'next/dist/client/router'
 import { NextApiRequest, NextApiResponse } from 'next'
 
 import { ThemeContext } from 'styled-components'
@@ -19,13 +20,28 @@ const HomePage: Page<SinglePageProps> = ({ preferences }) => {
 
   const { darkModeActive, theme } = useContext(ThemeContext)
 
+  const [loading, setLoading] = useState(false)
+  const startLoading = () => setLoading(true)
+  const stopLoading = () => setLoading(false)
+
+  useEffect(() => {
+    Router.events.on('routeChangeStart', startLoading)
+    Router.events.on('routeChangeComplete', stopLoading)
+    return () => {
+      Router.events.off('routeChangeStart', startLoading)
+      Router.events.off('routeChangeComplete', stopLoading)
+    }
+  }, [])
+
   return (
     <>
       <MenuWrapper
         isMenuFocused={isMenuFocused}
         triggerMenuFocus={triggerMenuFocus}
       />
-      {hasSavedPreferences ? (
+      {loading ? (
+        <img src="/assets/loading.svg" alt="loading" />
+      ) : hasSavedPreferences ? (
         <HomeScreen preferences={preferences} />
       ) : (
         <WelcomeScreen
