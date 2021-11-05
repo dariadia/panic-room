@@ -1,4 +1,5 @@
 export * from './Checkmark'
+export * from './Loader'
 export * from './Menu'
 export * from './ModeSwitcher'
 export * from './PreferenceCheckbox'

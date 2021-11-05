@@ -23,5 +23,4 @@ npm run dev
   - [Next.JS](https://nextjs.org/)
   - [styled components](https://styled-components.com/)
   - [next-dark-mode](https://github.com/xeoneux/next-dark-mode)
-  - [next-i18next](https://github.com/isaachinman/next-i18next)
 

@@ -9,6 +9,7 @@ export type Page<T> = NextPage<T> & { Layout?: React.FC }
 
 export interface SinglePage {
   locale?: Locale
+  preferences?: string | null
 }
 
 export type Theme = typeof theme

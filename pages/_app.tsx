@@ -1,13 +1,17 @@
-import React, { ComponentType } from 'react'
+import React, { ComponentType, useState, useEffect } from 'react'
+import Router from 'next/router'
 import Head from 'next/head'
-import { AppProps } from 'next/app'
 
-import { appWithTranslation, useTranslation } from 'next-i18next'
+import { AppProps } from 'next/app'
+import { CookiesProvider } from 'react-cookie'
+
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import { normalize } from 'styled-normalize'
 import withDarkMode from 'next-dark-mode'
 
+import { TEXTS } from 'constants/texts'
 import { theme } from 'utils/theme'
+import { Loader } from '@/components'
 
 const GlobalStyle = createGlobalStyle`
  ${normalize}
@@ -34,15 +38,27 @@ const App: React.FC<ApplicationProps> = ({
   darkMode,
 }) => {
   const Layout: ComponentType = Component.Layout || React.Fragment
-  const { t } = useTranslation(['common'])
+
+  const [loading, setLoading] = useState(false)
+  const startLoading = () => setLoading(true)
+  const stopLoading = () => setLoading(false)
+
+  useEffect(() => {
+    Router.events.on('routeChangeStart', startLoading)
+    Router.events.on('routeChangeComplete', stopLoading)
+    return () => {
+      Router.events.off('routeChangeStart', startLoading)
+      Router.events.off('routeChangeComplete', stopLoading)
+    }
+  }, [])
 
   return (
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>{t('app_title')}</title>
-        <meta name="description" content={t('app_description')} />
+        <title>{TEXTS.app_title}</title>
+        <meta name="description" content={TEXTS.app_description} />
         <meta
           name="og:image"
           property="og:image"
@@ -54,13 +70,15 @@ const App: React.FC<ApplicationProps> = ({
         <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png" />
       </Head>
       <ThemeProvider theme={{ ...darkMode, theme }}>
-        {Component.Layout ? (
-          <Layout {...pageProps}>
+        <CookiesProvider>
+          {Component.Layout ? (
+            <Layout {...pageProps}>
+              {loading ? <Loader /> : <Component {...pageProps} />}
+            </Layout>
+          ) : (
             <Component {...pageProps} />
-          </Layout>
-        ) : (
-          <Component {...pageProps} />
-        )}
+          )}
+        </CookiesProvider>
       </ThemeProvider>
       <GlobalStyle />
     </>
@@ -69,4 +87,4 @@ const App: React.FC<ApplicationProps> = ({
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-export default appWithTranslation(withDarkMode(App))
+export default withDarkMode(App, { defaultMode: 'dark' })

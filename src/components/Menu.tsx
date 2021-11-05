@@ -7,15 +7,16 @@ import React, {
   useEffect,
 } from 'react'
 import styled, { ThemeContext } from 'styled-components'
+import { useCookies } from 'react-cookie'
 
-import { useTranslation } from 'next-i18next'
-
+import { GOLDEN_SHADOW, BLUE_SHADOW } from 'utils/theme'
 import {
-  defaultPreferences,
-  GOLDEN_SHADOW,
-  BLUE_SHADOW,
-  setUserPreferences,
-} from 'utils/theme'
+  ALLOW_MOTION,
+  ALLOW_SOUNDS,
+  PANIC_ROOM_PREFERENCES,
+} from 'constants/theme'
+import { TEXTS } from 'constants/texts'
+
 import { Button, PreferenceCheckbox } from '.'
 
 export const MenuWrapper: React.FC<{
@@ -23,7 +24,6 @@ export const MenuWrapper: React.FC<{
   triggerMenuFocus: Dispatch<SetStateAction<boolean>>
 }> = ({ isMenuFocused, triggerMenuFocus }) => {
   const { darkModeActive, theme } = useContext(ThemeContext)
-  const { t } = useTranslation('common')
 
   const [isMenuOpen, triggerMenuOpen] = useState(false)
 
@@ -57,9 +57,16 @@ export const MenuWrapper: React.FC<{
     }
   }
 
-  const [preferences, setPreferences] = useState(defaultPreferences)
+  const [cookies, setCookie] = useCookies([PANIC_ROOM_PREFERENCES])
+  const userPreferences = cookies[PANIC_ROOM_PREFERENCES]
+  const [preferences, setPreferences] = useState(userPreferences)
   const onCheckboxChange = (target: EventTarget & HTMLInputElement) =>
     setPreferences({ ...preferences, [target.name]: target.checked })
+
+  const savePreferences = () => {
+    setCookie(PANIC_ROOM_PREFERENCES, JSON.stringify(preferences))
+    window.location.reload()
+  }
 
   return (
     <Menu
@@ -75,31 +82,29 @@ export const MenuWrapper: React.FC<{
           theme={darkModeActive ? theme.darkTheme : theme.lightTheme}
         >
           <PreferenceCheckbox
+            checked={preferences?.allowMotion || false}
             labelId={MENU_OPTION_MOTION}
-            id={t('motion')}
-            name="allowMotion"
+            id={TEXTS.motion}
+            name={ALLOW_MOTION}
             onChange={onCheckboxChange}
             color="gold"
             shadow={darkModeActive ? GOLDEN_SHADOW : BLUE_SHADOW}
           >
-            <span>{t('motion')}</span>
+            <span>{TEXTS.motion}</span>
           </PreferenceCheckbox>
           <PreferenceCheckbox
+            checked={preferences?.allowSounds || false}
             labelId={MENU_OPTION_SOUNDS}
-            id={t('sounds')}
-            name="allowSounds"
+            id={TEXTS.sounds}
+            name={ALLOW_SOUNDS}
             onChange={onCheckboxChange}
             color="gold"
             shadow={darkModeActive ? GOLDEN_SHADOW : BLUE_SHADOW}
           >
-            <span style={{ lineHeight: 2 }}>{t('sounds')}</span>
+            <span style={{ lineHeight: 2 }}>{TEXTS.sounds}</span>
           </PreferenceCheckbox>
-          <Button
-            onClick={() => setUserPreferences(preferences)}
-            marginTop={24}
-            as="span"
-          >
-            {t('save')}
+          <Button onClick={savePreferences} marginTop={24} as="span">
+            {TEXTS.save}
           </Button>
         </MenuDropdown>
       )}
@@ -107,7 +112,7 @@ export const MenuWrapper: React.FC<{
   )
 }
 
-const MenuDropdown = styled('div')`
+const MenuDropdown = styled('nav')`
   position: absolute;
   padding: 16px;
   background: ${({ theme }) => theme.brand};
@@ -127,5 +132,10 @@ export const Menu = styled('button')`
     outline: none;
     filter: drop-shadow(1px 2px 8px hsl(220deg 60% 50%));
     background: gold;
+  }
+  :hover {
+    background: rgb(100%, 84%, 0%, 0.8);
+    cursor: pointer;
+    transition: all 0.2s;
   }
 `

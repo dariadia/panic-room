@@ -1,17 +1,19 @@
 import React, { Dispatch, SetStateAction, useContext, useState } from 'react'
 import styled, { ThemeContext } from 'styled-components'
 
-import { Trans, useTranslation } from 'next-i18next'
-
+import { useCookies } from 'react-cookie'
+import { PreferenceCheckbox } from '.'
+import { TEXTS } from 'constants/texts'
 import {
-  defaultPreferences,
-  BLUE_SHADOW,
-  GOLDEN_SHADOW,
-  setUserPreferences,
-} from 'utils/theme'
+  PANIC_ROOM_PREFERENCES,
+  DEFAULT_PREFERENCES,
+  ALLOW_MOTION,
+  ALLOW_SOUNDS,
+} from 'constants/theme'
+
+import { BLUE_SHADOW, GOLDEN_SHADOW } from 'utils/theme'
 
 import { Theme } from 'types'
-import { PreferenceCheckbox } from '.'
 
 export const WelcomeScreen: React.FC<{ theme: Theme }> = styled('div')<{
   theme: Theme
@@ -41,70 +43,64 @@ const Branding = styled('span')`
 export const WelcomeMessage: React.FC<{
   triggerMenuFocus: Dispatch<SetStateAction<boolean>>
 }> = ({ triggerMenuFocus }) => {
-  const { t } = useTranslation('common')
   const { darkModeActive, theme } = useContext(ThemeContext)
 
-  const [preferences, setPreferences] = useState(defaultPreferences)
+  const [preferences, setPreferences] = useState(DEFAULT_PREFERENCES)
+  const [, setCookie] = useCookies([PANIC_ROOM_PREFERENCES])
+
+  const savePreferences = () => {
+    setCookie(PANIC_ROOM_PREFERENCES, JSON.stringify(preferences))
+    window.location.reload()
+  }
+
   const onCheckboxChange = (target: EventTarget & HTMLInputElement) =>
     setPreferences({ ...preferences, [target.name]: target.checked })
 
   return (
     <WelcomeSection>
       <p>
-        <Trans
-          i18nKey={`common:greeting`}
-          components={{
-            branding: (
-              <Branding
-                color={
-                  darkModeActive
-                    ? theme.darkTheme.brand
-                    : theme.lightTheme.brand
-                }
-              />
-            ),
-          }}
-        />
+        {TEXTS.greeting}{' '}
+        <Branding
+          color={
+            darkModeActive ? theme.darkTheme.brand : theme.lightTheme.brand
+          }
+        >
+          {TEXTS.panic_room}
+        </Branding>
       </p>
       <p style={{ marginBottom: '32px' }}>
-        <Trans
-          i18nKey={`common:greeting_intro`}
-          components={{
-            focused: (
-              <button
-                onClick={() => triggerMenuFocus(true)}
-                style={{ cursor: 'pointer' }}
-              />
-            ),
-          }}
-        />
+        {TEXTS.greeting_intro}
+        <button
+          onClick={() => triggerMenuFocus(true)}
+          style={{ cursor: 'pointer' }}
+        >
+          {TEXTS.menu}
+        </button>
       </p>
       <article>
         <PreferenceCheckbox
-          id={t('motion')}
-          name="allowMotion"
+          id={TEXTS.motion}
+          name={ALLOW_MOTION}
           onChange={onCheckboxChange}
           color={
             darkModeActive ? theme.darkTheme.brand : theme.lightTheme.brand
           }
           shadow={darkModeActive ? BLUE_SHADOW : GOLDEN_SHADOW}
         >
-          <span>{t('motion')}</span>
+          <span>{TEXTS.motion}</span>
         </PreferenceCheckbox>
         <PreferenceCheckbox
-          id={t('sounds')}
-          name="allowSounds"
+          id={TEXTS.sounds}
+          name={ALLOW_SOUNDS}
           onChange={onCheckboxChange}
           color={
             darkModeActive ? theme.darkTheme.brand : theme.lightTheme.brand
           }
           shadow={darkModeActive ? BLUE_SHADOW : GOLDEN_SHADOW}
         >
-          <span>{t('sounds')}</span>
+          <span>{TEXTS.sounds}</span>
         </PreferenceCheckbox>
-        <Button onClick={() => setUserPreferences(preferences)}>
-          {t('save')}
-        </Button>
+        <Button onClick={savePreferences}>{TEXTS.save}</Button>
       </article>
     </WelcomeSection>
   )

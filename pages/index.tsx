@@ -1,17 +1,19 @@
-import React, { useContext, useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { NextApiRequest, NextApiResponse } from 'next'
+
 import { ThemeContext } from 'styled-components'
+import Cookies from 'cookies'
 
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-
-import { hasUserPreferences } from 'utils/theme'
 import { MainLayout } from '@/layouts'
 
 import { MenuWrapper, WelcomeMessage, WelcomeScreen } from '@/components'
+import { HomeScreen } from '@/components/HomeScreen'
+import { PANIC_ROOM_PREFERENCES } from 'constants/theme'
 
-import type { Locale, Page, SinglePage as SinglePageProps } from 'types'
+import type { Page, SinglePage as SinglePageProps } from 'types'
 
-const HomePage: Page<SinglePageProps> = () => {
-  const hasSavedPreferences = hasUserPreferences()
+const HomePage: Page<SinglePageProps> = ({ preferences }) => {
+  const hasSavedPreferences = preferences
 
   const [isMenuFocused, triggerMenuFocus] = useState(false)
 
@@ -24,7 +26,7 @@ const HomePage: Page<SinglePageProps> = () => {
         triggerMenuFocus={triggerMenuFocus}
       />
       {hasSavedPreferences ? (
-        <MainScreen />
+        <HomeScreen preferences={preferences} />
       ) : (
         <WelcomeScreen
           theme={darkModeActive ? theme.darkTheme : theme.lightTheme}
@@ -36,21 +38,23 @@ const HomePage: Page<SinglePageProps> = () => {
   )
 }
 
-const MainScreen = () => <span>welcome</span>
-
 HomePage.Layout = ({ children, ...props }) => (
   <MainLayout {...props}>{children}</MainLayout>
 )
 
-export async function getStaticProps({
-  locale,
+export async function getServerSideProps({
+  req,
+  res,
 }: {
-  locale: Locale
+  req: NextApiRequest
+  res: NextApiResponse
 }): Promise<{ props: SinglePageProps }> {
+  const cookies = new Cookies(req, res)
+  const preferences = cookies.get(PANIC_ROOM_PREFERENCES) || null
+
   return {
     props: {
-      locale,
-      ...(await serverSideTranslations(locale, ['common'])),
+      preferences,
     },
   }
 }
