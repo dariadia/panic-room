@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction, useState } from 'react'
 import styled, { keyframes, css } from 'styled-components'
 
 import { TEXTS } from 'constants/texts'
-import { GOLDEN_SHADOW } from 'utils/theme'
+import { GOLDEN_SHADOW, MAIN_PADDING } from 'utils/theme'
 import { PaperScroll } from './PaperScroll'
 
 const appear = keyframes`
@@ -180,6 +180,21 @@ const StyledCookie = styled('article').attrs({ children: <CookieSVG /> })<{
   }
 `
 
+const rollOut = keyframes`
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+`
+
 const StyledMessage = styled('article').attrs({
   children: (
     <>
@@ -187,4 +202,22 @@ const StyledMessage = styled('article').attrs({
       <div>hello</div>
     </>
   ),
-})``
+})`
+  position: relative;
+  animation: ${rollOut} 2s 1;
+  margin: 0 auto;
+  width: calc(100vw - ${MAIN_PADDING * 2}px);
+  height: calc(100vh - ${MAIN_PADDING * 2}px);
+  > svg {
+    height: 50vh;
+    transform: rotate(90deg);
+    position: absolute;
+    top: 0;
+    z-index: 1;
+  }
+  > div {
+    position: absolute;
+    top: 0;
+    z-index: 2;
+  }
+`

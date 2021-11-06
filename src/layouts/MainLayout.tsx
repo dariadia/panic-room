@@ -2,10 +2,9 @@ import React, { useContext } from 'react'
 import styled, { ThemeContext } from 'styled-components'
 
 import { Footer, FOOTER_HEIGHT } from './Footer'
+import { MAIN_PADDING } from 'utils/theme'
 
 import { Theme } from 'types'
-
-const MAIN_PADDING = 24
 
 export const Body: React.FC<{ theme: Theme }> = styled('div')`
   background: ${({ theme }) => theme.background};
