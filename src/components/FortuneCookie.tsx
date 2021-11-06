@@ -5,7 +5,7 @@ export const FortuneCookie: React.FC = () => {
 
   return (
     <div>
-      {isCookieCracked ? (
+      {!isCookieCracked ? (
         <CookieSVG onClick={crackCookie} />
       ) : (
         <span>hello world</span>

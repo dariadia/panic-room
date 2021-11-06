@@ -4,7 +4,7 @@ import Cookies from 'cookies'
 
 import { MainLayout } from '@/layouts'
 
-import { MenuWrapper } from '@/components'
+import { MenuWrapper, FortuneCookie } from '@/components'
 import { PANIC_ROOM_PREFERENCES } from 'constants/theme'
 
 import type { Page, SinglePage as SinglePageProps } from 'types'
@@ -18,7 +18,7 @@ const FortuneCookiesPage: Page<SinglePageProps> = ({ preferences }) => {
         isMenuFocused={isMenuFocused}
         triggerMenuFocus={triggerMenuFocus}
       />
-      hello world
+      <FortuneCookie />
     </>
   )
 }
