@@ -15,4 +15,5 @@ export const TEXTS = {
   save: 'save',
   something_went_wrong: 'Something went wrong',
   error_occured: 'Oops! An error has occured',
+  fortune_cookie: 'fortune cookie',
 }

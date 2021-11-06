@@ -55,3 +55,5 @@ export const getValueFromCookieString = ({
 
   return matchedString === 'true'
 }
+
+export const FortuneCookiesFontFamily = '"Neucha", sans-serif'
