@@ -1,6 +1,6 @@
 export type FortuneCookie = {
   id: string
   emoji?: string
-  link?: string
+  source_link?: string
   text: string
 }
