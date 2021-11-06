@@ -12,3 +12,5 @@ export const PANIC_ROOM_PREFERENCES = 'panic-room-preferences'
 
 export const LIGHT = 'light'
 export const DARK = 'dark'
+
+export const FortuneCookiesFontFamily = '"Neucha", sans-serif'
