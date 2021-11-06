@@ -1,4 +1,5 @@
 import React, { Dispatch, SetStateAction, useState } from 'react'
+import styled from 'styled-components'
 
 export const FortuneCookie: React.FC = () => {
   const [isCookieCracked, crackCookie] = useState(false)
@@ -6,7 +7,7 @@ export const FortuneCookie: React.FC = () => {
   return (
     <div>
       {!isCookieCracked ? (
-        <CookieSVG onClick={crackCookie} />
+        <StyledCookie onClick={() => crackCookie(true)} />
       ) : (
         <span>hello world</span>
       )}
@@ -14,9 +15,7 @@ export const FortuneCookie: React.FC = () => {
   )
 }
 
-const CookieSVG: React.FC<{
-  onClick: Dispatch<SetStateAction<boolean>>
-}> = () => (
+const CookieSVG: React.FC = () => (
   <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 465 353">
     <g transform="translate(-2365.4 1838.7)">
       <g transform="translate(1.223)">
@@ -77,3 +76,7 @@ const CookieSVG: React.FC<{
     </g>
   </svg>
 )
+
+const StyledCookie = styled('div').attrs({ children: <CookieSVG /> })<{
+  onClick: Dispatch<SetStateAction<boolean>>
+}>``
