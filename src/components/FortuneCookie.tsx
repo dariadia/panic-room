@@ -1,13 +1,22 @@
 import React, { Dispatch, SetStateAction, useState } from 'react'
-import styled, { keyframes } from 'styled-components'
+import styled, { keyframes, css } from 'styled-components'
 
 import { TEXTS } from 'constants/texts'
 import { GOLDEN_SHADOW } from 'utils/theme'
-import { PaperScroll } from '.'
+import { PaperScroll } from './PaperScroll'
 
 const appear = keyframes`
   0% {
     opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`
+
+const stay = keyframes`
+  0% {
+    opacity: 0.6;
   }
   100% {
     opacity: 1;
@@ -49,24 +58,29 @@ const vibrate = keyframes`
   }
 `
 
-const Title = styled('h1')`
+const Title = styled('h1')<{ allowMotion: boolean }>`
   font: 6rem/8rem 'Caveat', cursiv;
   filter: drop-shadow(0.5px 1px 4px ${GOLDEN_SHADOW});
   margin: 0 auto;
   padding: 0.3em 0;
   width: fit-content;
-  animation: ${appear} 1.5s 1;
+  animation: ${({ allowMotion }) => (allowMotion ? appear : stay)} 1.5s 1;
 `
 
-export const FortuneCookie: React.FC = () => {
+export const FortuneCookie: React.FC<{ allowMotion: boolean }> = ({
+  allowMotion,
+}) => {
   const [isCookieCracked, crackCookie] = useState(false)
 
   return (
     <section>
       {!isCookieCracked ? (
         <>
-          <Title>{TEXTS.how_s_it}</Title>
-          <StyledCookie onClick={() => crackCookie(true)} />
+          <Title allowMotion={allowMotion}>{TEXTS.how_s_it}</Title>
+          <StyledCookie
+            onClick={() => crackCookie(true)}
+            allowMotion={allowMotion}
+          />
         </>
       ) : (
         <StyledMessage />
@@ -137,24 +151,30 @@ const CookieSVG: React.FC = () => (
   </svg>
 )
 
+const animateCookie = () =>
+  css`
+    ${lowerIn}, ${vibrate};
+  `
+
 const StyledCookie = styled('article').attrs({ children: <CookieSVG /> })<{
   onClick: Dispatch<SetStateAction<boolean>>
+  allowMotion: boolean
 }>`
   width: 50vw;
   height: 50vh;
   margin: auto;
   filter: drop-shadow(1px 2px 8px ${GOLDEN_SHADOW});
-  animation-name: ${lowerIn}, ${vibrate};
+  animation-name: ${({ allowMotion }) => allowMotion && animateCookie};
   animation-duration: 1s, 2s;
   animation-delay: 0s, 0.5s;
   animation-iteration-count: 1, 1;
   &:hover {
     cursor: pointer;
-    transform: rotate(-10deg);
+    transform: rotate(10deg);
     transition: ease-out transform 0.2s;
   }
   &:focus {
-    transform: rotate(10deg);
+    transform: rotate(-10deg);
     transition: ease-in transform 0.2s;
   }
 `

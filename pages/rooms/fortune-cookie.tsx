@@ -3,25 +3,38 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import Head from 'next/head'
 
 import Cookies from 'cookies'
+import { useCookies } from 'react-cookie'
+import { getValueFromCookieString } from 'utils/theme'
 
 import { ThemeContext } from 'styled-components'
 import { MainLayout } from '@/layouts'
-
 import {
   MenuWrapper,
   FortuneCookie,
   WelcomeMessage,
   WelcomeScreen,
 } from '@/components'
-import { PANIC_ROOM_PREFERENCES } from 'constants/theme'
 
-import type { Page, SinglePage as SinglePageProps } from 'types'
+import { ALLOW_MOTION, PANIC_ROOM_PREFERENCES } from 'constants/theme'
+
+import type { Page, Preferences, SinglePage as SinglePageProps } from 'types'
 
 const FortuneCookiesPage: Page<SinglePageProps> = ({ preferences }) => {
   const hasSavedPreferences = preferences
 
   const { darkModeActive, theme } = useContext(ThemeContext)
   const [isMenuFocused, triggerMenuFocus] = useState(false)
+
+  const [cookies] = useCookies([PANIC_ROOM_PREFERENCES])
+  const userPreferences =
+    preferences || (cookies[PANIC_ROOM_PREFERENCES] as Preferences)
+  const allowMotion =
+    typeof userPreferences === 'string'
+      ? getValueFromCookieString({
+          cookie: preferences as string,
+          value: ALLOW_MOTION,
+        })
+      : userPreferences.allowMotion
 
   return (
     <>
@@ -36,7 +49,7 @@ const FortuneCookiesPage: Page<SinglePageProps> = ({ preferences }) => {
         triggerMenuFocus={triggerMenuFocus}
       />
       {hasSavedPreferences ? (
-        <FortuneCookie />
+        <FortuneCookie allowMotion={allowMotion} />
       ) : (
         <WelcomeScreen
           theme={darkModeActive ? theme.darkTheme : theme.lightTheme}
