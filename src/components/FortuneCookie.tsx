@@ -3,6 +3,7 @@ import styled, { keyframes } from 'styled-components'
 
 import { TEXTS } from 'constants/texts'
 import { GOLDEN_SHADOW } from 'utils/theme'
+import { PaperScroll } from '.'
 
 const appear = keyframes`
   0% {
@@ -60,13 +61,17 @@ const Title = styled('h1')`
 export const FortuneCookie: React.FC = () => {
   const [isCookieCracked, crackCookie] = useState(false)
 
-  return !isCookieCracked ? (
-    <>
-      <Title>{TEXTS.how_s_it}</Title>
-      <StyledCookie onClick={() => crackCookie(true)} />
-    </>
-  ) : (
-    <span>hello world</span>
+  return (
+    <section>
+      {!isCookieCracked ? (
+        <>
+          <Title>{TEXTS.how_s_it}</Title>
+          <StyledCookie onClick={() => crackCookie(true)} />
+        </>
+      ) : (
+        <StyledMessage />
+      )}
+    </section>
   )
 }
 
@@ -132,7 +137,7 @@ const CookieSVG: React.FC = () => (
   </svg>
 )
 
-const StyledCookie = styled('div').attrs({ children: <CookieSVG /> })<{
+const StyledCookie = styled('article').attrs({ children: <CookieSVG /> })<{
   onClick: Dispatch<SetStateAction<boolean>>
 }>`
   width: 50vw;
@@ -153,3 +158,12 @@ const StyledCookie = styled('div').attrs({ children: <CookieSVG /> })<{
     transition: ease-in transform 0.2s;
   }
 `
+
+const StyledMessage = styled('article').attrs({
+  children: (
+    <>
+      <PaperScroll />
+      <div>hello</div>
+    </>
+  ),
+})``
