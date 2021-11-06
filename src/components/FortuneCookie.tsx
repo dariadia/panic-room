@@ -4,7 +4,10 @@ import styled from 'styled-components'
 import { TEXTS } from 'constants/texts'
 
 const Title = styled('h1')`
-  font-family: fantasy;
+  font: 6rem/8rem 'Caveat', cursiv;
+  margin: 0 auto;
+  padding-top: 0.3em;
+  width: fit-content;
 `
 
 export const FortuneCookie: React.FC = () => {
@@ -84,4 +87,8 @@ const CookieSVG: React.FC = () => (
 
 const StyledCookie = styled('div').attrs({ children: <CookieSVG /> })<{
   onClick: Dispatch<SetStateAction<boolean>>
-}>``
+}>`
+  width: 50vw;
+  height: 50vh;
+  margin: auto;
+`

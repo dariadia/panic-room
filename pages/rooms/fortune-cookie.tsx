@@ -1,5 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { NextApiRequest, NextApiResponse } from 'next'
+import Head from 'next/head'
+
 import Cookies from 'cookies'
 
 import { ThemeContext } from 'styled-components'
@@ -23,6 +25,12 @@ const FortuneCookiesPage: Page<SinglePageProps> = ({ preferences }) => {
 
   return (
     <>
+      <Head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Caveat"
+          rel="stylesheet"
+        />
+      </Head>
       <MenuWrapper
         isMenuFocused={isMenuFocused}
         triggerMenuFocus={triggerMenuFocus}
