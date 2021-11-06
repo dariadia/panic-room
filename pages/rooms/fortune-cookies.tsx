@@ -1,48 +1,29 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { NextApiRequest, NextApiResponse } from 'next'
-
-import { ThemeContext } from 'styled-components'
 import Cookies from 'cookies'
 
 import { MainLayout } from '@/layouts'
 
-import {
-  MenuWrapper,
-  WelcomeMessage,
-  WelcomeScreen,
-  HomeScreen,
-} from '@/components'
+import { MenuWrapper } from '@/components'
 import { PANIC_ROOM_PREFERENCES } from 'constants/theme'
 
 import type { Page, SinglePage as SinglePageProps } from 'types'
 
-const HomePage: Page<SinglePageProps> = ({ preferences }) => {
-  const hasSavedPreferences = preferences
-
+const FortuneCookiesPage: Page<SinglePageProps> = ({ preferences }) => {
   const [isMenuFocused, triggerMenuFocus] = useState(false)
-
-  const { darkModeActive, theme } = useContext(ThemeContext)
-
+  console.log(preferences)
   return (
     <>
       <MenuWrapper
         isMenuFocused={isMenuFocused}
         triggerMenuFocus={triggerMenuFocus}
       />
-      {hasSavedPreferences ? (
-        <HomeScreen preferences={preferences} />
-      ) : (
-        <WelcomeScreen
-          theme={darkModeActive ? theme.darkTheme : theme.lightTheme}
-        >
-          <WelcomeMessage triggerMenuFocus={triggerMenuFocus} />
-        </WelcomeScreen>
-      )}
+      hello world
     </>
   )
 }
 
-HomePage.Layout = ({ children, ...props }) => (
+FortuneCookiesPage.Layout = ({ children, ...props }) => (
   <MainLayout {...props}>{children}</MainLayout>
 )
 
@@ -63,4 +44,4 @@ export async function getServerSideProps({
   }
 }
 
-export default HomePage
+export default FortuneCookiesPage

@@ -1,5 +1,6 @@
 export * from './Checkmark'
 export * from './Loader'
+export * from './HomeScreen'
 export * from './Menu'
 export * from './ModeSwitcher'
 export * from './PreferenceCheckbox'
