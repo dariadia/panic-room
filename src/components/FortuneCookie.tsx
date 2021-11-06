@@ -182,16 +182,15 @@ const StyledCookie = styled('article').attrs({ children: <CookieSVG /> })<{
 
 const rollOut = keyframes`
   0% {
+    height: 0.5vw;
     opacity: 0;
   }
   30% {
-    opacity: 1;
-  }
-  60% {
+    height: 5vw;
     opacity: 1;
   }
   100% {
-    opacity: 1;
+    height: 70vw;
   }
 `
 
@@ -204,16 +203,18 @@ const StyledMessage = styled('article').attrs({
   ),
 })`
   position: relative;
-  animation: ${rollOut} 2s 1;
   margin: 0 auto;
   width: calc(100vw - ${MAIN_PADDING * 2}px);
   height: calc(100vh - ${MAIN_PADDING * 2}px);
   > svg {
-    height: 50vh;
+    animation: ${rollOut} 2s 1;
     transform: rotate(90deg);
+    height: 70vw;
+    width: 30vw;
     position: absolute;
-    top: 0;
+    left: calc((100vw - 30vw) / 2);
     z-index: 1;
+    filter: drop-shadow(1px 2px 8px ${GOLDEN_SHADOW});
   }
   > div {
     position: absolute;
