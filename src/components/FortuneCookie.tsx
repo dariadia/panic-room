@@ -144,6 +144,10 @@ const StyledCookie = styled('div').attrs({ children: <CookieSVG /> })<{
   &:hover {
     cursor: pointer;
     transform: rotate(-10deg);
-    transition: ease-out all 0.2s;
+    transition: ease-out transform 0.2s;
+  }
+  &:focus {
+    transform: rotate(10deg);
+    transition: ease-in transform 0.2s;
   }
 `
