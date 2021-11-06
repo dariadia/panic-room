@@ -2,6 +2,7 @@ import React, { Dispatch, SetStateAction, useState } from 'react'
 import styled, { keyframes } from 'styled-components'
 
 import { TEXTS } from 'constants/texts'
+import { GOLDEN_SHADOW } from 'utils/theme'
 
 const appear = keyframes`
   0% {
@@ -49,10 +50,11 @@ const vibrate = keyframes`
 
 const Title = styled('h1')`
   font: 6rem/8rem 'Caveat', cursiv;
+  filter: drop-shadow(0.5px 1px 4px ${GOLDEN_SHADOW});
   margin: 0 auto;
   padding: 0.3em 0;
   width: fit-content;
-  animation: ${appear} 1s 1;
+  animation: ${appear} 1.5s 1;
 `
 
 export const FortuneCookie: React.FC = () => {
@@ -136,7 +138,7 @@ const StyledCookie = styled('div').attrs({ children: <CookieSVG /> })<{
   width: 50vw;
   height: 50vh;
   margin: auto;
-  cursor: pointer;
+  filter: drop-shadow(1px 2px 8px ${GOLDEN_SHADOW});
   animation-name: ${lowerIn}, ${vibrate};
   animation-duration: 1s, 2s;
   animation-delay: 0s, 0.5s;
