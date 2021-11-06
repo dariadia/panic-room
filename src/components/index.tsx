@@ -1,4 +1,5 @@
 export * from './Checkmark'
+export * from './FortuneCookie'
 export * from './Loader'
 export * from './HomeScreen'
 export * from './Menu'
