@@ -1,24 +1,41 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { NextApiRequest, NextApiResponse } from 'next'
 import Cookies from 'cookies'
 
+import { ThemeContext } from 'styled-components'
 import { MainLayout } from '@/layouts'
 
-import { MenuWrapper, FortuneCookie } from '@/components'
+import {
+  MenuWrapper,
+  FortuneCookie,
+  WelcomeMessage,
+  WelcomeScreen,
+} from '@/components'
 import { PANIC_ROOM_PREFERENCES } from 'constants/theme'
 
 import type { Page, SinglePage as SinglePageProps } from 'types'
 
 const FortuneCookiesPage: Page<SinglePageProps> = ({ preferences }) => {
+  const hasSavedPreferences = preferences
+
+  const { darkModeActive, theme } = useContext(ThemeContext)
   const [isMenuFocused, triggerMenuFocus] = useState(false)
-  console.log(preferences)
+
   return (
     <>
       <MenuWrapper
         isMenuFocused={isMenuFocused}
         triggerMenuFocus={triggerMenuFocus}
       />
-      <FortuneCookie />
+      {hasSavedPreferences ? (
+        <FortuneCookie />
+      ) : (
+        <WelcomeScreen
+          theme={darkModeActive ? theme.darkTheme : theme.lightTheme}
+        >
+          <WelcomeMessage triggerMenuFocus={triggerMenuFocus} />
+        </WelcomeScreen>
+      )}
     </>
   )
 }

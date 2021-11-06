@@ -1,17 +1,22 @@
 import React, { Dispatch, SetStateAction, useState } from 'react'
 import styled from 'styled-components'
 
+import { TEXTS } from 'constants/texts'
+
+const Title = styled('h1')`
+  font-family: fantasy;
+`
+
 export const FortuneCookie: React.FC = () => {
   const [isCookieCracked, crackCookie] = useState(false)
 
-  return (
-    <div>
-      {!isCookieCracked ? (
-        <StyledCookie onClick={() => crackCookie(true)} />
-      ) : (
-        <span>hello world</span>
-      )}
-    </div>
+  return !isCookieCracked ? (
+    <>
+      <Title>{TEXTS.how_s_it}</Title>
+      <StyledCookie onClick={() => crackCookie(true)} />
+    </>
+  ) : (
+    <span>hello world</span>
   )
 }
 

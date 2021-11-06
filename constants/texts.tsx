@@ -16,4 +16,5 @@ export const TEXTS = {
   something_went_wrong: 'Something went wrong',
   error_occured: 'Oops! An error has occured',
   fortune_cookie: 'fortune cookie',
+  how_s_it: `How's it going?`,
 }
