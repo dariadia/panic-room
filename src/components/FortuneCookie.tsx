@@ -6,7 +6,7 @@ import { TEXTS } from 'constants/texts'
 const Title = styled('h1')`
   font: 6rem/8rem 'Caveat', cursiv;
   margin: 0 auto;
-  padding-top: 0.3em;
+  padding: 0.3em 0;
   width: fit-content;
 `
 
