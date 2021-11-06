@@ -161,8 +161,8 @@ const StyledCookie = styled('article').attrs({ children: <CookieSVG /> })<{
   onClick: Dispatch<SetStateAction<boolean>>
   allowMotion: boolean
 }>`
-  width: 50vw;
-  height: 50vh;
+  width: 45vw;
+  height: 45vh;
   margin: auto;
   filter: drop-shadow(1px 2px 8px ${GOLDEN_SHADOW});
   animation-name: ${({ allowMotion }) => allowMotion && animateCookie};
@@ -184,13 +184,17 @@ const rollOut = keyframes`
   0% {
     height: 0.5vw;
     opacity: 0;
+    top: 0;
+    filter: drop-shadow(8px 16px 48px ${GOLDEN_SHADOW});
   }
-  30% {
+  25% {
     height: 5vw;
     opacity: 1;
+    top: 2vw;
   }
   100% {
-    height: 70vw;
+    height: 60vw;
+    top: -12vw;
   }
 `
 
@@ -207,14 +211,15 @@ const StyledMessage = styled('article').attrs({
   width: calc(100vw - ${MAIN_PADDING * 2}px);
   height: calc(100vh - ${MAIN_PADDING * 2}px);
   > svg {
-    animation: ${rollOut} 2s 1;
+    animation: ${rollOut} 1.5s 1;
     transform: rotate(90deg);
-    height: 70vw;
+    height: 60vw;
     width: 30vw;
     position: absolute;
     left: calc((100vw - 30vw) / 2);
     z-index: 1;
     filter: drop-shadow(1px 2px 8px ${GOLDEN_SHADOW});
+    top: -12vw;
   }
   > div {
     position: absolute;
