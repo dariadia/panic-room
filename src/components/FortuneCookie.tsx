@@ -1,13 +1,58 @@
 import React, { Dispatch, SetStateAction, useState } from 'react'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 
 import { TEXTS } from 'constants/texts'
+
+const appear = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`
+
+const lowerIn = keyframes`
+  0% {
+    opacity: 0;
+    margin-top: -50px;
+  }
+  100% {
+    opacity: 1;
+    margin-top: 0px;
+  }
+`
+
+const vibrate = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+  30% {
+    transform: rotate(0deg);
+  }
+  40% {
+    transform: rotate(20deg);
+  }
+  45% {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+  55% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+`
 
 const Title = styled('h1')`
   font: 6rem/8rem 'Caveat', cursiv;
   margin: 0 auto;
   padding: 0.3em 0;
   width: fit-content;
+  animation: ${appear} 1s 1;
 `
 
 export const FortuneCookie: React.FC = () => {
@@ -91,4 +136,14 @@ const StyledCookie = styled('div').attrs({ children: <CookieSVG /> })<{
   width: 50vw;
   height: 50vh;
   margin: auto;
+  cursor: pointer;
+  animation-name: ${lowerIn}, ${vibrate};
+  animation-duration: 1s, 2s;
+  animation-delay: 0s, 0.5s;
+  animation-iteration-count: 1, 1;
+  &:hover {
+    cursor: pointer;
+    transform: rotate(-10deg);
+    transition: ease-out all 0.2s;
+  }
 `
