@@ -65,6 +65,7 @@ const Title = styled('h1')<{ allowMotion: boolean }>`
   padding: 0.3em 0;
   width: fit-content;
   animation: ${({ allowMotion }) => (allowMotion ? appear : stay)} 1.5s 1;
+  text-align: center;
 `
 
 export const FortuneCookie: React.FC<{ allowMotion: boolean }> = ({
