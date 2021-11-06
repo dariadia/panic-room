@@ -15,7 +15,11 @@ import {
   WelcomeScreen,
 } from '@/components'
 
-import { ALLOW_MOTION, PANIC_ROOM_PREFERENCES } from 'constants/theme'
+import {
+  ALLOW_MOTION,
+  ALLOW_SOUNDS,
+  PANIC_ROOM_PREFERENCES,
+} from 'constants/theme'
 
 import type { Page, Preferences, SinglePage as SinglePageProps } from 'types'
 
@@ -36,6 +40,14 @@ const FortuneCookiesPage: Page<SinglePageProps> = ({ preferences }) => {
         })
       : userPreferences.allowMotion
 
+  const allowSounds =
+    typeof userPreferences === 'string'
+      ? getValueFromCookieString({
+          cookie: preferences as string,
+          value: ALLOW_SOUNDS,
+        })
+      : userPreferences.allowSounds
+
   return (
     <>
       <Head>
@@ -49,7 +61,7 @@ const FortuneCookiesPage: Page<SinglePageProps> = ({ preferences }) => {
         triggerMenuFocus={triggerMenuFocus}
       />
       {hasSavedPreferences ? (
-        <FortuneCookie allowMotion={allowMotion} />
+        <FortuneCookie allowMotion={allowMotion} allowSounds={allowSounds} />
       ) : (
         <WelcomeScreen
           theme={darkModeActive ? theme.darkTheme : theme.lightTheme}

@@ -68,20 +68,23 @@ const Title = styled('h1')<{ allowMotion: boolean }>`
   text-align: center;
 `
 
-export const FortuneCookie: React.FC<{ allowMotion: boolean }> = ({
-  allowMotion,
-}) => {
-  const [isCookieCracked, crackCookie] = useState(false)
+export const FortuneCookie: React.FC<{
+  allowMotion: boolean
+  allowSounds: boolean
+}> = ({ allowMotion, allowSounds }) => {
+  const [isCookieCracked, setCookieCracked] = useState(false)
+  const crackCookie = () => {
+    const cookieSound = new Audio('/assets/sounds/cookie-crunch.wav')
+    if (allowSounds) cookieSound.play()
+    setCookieCracked(true)
+  }
 
   return (
     <section>
       {!isCookieCracked ? (
         <>
           <Title allowMotion={allowMotion}>{TEXTS.how_s_it}</Title>
-          <StyledCookie
-            onClick={() => crackCookie(true)}
-            allowMotion={allowMotion}
-          />
+          <StyledCookie onClick={crackCookie} allowMotion={allowMotion} />
         </>
       ) : (
         <StyledMessage />
