@@ -192,21 +192,42 @@ const StyledCookie = styled('article').attrs({ children: <CookieSVG /> })<{
   }
 `
 
-const rollOut = keyframes`
+const rollOutGlow = keyframes`
   0% {
     height: 0.5vw;
     opacity: 0;
-    top: 0;
+    top: -20vw;
     filter: drop-shadow(8px 16px 48px ${GOLDEN_SHADOW});
   }
   25% {
     height: 5vw;
     opacity: 1;
-    top: 2vw;
+    top: -10vw;
   }
   100% {
     height: 60vw;
-    top: -12vw;
+    top: -10vw;
+  }
+`
+
+const rollOut = keyframes`
+  0% {
+    height: 1vw;
+    opacity: 0;
+    margin-top: 200px;
+    filter: drop-shadow(8px 16px 48px ${GOLDEN_SHADOW});
+    background: center / 30vw 1vw no-repeat url('/assets/parchement.svg');
+  }
+  25% {
+    height: 5vw;
+    opacity: 1;
+    margin-top: 200px;
+    background: center / 30vw 5vw no-repeat url('/assets/parchement.svg');
+  }
+  100% {
+    height: 60vw;
+    margin-top: 0;
+    background: center / 30vw 60vw no-repeat url('/assets/parchement.svg');
   }
 `
 
@@ -240,19 +261,20 @@ const StyledMessage: React.FC<WithHost> = styled('article').attrs(
   width: calc(100vw - ${MAIN_PADDING * 2}px);
   height: calc(100vh - ${MAIN_PADDING * 2}px);
   > div {
-    animation: ${rollOut} 1.5s 1;
+    animation: ${rollOutGlow} 1.5s 1;
     height: 60vw;
     width: 30vw;
     position: absolute;
     left: calc((100vw - 30vw) / 2);
     z-index: 1;
-    top: -12vw;
+    top: -10vw;
     color: black;
     font: 2rem/4rem 'Caveat', serif;
   }
   > div::before {
     display: block;
     content: '';
+    animation: ${rollOut} 1.5s 1;
     height: 60vw;
     background: center / 30vw 60vw no-repeat url('/assets/parchement.svg');
     transform: rotate(90deg);
