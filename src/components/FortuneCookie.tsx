@@ -3,7 +3,16 @@ import styled, { keyframes, css } from 'styled-components'
 
 import { TEXTS } from 'constants/texts'
 import { GOLDEN_SHADOW, MAIN_PADDING } from 'utils/theme'
+import { getRandomInt } from 'utils/randomiser'
+import { useAPI } from 'hooks/use-api'
+
 import { PaperScroll } from './PaperScroll'
+import {
+  FORTUNE_COOKIES_PATH_COUNT,
+  FORTUNE_COOKIES_PATH_ONE,
+} from 'constants/locations'
+
+import type { FortuneCookie as FortuneCookieType, WithHost } from 'types'
 
 const appear = keyframes`
   0% {
@@ -71,7 +80,8 @@ const Title = styled('h1')<{ allowMotion: boolean }>`
 export const FortuneCookie: React.FC<{
   allowMotion: boolean
   allowSounds: boolean
-}> = ({ allowMotion, allowSounds }) => {
+  host?: string
+}> = ({ allowMotion, allowSounds, host }) => {
   const [isCookieCracked, setCookieCracked] = useState(false)
   const crackCookie = () => {
     const cookieSound = new Audio('/assets/sounds/cookie-crunch.wav')
@@ -87,7 +97,7 @@ export const FortuneCookie: React.FC<{
           <StyledCookie onClick={crackCookie} allowMotion={allowMotion} />
         </>
       ) : (
-        <StyledMessage />
+        <StyledMessage host={host} />
       )}
     </section>
   )
@@ -201,14 +211,33 @@ const rollOut = keyframes`
   }
 `
 
-const StyledMessage = styled('article').attrs({
-  children: (
-    <>
-      <PaperScroll />
-      <div>hello</div>
-    </>
-  ),
-})`
+const Message = ({ host }: WithHost): JSX.Element => {
+  const { data: count } = useAPI({
+    host,
+    url: FORTUNE_COOKIES_PATH_COUNT,
+  })
+  const CookieId = getRandomInt(count as number)
+  let { data: fortuneCookie } = useAPI({
+    host,
+    url: `${FORTUNE_COOKIES_PATH_ONE}${CookieId}`,
+  })
+  fortuneCookie = fortuneCookie as FortuneCookieType
+  console.log(fortuneCookie)
+  return <div>hello world</div>
+}
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+const StyledMessage: React.FC<WithHost> = styled('article').attrs(
+  (props: WithHost) => ({
+    children: (
+      <>
+        <PaperScroll />
+        <Message host={props.host} />
+      </>
+    ),
+  }),
+)`
   position: relative;
   margin: 0 auto;
   width: calc(100vw - ${MAIN_PADDING * 2}px);

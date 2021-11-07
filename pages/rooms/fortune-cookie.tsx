@@ -23,7 +23,7 @@ import {
 
 import type { Page, Preferences, SinglePage as SinglePageProps } from 'types'
 
-const FortuneCookiesPage: Page<SinglePageProps> = ({ preferences }) => {
+const FortuneCookiesPage: Page<SinglePageProps> = ({ preferences, host }) => {
   const hasSavedPreferences = preferences
 
   const { darkModeActive, theme } = useContext(ThemeContext)
@@ -61,7 +61,11 @@ const FortuneCookiesPage: Page<SinglePageProps> = ({ preferences }) => {
         triggerMenuFocus={triggerMenuFocus}
       />
       {hasSavedPreferences ? (
-        <FortuneCookie allowMotion={allowMotion} allowSounds={allowSounds} />
+        <FortuneCookie
+          allowMotion={allowMotion}
+          allowSounds={allowSounds}
+          host={host}
+        />
       ) : (
         <WelcomeScreen
           theme={darkModeActive ? theme.darkTheme : theme.lightTheme}
@@ -86,10 +90,12 @@ export async function getServerSideProps({
 }): Promise<{ props: SinglePageProps }> {
   const cookies = new Cookies(req, res)
   const preferences = cookies.get(PANIC_ROOM_PREFERENCES) || null
+  const host = req.headers.host
 
   return {
     props: {
       preferences,
+      host,
     },
   }
 }
