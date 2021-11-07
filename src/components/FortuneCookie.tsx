@@ -12,7 +12,7 @@ import {
   FORTUNE_COOKIES_PATH_ONE,
 } from 'constants/locations'
 
-import type { FortuneCookie as FortuneCookieType, WithHost } from 'types'
+import type { WithHost } from 'types'
 
 const appear = keyframes`
   0% {
@@ -211,19 +211,22 @@ const rollOut = keyframes`
   }
 `
 
-const Message = ({ host }: WithHost): JSX.Element => {
+const Message = ({ host }: WithHost): JSX.Element | null => {
   const { data: count } = useAPI({
     host,
     url: FORTUNE_COOKIES_PATH_COUNT,
   })
   const CookieId = getRandomInt(count as number)
-  let { data: fortuneCookie } = useAPI({
+  const { data: fortuneCookie } = useAPI({
     host,
     url: `${FORTUNE_COOKIES_PATH_ONE}${CookieId}`,
   })
-  fortuneCookie = fortuneCookie as FortuneCookieType
-  console.log(fortuneCookie)
-  return <div>hello world</div>
+
+  if (!fortuneCookie) return null
+
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  return <div>{fortuneCookie.text}</div>
 }
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
