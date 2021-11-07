@@ -15,6 +15,9 @@ const buildRequestUrl = (url: string, RequestParams?: RequestOptions) => {
   return `${url}?${queryString}`
 }
 
+const getProtocol = (host: string): string =>
+  host.includes('localhost') ? 'http://' : 'https://'
+
 const getDefaultFetcher = (url: string) => () =>
   fetch(url).then(res => res.json())
 
@@ -31,7 +34,10 @@ export const useAPI = ({
   requestParams?: RequestOptions
   host?: string
 }): SWRResponse<unknown, unknown> => {
-  const apiUrl = `${host}/api${buildRequestUrl(url, requestParams)}`
+  const apiUrl = `${getProtocol(host)}${host}/api${buildRequestUrl(
+    url,
+    requestParams,
+  )}`
   const apiFetcher = (fetcher || getDefaultFetcher(apiUrl)) as Fetcher<unknown>
   return useSWR(apiUrl, apiFetcher, options)
 }
