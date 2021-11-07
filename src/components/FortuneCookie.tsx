@@ -6,7 +6,6 @@ import { GOLDEN_SHADOW, MAIN_PADDING } from 'utils/theme'
 import { getRandomInt } from 'utils/randomiser'
 import { useAPI } from 'hooks/use-api'
 
-import { PaperScroll } from './PaperScroll'
 import {
   FORTUNE_COOKIES_PATH_COUNT,
   FORTUNE_COOKIES_PATH_ONE,
@@ -233,32 +232,30 @@ const Message = ({ host }: WithHost): JSX.Element | null => {
 // @ts-ignore
 const StyledMessage: React.FC<WithHost> = styled('article').attrs(
   (props: WithHost) => ({
-    children: (
-      <>
-        <PaperScroll />
-        <Message host={props.host} />
-      </>
-    ),
+    children: <Message host={props.host} />,
   }),
 )`
   position: relative;
   margin: 0 auto;
   width: calc(100vw - ${MAIN_PADDING * 2}px);
   height: calc(100vh - ${MAIN_PADDING * 2}px);
-  > svg {
+  > div {
     animation: ${rollOut} 1.5s 1;
-    transform: rotate(90deg);
     height: 60vw;
     width: 30vw;
     position: absolute;
     left: calc((100vw - 30vw) / 2);
     z-index: 1;
-    filter: drop-shadow(1px 2px 8px ${GOLDEN_SHADOW});
     top: -12vw;
+    color: black;
+    font: 2rem/4rem 'Caveat', serif;
   }
-  > div {
-    position: absolute;
-    top: 0;
-    z-index: 2;
+  > div::before {
+    display: block;
+    content: '';
+    height: 60vw;
+    background: center / 30vw 60vw no-repeat url('/assets/parchement.svg');
+    transform: rotate(90deg);
+    filter: drop-shadow(1px 2px 8px ${GOLDEN_SHADOW});
   }
 `
