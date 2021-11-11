@@ -259,6 +259,13 @@ const Message = ({ host }: WithHost): JSX.Element | null => {
   const fortuneCookie = data as FortuneCookieType
 
   if (!fortuneCookie) return null
+  const {
+    text,
+    emoji,
+    source_link,
+    source_title,
+    source_author,
+  } = fortuneCookie
 
   return (
     <>
@@ -266,8 +273,14 @@ const Message = ({ host }: WithHost): JSX.Element | null => {
       <FortuneText
         color={darkModeActive ? theme.darkTheme.text : theme.lightTheme.text}
       >
-        {fortuneCookie?.text}
-        <span className="fortune-cookie_emoji">{fortuneCookie?.emoji}</span>
+        {text}
+        {emoji && <span className="fortune-cookie_emoji">{emoji}</span>}
+        <div className="fortune-cookie_source">
+          <a href={source_link} target="_blank">
+            {source_title}
+          </a>{' '}
+          {source_author}
+        </div>
       </FortuneText>
     </>
   )
@@ -309,6 +322,14 @@ const StyledMessage: React.FC<WithHost> = styled('article').attrs(
   @media (max-width: 500px) {
     .fortune-cookie_emoji {
       font: 2rem/4rem emoji;
+    }
+  }
+  .fortune-cookie_source > a {
+    color: green;
+    font-family: Caveat;
+    &:hover {
+      color: ${GOLDEN_SHADOW};
+      transition: color 0.2s;
     }
   }
 `
