@@ -1,5 +1,5 @@
-import React, { Dispatch, SetStateAction, useState } from 'react'
-import styled, { keyframes, css } from 'styled-components'
+import React, { Dispatch, SetStateAction, useContext, useState } from 'react'
+import styled, { keyframes, css, ThemeContext } from 'styled-components'
 
 import { TEXTS } from 'constants/texts'
 import { GOLDEN_SHADOW, MAIN_PADDING } from 'utils/theme'
@@ -11,7 +11,7 @@ import {
   FORTUNE_COOKIES_PATH_ONE,
 } from 'constants/locations'
 
-import type { WithHost } from 'types'
+import type { WithHost, FortuneCookie as FortuneCookieType } from 'types'
 
 const appear = keyframes`
   0% {
@@ -205,7 +205,7 @@ const rollOutGlow = keyframes`
     top: -10vw;
   }
   100% {
-    height: 60vw;
+    height: 30vw;
     top: -10vw;
   }
 `
@@ -214,20 +214,32 @@ const rollOut = keyframes`
   0% {
     height: 1vw;
     opacity: 0;
-    margin-top: 200px;
     filter: drop-shadow(8px 16px 48px ${GOLDEN_SHADOW});
-    background: center / 30vw 1vw no-repeat url('/assets/parchement.svg');
+    background: center / 15vw 1vw no-repeat url('/assets/parchement.svg');
   }
   25% {
     height: 5vw;
     opacity: 1;
-    margin-top: 200px;
-    background: center / 30vw 5vw no-repeat url('/assets/parchement.svg');
+    background: center / 15vw 5vw no-repeat url('/assets/parchement.svg');
   }
   100% {
-    height: 60vw;
-    margin-top: 0;
-    background: center / 30vw 60vw no-repeat url('/assets/parchement.svg');
+    height: 30vw;
+    margin: 50px 0 0 -50px;
+    background: center / 15vw 30vw no-repeat url('/assets/parchement.svg');
+  }
+`
+
+const FortuneText = styled('span')`
+  color: ${({ color }) => color};
+  display: block;
+  max-width: 60vw;
+  margin: auto;
+  padding-top: 20vw;
+  text-align: center;
+  font: 2rem/4rem monospace;
+  @media (max-width: 500px) {
+    font: 1rem/2rem monospace;
+    padding-top: 40vw;
   }
 `
 
@@ -237,16 +249,27 @@ const Message = ({ host }: WithHost): JSX.Element | null => {
     url: FORTUNE_COOKIES_PATH_COUNT,
   })
   const CookieId = getRandomInt(count as number)
-  const { data: fortuneCookie } = useAPI({
+  const { data } = useAPI({
     host,
     url: `${FORTUNE_COOKIES_PATH_ONE}${CookieId}`,
   })
 
+  const { darkModeActive, theme } = useContext(ThemeContext)
+
+  const fortuneCookie = data as FortuneCookieType
+
   if (!fortuneCookie) return null
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  return <div>{fortuneCookie.text}</div>
+  return (
+    <>
+      <div />
+      <FortuneText
+        color={darkModeActive ? theme.darkTheme.text : theme.lightTheme.text}
+      >
+        {fortuneCookie?.text}
+      </FortuneText>
+    </>
+  )
 }
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -262,21 +285,20 @@ const StyledMessage: React.FC<WithHost> = styled('article').attrs(
   height: calc(100vh - ${MAIN_PADDING * 2}px);
   > div {
     animation: ${rollOutGlow} 1.5s 1;
-    height: 60vw;
-    width: 30vw;
+    height: 30vw;
+    width: 15vw;
     position: absolute;
-    left: calc((100vw - 30vw) / 2);
+    left: calc((100vw - 15vw) / 2);
     z-index: 1;
     top: -10vw;
-    color: black;
-    font: 2rem/4rem 'Caveat', serif;
   }
   > div::before {
     display: block;
     content: '';
     animation: ${rollOut} 1.5s 1;
-    height: 60vw;
-    background: center / 30vw 60vw no-repeat url('/assets/parchement.svg');
+    margin: 50px 0 0 -50px;
+    height: 30vw;
+    background: center / 15vw 30vw no-repeat url('/assets/parchement.svg');
     transform: rotate(90deg);
     filter: drop-shadow(1px 2px 8px ${GOLDEN_SHADOW});
   }
