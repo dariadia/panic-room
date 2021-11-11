@@ -55,3 +55,5 @@ export const getValueFromCookieString = ({
 
   return matchedString === 'true'
 }
+
+export const MAIN_PADDING = 24

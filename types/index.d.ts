@@ -1,5 +1,7 @@
 export * from './Date'
 export * from './Event'
+export * from './FortuneCookie'
 export * from './Locale'
 export * from './Page'
 export * from './Preferences'
+export * from './Request'

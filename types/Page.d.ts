@@ -10,6 +10,10 @@ export type Page<T> = NextPage<T> & { Layout?: React.FC }
 export interface SinglePage {
   locale?: Locale
   preferences?: string | null
+  host?: string
+  url?: string
 }
 
 export type Theme = typeof theme
+
+export type WithHost = { host?: string }

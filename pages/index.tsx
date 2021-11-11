@@ -6,8 +6,12 @@ import Cookies from 'cookies'
 
 import { MainLayout } from '@/layouts'
 
-import { MenuWrapper, WelcomeMessage, WelcomeScreen } from '@/components'
-import { HomeScreen } from '@/components/HomeScreen'
+import {
+  MenuWrapper,
+  WelcomeMessage,
+  WelcomeScreen,
+  HomeScreen,
+} from '@/components'
 import { PANIC_ROOM_PREFERENCES } from 'constants/theme'
 
 import type { Page, SinglePage as SinglePageProps } from 'types'
@@ -55,6 +59,7 @@ export async function getServerSideProps({
   return {
     props: {
       preferences,
+      url: req.url,
     },
   }
 }

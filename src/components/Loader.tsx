@@ -21,6 +21,7 @@ export const Loader: React.FC = () => {
       version="1.1"
       viewBox="0 0 150 150"
       xmlSpace="preserve"
+      style={{ margin: '0 auto', display: 'block' }}
     >
       <radialGradient
         id="SVGID_1_"
