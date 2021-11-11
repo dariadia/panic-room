@@ -267,6 +267,7 @@ const Message = ({ host }: WithHost): JSX.Element | null => {
         color={darkModeActive ? theme.darkTheme.text : theme.lightTheme.text}
       >
         {fortuneCookie?.text}
+        <span className="fortune-cookie_emoji">{fortuneCookie?.emoji}</span>
       </FortuneText>
     </>
   )
@@ -300,5 +301,14 @@ const StyledMessage: React.FC<WithHost> = styled('article').attrs(
     background: center / 15vw 30vw no-repeat url('/assets/parchement.svg');
     transform: rotate(90deg);
     filter: drop-shadow(1px 2px 8px ${GOLDEN_SHADOW});
+  }
+  .fortune-cookie_emoji {
+    font: 4rem/8rem emoji;
+    display: block;
+  }
+  @media (max-width: 500px) {
+    .fortune-cookie_emoji {
+      font: 2rem/4rem emoji;
+    }
   }
 `
