@@ -6,7 +6,7 @@ import { TEXTS } from 'constants/texts'
 import { HOME } from 'constants/locations'
 import { isClient } from 'utils/env'
 
-export const HomeButton: React.FC | null = () => {
+export const HomeButton: React.FC = () => {
   if (isClient() && window.location.pathname === HOME) return null
 
   return (
