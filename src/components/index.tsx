@@ -1,6 +1,7 @@
 export * from './Checkmark'
 export * from './FortuneCookie'
 export * from './Loader'
+export * from './HomeButton'
 export * from './HomeScreen'
 export * from './Menu'
 export * from './ModeSwitcher'

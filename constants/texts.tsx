@@ -17,4 +17,5 @@ export const TEXTS = {
   error_occured: 'Oops! An error has occured',
   fortune_cookie: 'fortune cookie',
   how_s_it: `How's it going?`,
+  home: 'home',
 }
