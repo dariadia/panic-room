@@ -96,6 +96,7 @@ export async function getServerSideProps({
     props: {
       preferences,
       host,
+      url: req.url,
     },
   }
 }
