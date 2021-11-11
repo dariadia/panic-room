@@ -234,7 +234,7 @@ const FortuneText = styled('span')`
   display: block;
   max-width: 60vw;
   margin: auto;
-  padding-top: 20vw;
+  padding-top: 22vw;
   text-align: center;
   font: 2rem/4rem monospace;
   @media (max-width: 500px) {
@@ -282,7 +282,6 @@ const StyledMessage: React.FC<WithHost> = styled('article').attrs(
   position: relative;
   margin: 0 auto;
   width: calc(100vw - ${MAIN_PADDING * 2}px);
-  height: calc(100vh - ${MAIN_PADDING * 2}px);
   > div {
     animation: ${rollOutGlow} 1.5s 1;
     height: 30vw;
