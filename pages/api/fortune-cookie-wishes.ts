@@ -2,6 +2,8 @@ import fortuneCookieWishes from './fortune-cookie-wishes.json'
 import { FortuneCookie } from 'types'
 
 export default function handler(
+  // eslint-disable-next-line
+  // @ts-ignore
   req: any,
   res: {
     status: (
