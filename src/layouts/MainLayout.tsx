@@ -2,9 +2,12 @@ import React, { useContext } from 'react'
 import styled, { ThemeContext } from 'styled-components'
 
 import { Footer, FOOTER_HEIGHT } from './Footer'
+import { HomeButton } from '@/components'
 import { MAIN_PADDING } from 'utils/theme'
 
-import { Theme } from 'types'
+import { HOME } from 'constants/locations'
+
+import { SinglePage, Theme } from 'types'
 
 export const Body: React.FC<{ theme: Theme }> = styled('div')`
   background: ${({ theme }) => theme.background};
@@ -34,11 +37,12 @@ const Main = styled('main')`
   overflow-clip-margin: ${MAIN_PADDING}px;
 `
 
-export const MainLayout: React.FC = ({ children }) => {
+export const MainLayout: React.FC<SinglePage> = ({ children, url }) => {
   const { darkModeActive, theme } = useContext(ThemeContext)
 
   return (
     <Body theme={darkModeActive ? theme.darkTheme : theme.lightTheme}>
+      {url !== HOME && <HomeButton />}
       <Main>{children}</Main> <Footer />
     </Body>
   )

@@ -59,6 +59,7 @@ export async function getServerSideProps({
   return {
     props: {
       preferences,
+      url: req.url,
     },
   }
 }
