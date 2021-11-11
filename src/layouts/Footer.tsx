@@ -10,7 +10,7 @@ const currentYear = new Date().getFullYear()
 
 export const FOOTER_HEIGHT = 24
 
-export const Footer: React.FC = styled('footer').attrs({
+export const Footer: React.FC<{ color?: string }> = styled('footer').attrs({
   children: (
     <>
       <span>
@@ -28,4 +28,7 @@ export const Footer: React.FC = styled('footer').attrs({
   display: flex;
   justify-content: space-between;
   align-items: end;
+  > span > a {
+    color: ${({ color }) => color};
+  }
 `

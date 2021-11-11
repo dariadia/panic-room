@@ -43,7 +43,10 @@ export const MainLayout: React.FC<SinglePage> = ({ children, url }) => {
   return (
     <Body theme={darkModeActive ? theme.darkTheme : theme.lightTheme}>
       {url !== HOME && <HomeButton />}
-      <Main>{children}</Main> <Footer />
+      <Main>{children}</Main>
+      <Footer
+        color={darkModeActive ? theme.darkTheme.text : theme.lightTheme.text}
+      />
     </Body>
   )
 }
