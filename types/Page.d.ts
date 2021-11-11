@@ -11,6 +11,7 @@ export interface SinglePage {
   locale?: Locale
   preferences?: string | null
   host?: string
+  url?: string
 }
 
 export type Theme = typeof theme
