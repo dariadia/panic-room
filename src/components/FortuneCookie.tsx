@@ -4,7 +4,7 @@ import styled, { keyframes, css, ThemeContext } from 'styled-components'
 import { TEXTS } from 'constants/texts'
 import { GOLDEN_SHADOW, MAIN_PADDING } from 'utils/theme'
 import { getRandomInt } from 'utils/randomiser'
-import { useAPI } from 'hooks/use-api'
+import { buildRequestUrl, getProtocol } from 'hooks/use-api'
 
 import { Loader } from './Loader'
 
@@ -87,24 +87,34 @@ export const FortuneCookie: React.FC<{
   const [isFortuneLoading, setFortuneLoading] = useState(false)
   const [userFortune, setUserFortune] = useState({})
 
-  const cookieSound = new Audio('/assets/sounds/cookie-crunch.wav')
-
-  const useCrackCookie = () => {
+  const useCrackCookie = async () => {
     setFortuneLoading(true)
 
-    const { data: count } = useAPI({
-      host,
-      url: FORTUNE_COOKIES_PATH_COUNT,
-    })
-    const CookieId = getRandomInt(count as number)
-    const { data } = useAPI({
-      host,
-      url: `${FORTUNE_COOKIES_PATH_ONE}${CookieId}`,
-    })
-    if (allowSounds) cookieSound.play()
-    setCookieCracked(true)
-    const fortuneCookie = data as FortuneCookieType
+    const getCountUrl = `${getProtocol(
+      host as string,
+    )}${host}/api${buildRequestUrl(FORTUNE_COOKIES_PATH_COUNT)}`
+
+    const fortunesAvailableCount = await fetch(getCountUrl, {
+      method: 'GET',
+    }).then(res => res.json())
+
+    const CookieId = getRandomInt(fortunesAvailableCount as number)
+    const getFortuneUrl = `${getProtocol(
+      host as string,
+    )}${host}/api${buildRequestUrl(`${FORTUNE_COOKIES_PATH_ONE}${CookieId}`)}`
+
+    const fortune = await fetch(getFortuneUrl, {
+      method: 'GET',
+    }).then(res => res.json())
+
+    const fortuneCookie = fortune as FortuneCookieType
     setUserFortune(fortuneCookie)
+    setFortuneLoading(false)
+
+    const cookieSound = new Audio('/assets/sounds/cookie-crunch.wav')
+    if (allowSounds) cookieSound.play()
+
+    setCookieCracked(true)
   }
 
   return isFortuneLoading ? (
