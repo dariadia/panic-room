@@ -8,15 +8,17 @@ type LoaderProps = {
 
 export const Loader: React.FC<LoaderProps> = ({ mainColour, accentColour }) => {
   const { darkModeActive, theme } = useContext(ThemeContext)
-  const loaderFill =
-    mainColour || darkModeActive
-      ? theme.darkTheme.brand
-      : theme.lightTheme.brand
+  const loaderFill = mainColour
+    ? mainColour
+    : darkModeActive
+    ? theme.darkTheme.brand
+    : theme.lightTheme.brand
 
-  const loaderStroke =
-    accentColour || darkModeActive
-      ? theme.darkTheme.brandShadow
-      : theme.lightTheme.brandShadow
+  const loaderStroke = accentColour
+    ? accentColour
+    : darkModeActive
+    ? theme.darkTheme.brandShadow
+    : theme.lightTheme.brandShadow
 
   return (
     <svg
