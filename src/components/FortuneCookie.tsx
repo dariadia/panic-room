@@ -6,12 +6,14 @@ import { GOLDEN_SHADOW, MAIN_PADDING } from 'utils/theme'
 import { getRandomInt } from 'utils/randomiser'
 import { useAPI } from 'hooks/use-api'
 
+import { Loader } from './Loader'
+
 import {
   FORTUNE_COOKIES_PATH_COUNT,
   FORTUNE_COOKIES_PATH_ONE,
 } from 'constants/locations'
 
-import type { WithHost, FortuneCookie as FortuneCookieType } from 'types'
+import type { FortuneCookie as FortuneCookieType } from 'types'
 
 const appear = keyframes`
   0% {
@@ -82,21 +84,40 @@ export const FortuneCookie: React.FC<{
   host?: string
 }> = ({ allowMotion, allowSounds, host }) => {
   const [isCookieCracked, setCookieCracked] = useState(false)
-  const crackCookie = () => {
-    const cookieSound = new Audio('/assets/sounds/cookie-crunch.wav')
+  const [isFortuneLoading, setFortuneLoading] = useState(false)
+  const [userFortune, setUserFortune] = useState({})
+
+  const cookieSound = new Audio('/assets/sounds/cookie-crunch.wav')
+
+  const useCrackCookie = () => {
+    setFortuneLoading(true)
+
+    const { data: count } = useAPI({
+      host,
+      url: FORTUNE_COOKIES_PATH_COUNT,
+    })
+    const CookieId = getRandomInt(count as number)
+    const { data } = useAPI({
+      host,
+      url: `${FORTUNE_COOKIES_PATH_ONE}${CookieId}`,
+    })
     if (allowSounds) cookieSound.play()
     setCookieCracked(true)
+    const fortuneCookie = data as FortuneCookieType
+    setUserFortune(fortuneCookie)
   }
 
-  return (
+  return isFortuneLoading ? (
+    <Loader />
+  ) : (
     <section>
       {!isCookieCracked ? (
         <>
           <Title allowMotion={allowMotion}>{TEXTS.how_s_it}</Title>
-          <StyledCookie onClick={crackCookie} allowMotion={allowMotion} />
+          <StyledCookie onClick={useCrackCookie} allowMotion={allowMotion} />
         </>
       ) : (
-        <StyledMessage host={host} />
+        <StyledMessage fortuneCookie={userFortune as FortuneCookieType} />
       )}
     </section>
   )
@@ -243,20 +264,10 @@ const FortuneText = styled('span')`
   }
 `
 
-const Message = ({ host }: WithHost): JSX.Element | null => {
-  const { data: count } = useAPI({
-    host,
-    url: FORTUNE_COOKIES_PATH_COUNT,
-  })
-  const CookieId = getRandomInt(count as number)
-  const { data } = useAPI({
-    host,
-    url: `${FORTUNE_COOKIES_PATH_ONE}${CookieId}`,
-  })
-
+const Message = ({
+  fortuneCookie,
+}: WithFortuneCookieData): JSX.Element | null => {
   const { darkModeActive, theme } = useContext(ThemeContext)
-
-  const fortuneCookie = data as FortuneCookieType
 
   if (!fortuneCookie) return null
   const {
@@ -286,11 +297,15 @@ const Message = ({ host }: WithHost): JSX.Element | null => {
   )
 }
 
+type WithFortuneCookieData = {
+  fortuneCookie: FortuneCookieType
+}
+
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-const StyledMessage: React.FC<WithHost> = styled('article').attrs(
-  (props: WithHost) => ({
-    children: <Message host={props.host} />,
+const StyledMessage: React.FC<WithFortuneCookieData> = styled('article').attrs(
+  (props: WithFortuneCookieData) => ({
+    children: <Message fortuneCookie={props.fortuneCookie} />,
   }),
 )`
   position: relative;
