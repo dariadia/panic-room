@@ -8,11 +8,13 @@ import React, {
 import styled, { keyframes, css, ThemeContext } from 'styled-components'
 
 import { TEXTS } from 'constants/texts'
+import { FORTUNE_COOKIE } from 'constants/theme'
 
 import { GOLDEN_SHADOW, MAIN_PADDING } from 'utils/theme'
 import { getRandomInt } from 'utils/randomiser'
 import { lighten } from 'polished'
 
+import { useCookies } from 'react-cookie'
 import { buildRequestUrl, getProtocol } from 'hooks/use-api'
 
 import { Loader } from './Loader'
@@ -92,9 +94,24 @@ export const FortuneCookie: React.FC<{
   allowSounds: boolean
   host?: string
 }> = ({ allowMotion, allowSounds, host }) => {
-  const [isCookieCracked, setCookieCracked] = useState(false)
   const [isFortuneLoading, setFortuneLoading] = useState(false)
   const [userFortune, setUserFortune] = useState({})
+
+  const [cookies, setCookie] = useCookies([FORTUNE_COOKIE])
+  const fortuneReadBefore = cookies[FORTUNE_COOKIE]
+
+  const fetchCookie = async (CookieId: number) => {
+    const getFortuneUrl = `${getProtocol(
+      host as string,
+    )}${host}/api${buildRequestUrl(`${FORTUNE_COOKIES_PATH_ONE}${CookieId}`)}`
+
+    const fortune = await fetch(getFortuneUrl, {
+      method: 'GET',
+    }).then(res => res.json())
+
+    const fortuneCookie = fortune as FortuneCookieType
+    setUserFortune(fortuneCookie)
+  }
 
   const useCrackCookie = async () => {
     setFortuneLoading(true)
@@ -108,29 +125,23 @@ export const FortuneCookie: React.FC<{
     }).then(res => res.json())
 
     const CookieId = getRandomInt(fortunesAvailableCount as number)
-    const getFortuneUrl = `${getProtocol(
-      host as string,
-    )}${host}/api${buildRequestUrl(`${FORTUNE_COOKIES_PATH_ONE}${CookieId}`)}`
+    setCookie(FORTUNE_COOKIE, JSON.stringify(CookieId))
 
-    const fortune = await fetch(getFortuneUrl, {
-      method: 'GET',
-    }).then(res => res.json())
+    fetchCookie(CookieId)
 
-    const fortuneCookie = fortune as FortuneCookieType
-    setUserFortune(fortuneCookie)
     setFortuneLoading(false)
 
     const cookieSound = new Audio('/assets/sounds/cookie-crunch.wav')
     if (allowSounds) cookieSound.play()
-
-    setCookieCracked(true)
   }
+
+  if (fortuneReadBefore) fetchCookie(fortuneReadBefore)
 
   return isFortuneLoading ? (
     <Loader mainColour={GOLDEN_SHADOW} accentColour={lighten(0.2, 'gold')} />
   ) : (
     <section>
-      {isCookieCracked ? (
+      {userFortune ? (
         <StyledMessage
           fortuneCookie={userFortune as FortuneCookieType}
           allowMotion={allowMotion}
