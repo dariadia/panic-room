@@ -16,6 +16,7 @@ import { lighten } from 'polished'
 
 import { useCookies } from 'react-cookie'
 import { buildRequestUrl, getProtocol } from 'hooks/use-api'
+import isEmpty from 'lodash/isEmpty'
 
 import { Loader } from './Loader'
 
@@ -141,16 +142,16 @@ export const FortuneCookie: React.FC<{
     <Loader mainColour={GOLDEN_SHADOW} accentColour={lighten(0.2, 'gold')} />
   ) : (
     <section>
-      {userFortune ? (
-        <StyledMessage
-          fortuneCookie={userFortune as FortuneCookieType}
-          allowMotion={allowMotion}
-        />
-      ) : (
+      {isEmpty(userFortune) ? (
         <>
           <Title allowMotion={allowMotion}>{TEXTS.how_s_it}</Title>
           <StyledCookie onClick={useCrackCookie} allowMotion={allowMotion} />
         </>
+      ) : (
+        <StyledMessage
+          fortuneCookie={userFortune as FortuneCookieType}
+          allowMotion={allowMotion}
+        />
       )}
     </section>
   )
