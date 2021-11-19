@@ -94,7 +94,6 @@ const Title = styled('h1')<{ allowMotion: boolean }>`
 const MidnightCaption = styled('div')`
   color: ${({ color }) => color};
   font: 2rem/4rem 'Caveat', cursiv;
-  filter: drop-shadow(1px 2px 8px ${GOLDEN_SHADOW});
   margin: 20px auto;
   width: fit-content;
 `
@@ -104,7 +103,7 @@ export const FortuneCookie: React.FC<{
   allowSounds: boolean
   host?: string
 }> = ({ allowMotion, allowSounds, host }) => {
-  const { darkModeActive, theme } = useContext(ThemeContext)
+  const { darkModeActive } = useContext(ThemeContext)
 
   const [isFortuneLoading, setFortuneLoading] = useState(false)
   const [userFortune, setUserFortune] = useState({})
@@ -173,12 +172,8 @@ export const FortuneCookie: React.FC<{
             fortuneCookie={userFortune as FortuneCookieType}
             allowMotion={allowMotion}
           />
-          <MidnightCaption
-            color={
-              darkModeActive ? theme.darkTheme.text : theme.lightTheme.text
-            }
-          >
-            {TEXTS.fortune_at_midnight} {tillMidnightHours} {TEXTS.hours}
+          <MidnightCaption color={darkModeActive ? 'pink' : 'hotpink'}>
+            🦦 {TEXTS.fortune_at_midnight} {tillMidnightHours} {TEXTS.hours} 🍀
           </MidnightCaption>
         </>
       )}
