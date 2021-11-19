@@ -10,7 +10,7 @@ export const DEFAULT_PREFERENCES: Preferences = {
 
 export const PANIC_ROOM_PREFERENCES = 'panic-room-preferences'
 export const FORTUNE_COOKIE = 'fortune-cookie'
-export const FORTUNE_COOKIE_TIMER = 'fortune-cookie-timer'
+export const FORTUNE_COOKIE_PICKED = 'fortune-cookie-picked'
 
 export const LIGHT = 'light'
 export const DARK = 'dark'

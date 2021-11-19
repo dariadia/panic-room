@@ -13,6 +13,7 @@ import { GOLDEN_SHADOW, BLUE_SHADOW } from 'utils/theme'
 import {
   ALLOW_MOTION,
   ALLOW_SOUNDS,
+  DEFAULT_PREFERENCES,
   PANIC_ROOM_PREFERENCES,
 } from 'constants/theme'
 import { TEXTS } from 'constants/texts'
@@ -58,7 +59,7 @@ export const MenuWrapper: React.FC<{
   }
 
   const [cookies, setCookie] = useCookies([PANIC_ROOM_PREFERENCES])
-  const userPreferences = cookies[PANIC_ROOM_PREFERENCES]
+  const userPreferences = cookies[PANIC_ROOM_PREFERENCES] || DEFAULT_PREFERENCES
   const [preferences, setPreferences] = useState(userPreferences)
   const onCheckboxChange = (target: EventTarget & HTMLInputElement) =>
     setPreferences({ ...preferences, [target.name]: target.checked })
@@ -82,7 +83,7 @@ export const MenuWrapper: React.FC<{
           theme={darkModeActive ? theme.darkTheme : theme.lightTheme}
         >
           <PreferenceCheckbox
-            checked={preferences?.allowMotion || false}
+            checked={preferences?.allowMotion}
             labelId={MENU_OPTION_MOTION}
             id={TEXTS.motion}
             name={ALLOW_MOTION}
@@ -93,7 +94,7 @@ export const MenuWrapper: React.FC<{
             <span>{TEXTS.motion}</span>
           </PreferenceCheckbox>
           <PreferenceCheckbox
-            checked={preferences?.allowSounds || false}
+            checked={preferences?.allowSounds}
             labelId={MENU_OPTION_SOUNDS}
             id={TEXTS.sounds}
             name={ALLOW_SOUNDS}
