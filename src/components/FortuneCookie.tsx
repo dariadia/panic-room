@@ -8,7 +8,7 @@ import React, {
 import styled, { keyframes, css, ThemeContext } from 'styled-components'
 
 import { TEXTS } from 'constants/texts'
-import { FORTUNE_COOKIE } from 'constants/theme'
+import { FORTUNE_COOKIE, FORTUNE_COOKIE_CRACKED } from 'constants/theme'
 
 import { GOLDEN_SHADOW, MAIN_PADDING } from 'utils/theme'
 import { getRandomInt } from 'utils/randomiser'
@@ -99,8 +99,11 @@ export const FortuneCookie: React.FC<{
   const [isFortuneLoading, setFortuneLoading] = useState(false)
   const [userFortune, setUserFortune] = useState({})
 
-  const [cookies, setCookie] = useCookies([FORTUNE_COOKIE])
-  const fortuneReadBefore = cookies[FORTUNE_COOKIE]
+  const [cookies, setCookie] = useCookies([
+    FORTUNE_COOKIE,
+    FORTUNE_COOKIE_CRACKED,
+  ])
+  const fortuneCrackedBefore = cookies[FORTUNE_COOKIE]
 
   const fetchCookie = async (CookieId: number) => {
     const getFortuneUrl = `${getProtocol(
@@ -126,9 +129,11 @@ export const FortuneCookie: React.FC<{
       method: 'GET',
     }).then(res => res.json())
 
-    console.log(cookies)
     const CookieId = getRandomInt(fortunesAvailableCount as number)
     setCookie(FORTUNE_COOKIE, JSON.stringify(CookieId), {
+      maxAge: getTimeInSeconds({ days: 1 }),
+    })
+    setCookie(FORTUNE_COOKIE_CRACKED, JSON.stringify(new Date()), {
       maxAge: getTimeInSeconds({ days: 1 }),
     })
 
@@ -140,10 +145,12 @@ export const FortuneCookie: React.FC<{
     if (allowSounds) cookieSound.play()
   }
 
-  if (fortuneReadBefore) fetchCookie(fortuneReadBefore)
+  if (fortuneCrackedBefore && isEmpty(userFortune)) {
+    fetchCookie(fortuneCrackedBefore)
+  }
 
   const isLoading =
-    isFortuneLoading || (fortuneReadBefore && isEmpty(userFortune))
+    isFortuneLoading || (fortuneCrackedBefore && isEmpty(userFortune))
 
   return isLoading ? (
     <Loader mainColour={GOLDEN_SHADOW} accentColour={lighten(0.2, 'gold')} />
