@@ -1,4 +1,10 @@
-import React, { Dispatch, SetStateAction, useContext, useState } from 'react'
+import React, {
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useState,
+  useEffect,
+} from 'react'
 import styled, { keyframes, css, ThemeContext } from 'styled-components'
 
 import { TEXTS } from 'constants/texts'
@@ -122,7 +128,10 @@ export const FortuneCookie: React.FC<{
   ) : (
     <section>
       {isCookieCracked ? (
-        <StyledMessage fortuneCookie={userFortune as FortuneCookieType} />
+        <StyledMessage
+          fortuneCookie={userFortune as FortuneCookieType}
+          allowMotion={allowMotion}
+        />
       ) : (
         <>
           <Title allowMotion={allowMotion}>{TEXTS.how_s_it}</Title>
@@ -260,7 +269,9 @@ const rollOut = keyframes`
   }
 `
 
-const FortuneText = styled('span')`
+type TextProps = { color: string; allowMotion: boolean }
+
+const FortuneText: React.FC<TextProps> = styled('span')<TextProps>`
   color: ${({ color }) => color};
   display: block;
   max-width: 60vw;
@@ -268,6 +279,7 @@ const FortuneText = styled('span')`
   padding-top: 22vw;
   text-align: center;
   font: 2rem/4rem monospace;
+  animation: ${({ allowMotion }) => (allowMotion ? appear : stay)} 1.5s 1;
   @media (max-width: 500px) {
     font: 1rem/2rem monospace;
     padding-top: 40vw;
@@ -276,8 +288,17 @@ const FortuneText = styled('span')`
 
 const Message = ({
   fortuneCookie,
+  allowMotion,
 }: WithFortuneCookieData): JSX.Element | null => {
   const { darkModeActive, theme } = useContext(ThemeContext)
+  const [isTextShown, showText] = useState(false)
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      showText(true)
+    }, 800)
+    return () => clearTimeout(timer)
+  }, [])
 
   if (!fortuneCookie) return null
   const {
@@ -291,31 +312,40 @@ const Message = ({
   return (
     <>
       <div />
-      <FortuneText
-        color={darkModeActive ? theme.darkTheme.text : theme.lightTheme.text}
-      >
-        {text}
-        {emoji && <span className="fortune-cookie_emoji">{emoji}</span>}
-        <div className="fortune-cookie_source">
-          <a href={source_link} target="_blank">
-            {source_title}
-          </a>{' '}
-          {source_author}
-        </div>
-      </FortuneText>
+      {isTextShown && (
+        <FortuneText
+          color={darkModeActive ? theme.darkTheme.text : theme.lightTheme.text}
+          allowMotion={allowMotion as boolean}
+        >
+          {text}
+          {emoji && <span className="fortune-cookie_emoji">{emoji}</span>}
+          <div className="fortune-cookie_source">
+            <a href={source_link} target="_blank">
+              {source_title}
+            </a>{' '}
+            {source_author}
+          </div>
+        </FortuneText>
+      )}
     </>
   )
 }
 
 type WithFortuneCookieData = {
   fortuneCookie: FortuneCookieType
+  allowMotion?: boolean
 }
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 const StyledMessage: React.FC<WithFortuneCookieData> = styled('article').attrs(
   (props: WithFortuneCookieData) => ({
-    children: <Message fortuneCookie={props.fortuneCookie} />,
+    children: (
+      <Message
+        fortuneCookie={props.fortuneCookie}
+        allowMotion={props.allowMotion}
+      />
+    ),
   }),
 )`
   position: relative;
