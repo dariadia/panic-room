@@ -37,6 +37,15 @@ const appear = keyframes`
   }
 `
 
+const appearSlow = keyframes`
+  0%, 85% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`
+
 const stay = keyframes`
   0% {
     opacity: 0.6;
@@ -96,6 +105,7 @@ const MidnightCaption = styled('div')`
   font: 2rem/4rem 'Caveat', cursiv;
   margin: 20px auto;
   width: fit-content;
+  animation: ${appearSlow} 2s 1;
 `
 
 export const FortuneCookie: React.FC<{
