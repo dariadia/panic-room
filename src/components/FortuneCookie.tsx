@@ -12,6 +12,7 @@ import { FORTUNE_COOKIE } from 'constants/theme'
 
 import { GOLDEN_SHADOW, MAIN_PADDING } from 'utils/theme'
 import { getRandomInt } from 'utils/randomiser'
+import { getTimeInSeconds } from 'utils/dates'
 import { lighten } from 'polished'
 
 import { useCookies } from 'react-cookie'
@@ -125,8 +126,11 @@ export const FortuneCookie: React.FC<{
       method: 'GET',
     }).then(res => res.json())
 
+    console.log(cookies)
     const CookieId = getRandomInt(fortunesAvailableCount as number)
-    setCookie(FORTUNE_COOKIE, JSON.stringify(CookieId))
+    setCookie(FORTUNE_COOKIE, JSON.stringify(CookieId), {
+      maxAge: getTimeInSeconds({ days: 1 }),
+    })
 
     fetchCookie(CookieId)
 

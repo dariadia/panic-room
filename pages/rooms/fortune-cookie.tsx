@@ -38,7 +38,7 @@ const FortuneCookiesPage: Page<SinglePageProps> = ({ preferences, host }) => {
           cookie: preferences as string,
           value: ALLOW_MOTION,
         })
-      : userPreferences.allowMotion
+      : userPreferences?.allowMotion
 
   const allowSounds =
     typeof userPreferences === 'string'
@@ -46,7 +46,7 @@ const FortuneCookiesPage: Page<SinglePageProps> = ({ preferences, host }) => {
           cookie: preferences as string,
           value: ALLOW_SOUNDS,
         })
-      : userPreferences.allowSounds
+      : userPreferences?.allowSounds
 
   return (
     <>
