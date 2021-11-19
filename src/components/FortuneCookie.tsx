@@ -8,8 +8,11 @@ import React, {
 import styled, { keyframes, css, ThemeContext } from 'styled-components'
 
 import { TEXTS } from 'constants/texts'
+
 import { GOLDEN_SHADOW, MAIN_PADDING } from 'utils/theme'
 import { getRandomInt } from 'utils/randomiser'
+import { lighten } from 'polished'
+
 import { buildRequestUrl, getProtocol } from 'hooks/use-api'
 
 import { Loader } from './Loader'
@@ -124,7 +127,7 @@ export const FortuneCookie: React.FC<{
   }
 
   return isFortuneLoading ? (
-    <Loader />
+    <Loader mainColour={GOLDEN_SHADOW} accentColour={lighten(0.2, 'gold')} />
   ) : (
     <section>
       {isCookieCracked ? (
