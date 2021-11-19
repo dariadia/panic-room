@@ -138,7 +138,10 @@ export const FortuneCookie: React.FC<{
 
   if (fortuneReadBefore) fetchCookie(fortuneReadBefore)
 
-  return isFortuneLoading ? (
+  const isLoading =
+    isFortuneLoading || (fortuneReadBefore && isEmpty(userFortune))
+
+  return isLoading ? (
     <Loader mainColour={GOLDEN_SHADOW} accentColour={lighten(0.2, 'gold')} />
   ) : (
     <section>
