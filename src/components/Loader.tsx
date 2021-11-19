@@ -1,15 +1,19 @@
 import React, { useContext } from 'react'
 import { ThemeContext } from 'styled-components'
 
-export const Loader: React.FC = () => {
-  const { darkModeActive, theme } = useContext(ThemeContext)
-  const loaderFill = darkModeActive
-    ? theme.darkTheme.brand
-    : theme.lightTheme.brand
+type LoaderProps = {
+  colour?: string
+}
 
-  const loaderStroke = darkModeActive
-    ? theme.darkTheme.brandShadow
-    : theme.lightTheme.brandShadow
+export const Loader: React.FC<LoaderProps> = ({ colour }) => {
+  const { darkModeActive, theme } = useContext(ThemeContext)
+  const loaderFill =
+    colour || darkModeActive ? theme.darkTheme.brand : theme.lightTheme.brand
+
+  const loaderStroke =
+    colour || darkModeActive
+      ? theme.darkTheme.brandShadow
+      : theme.lightTheme.brandShadow
 
   return (
     <svg
