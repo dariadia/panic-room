@@ -12,7 +12,7 @@ import { FORTUNE_COOKIE } from 'constants/theme'
 
 import { GOLDEN_SHADOW, MAIN_PADDING } from 'utils/theme'
 import { getRandomInt } from 'utils/randomiser'
-import { getTimeTillMidnight } from 'utils/dates'
+import { getTimeTillMidnight, getHoursFromSeconds } from 'utils/dates'
 import { lighten } from 'polished'
 
 import { useCookies } from 'react-cookie'
@@ -91,17 +91,28 @@ const Title = styled('h1')<{ allowMotion: boolean }>`
   text-align: center;
 `
 
+const MidnightCaption = styled('div')`
+  color: ${({ color }) => color};
+  font: 2rem/4rem 'Caveat', cursiv;
+  filter: drop-shadow(1px 2px 8px ${GOLDEN_SHADOW});
+  margin: 20px auto;
+  width: fit-content;
+`
+
 export const FortuneCookie: React.FC<{
   allowMotion: boolean
   allowSounds: boolean
   host?: string
 }> = ({ allowMotion, allowSounds, host }) => {
+  const { darkModeActive, theme } = useContext(ThemeContext)
+
   const [isFortuneLoading, setFortuneLoading] = useState(false)
   const [userFortune, setUserFortune] = useState({})
 
   const [cookies, setCookie] = useCookies([FORTUNE_COOKIE])
   const fortuneCrackedBefore = cookies[FORTUNE_COOKIE]
   const timeTillMidnight = getTimeTillMidnight()
+  const tillMidnightHours = getHoursFromSeconds(timeTillMidnight)
 
   const fetchCookie = async (CookieId: number) => {
     const getFortuneUrl = `${getProtocol(
@@ -157,10 +168,19 @@ export const FortuneCookie: React.FC<{
           <StyledCookie onClick={useCrackCookie} allowMotion={allowMotion} />
         </>
       ) : (
-        <StyledMessage
-          fortuneCookie={userFortune as FortuneCookieType}
-          allowMotion={allowMotion}
-        />
+        <>
+          <StyledMessage
+            fortuneCookie={userFortune as FortuneCookieType}
+            allowMotion={allowMotion}
+          />
+          <MidnightCaption
+            color={
+              darkModeActive ? theme.darkTheme.text : theme.lightTheme.text
+            }
+          >
+            {TEXTS.fortune_at_midnight} {tillMidnightHours} {TEXTS.hours}
+          </MidnightCaption>
+        </>
       )}
     </section>
   )
