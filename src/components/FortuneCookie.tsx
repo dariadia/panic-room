@@ -121,13 +121,13 @@ export const FortuneCookie: React.FC<{
     <Loader />
   ) : (
     <section>
-      {!isCookieCracked ? (
+      {isCookieCracked ? (
+        <StyledMessage fortuneCookie={userFortune as FortuneCookieType} />
+      ) : (
         <>
           <Title allowMotion={allowMotion}>{TEXTS.how_s_it}</Title>
           <StyledCookie onClick={useCrackCookie} allowMotion={allowMotion} />
         </>
-      ) : (
-        <StyledMessage fortuneCookie={userFortune as FortuneCookieType} />
       )}
     </section>
   )
