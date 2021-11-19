@@ -86,6 +86,7 @@ export const WelcomeMessage: React.FC<{
             darkModeActive ? theme.darkTheme.brand : theme.lightTheme.brand
           }
           shadow={darkModeActive ? BLUE_SHADOW : GOLDEN_SHADOW}
+          checked={preferences?.allowMotion}
         >
           <span>{TEXTS.motion}</span>
         </PreferenceCheckbox>
@@ -97,6 +98,7 @@ export const WelcomeMessage: React.FC<{
             darkModeActive ? theme.darkTheme.brand : theme.lightTheme.brand
           }
           shadow={darkModeActive ? BLUE_SHADOW : GOLDEN_SHADOW}
+          checked={preferences?.allowSounds}
         >
           <span>{TEXTS.sounds}</span>
         </PreferenceCheckbox>

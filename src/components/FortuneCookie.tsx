@@ -1,17 +1,32 @@
-import React, { Dispatch, SetStateAction, useContext, useState } from 'react'
+import React, {
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useState,
+  useEffect,
+} from 'react'
 import styled, { keyframes, css, ThemeContext } from 'styled-components'
 
 import { TEXTS } from 'constants/texts'
+import { FORTUNE_COOKIE } from 'constants/theme'
+
 import { GOLDEN_SHADOW, MAIN_PADDING } from 'utils/theme'
 import { getRandomInt } from 'utils/randomiser'
-import { useAPI } from 'hooks/use-api'
+import { getTimeTillMidnight, getHoursFromSeconds } from 'utils/dates'
+import { lighten } from 'polished'
+
+import { useCookies } from 'react-cookie'
+import { buildRequestUrl, getProtocol } from 'hooks/use-api'
+import isEmpty from 'lodash/isEmpty'
+
+import { Loader } from './Loader'
 
 import {
   FORTUNE_COOKIES_PATH_COUNT,
   FORTUNE_COOKIES_PATH_ONE,
 } from 'constants/locations'
 
-import type { WithHost, FortuneCookie as FortuneCookieType } from 'types'
+import type { FortuneCookie as FortuneCookieType } from 'types'
 
 const appear = keyframes`
   0% {
@@ -76,27 +91,91 @@ const Title = styled('h1')<{ allowMotion: boolean }>`
   text-align: center;
 `
 
+const MidnightCaption = styled('div')`
+  color: ${({ color }) => color};
+  font: 2rem/4rem 'Caveat', cursiv;
+  margin: 20px auto;
+  width: fit-content;
+`
+
 export const FortuneCookie: React.FC<{
   allowMotion: boolean
   allowSounds: boolean
   host?: string
 }> = ({ allowMotion, allowSounds, host }) => {
-  const [isCookieCracked, setCookieCracked] = useState(false)
-  const crackCookie = () => {
-    const cookieSound = new Audio('/assets/sounds/cookie-crunch.wav')
-    if (allowSounds) cookieSound.play()
-    setCookieCracked(true)
+  const { darkModeActive } = useContext(ThemeContext)
+
+  const [isFortuneLoading, setFortuneLoading] = useState(false)
+  const [userFortune, setUserFortune] = useState({})
+
+  const [cookies, setCookie] = useCookies([FORTUNE_COOKIE])
+  const fortuneCrackedBefore = cookies[FORTUNE_COOKIE]
+  const timeTillMidnight = getTimeTillMidnight()
+  const tillMidnightHours = getHoursFromSeconds(timeTillMidnight)
+
+  const fetchCookie = async (CookieId: number) => {
+    const getFortuneUrl = `${getProtocol(
+      host as string,
+    )}${host}/api${buildRequestUrl(`${FORTUNE_COOKIES_PATH_ONE}${CookieId}`)}`
+
+    const fortune = await fetch(getFortuneUrl, {
+      method: 'GET',
+    }).then(res => res.json())
+
+    const fortuneCookie = fortune as FortuneCookieType
+    setUserFortune(fortuneCookie)
   }
 
-  return (
+  const useCrackCookie = async () => {
+    setFortuneLoading(true)
+
+    const getCountUrl = `${getProtocol(
+      host as string,
+    )}${host}/api${buildRequestUrl(FORTUNE_COOKIES_PATH_COUNT)}`
+
+    const fortunesAvailableCount = await fetch(getCountUrl, {
+      method: 'GET',
+    }).then(res => res.json())
+
+    const CookieId = getRandomInt(fortunesAvailableCount as number)
+    setCookie(FORTUNE_COOKIE, JSON.stringify(CookieId), {
+      maxAge: timeTillMidnight,
+    })
+
+    fetchCookie(CookieId)
+
+    setFortuneLoading(false)
+
+    const cookieSound = new Audio('/assets/sounds/cookie-crunch.wav')
+    if (allowSounds) cookieSound.play()
+  }
+
+  if (fortuneCrackedBefore && isEmpty(userFortune)) {
+    fetchCookie(fortuneCrackedBefore)
+  }
+
+  const isLoading =
+    isFortuneLoading || (fortuneCrackedBefore && isEmpty(userFortune))
+
+  return isLoading ? (
+    <Loader mainColour={GOLDEN_SHADOW} accentColour={lighten(0.2, 'gold')} />
+  ) : (
     <section>
-      {!isCookieCracked ? (
+      {isEmpty(userFortune) ? (
         <>
           <Title allowMotion={allowMotion}>{TEXTS.how_s_it}</Title>
-          <StyledCookie onClick={crackCookie} allowMotion={allowMotion} />
+          <StyledCookie onClick={useCrackCookie} allowMotion={allowMotion} />
         </>
       ) : (
-        <StyledMessage host={host} />
+        <>
+          <StyledMessage
+            fortuneCookie={userFortune as FortuneCookieType}
+            allowMotion={allowMotion}
+          />
+          <MidnightCaption color={darkModeActive ? 'pink' : 'hotpink'}>
+            🦦 {TEXTS.fortune_at_midnight} {tillMidnightHours} {TEXTS.hours} 🍀
+          </MidnightCaption>
+        </>
       )}
     </section>
   )
@@ -229,7 +308,9 @@ const rollOut = keyframes`
   }
 `
 
-const FortuneText = styled('span')`
+type TextProps = { color: string; allowMotion: boolean }
+
+const FortuneText: React.FC<TextProps> = styled('span')<TextProps>`
   color: ${({ color }) => color};
   display: block;
   max-width: 60vw;
@@ -237,26 +318,26 @@ const FortuneText = styled('span')`
   padding-top: 22vw;
   text-align: center;
   font: 2rem/4rem monospace;
+  animation: ${({ allowMotion }) => (allowMotion ? appear : stay)} 1.5s 1;
   @media (max-width: 500px) {
     font: 1rem/2rem monospace;
     padding-top: 40vw;
   }
 `
 
-const Message = ({ host }: WithHost): JSX.Element | null => {
-  const { data: count } = useAPI({
-    host,
-    url: FORTUNE_COOKIES_PATH_COUNT,
-  })
-  const CookieId = getRandomInt(count as number)
-  const { data } = useAPI({
-    host,
-    url: `${FORTUNE_COOKIES_PATH_ONE}${CookieId}`,
-  })
-
+const Message = ({
+  fortuneCookie,
+  allowMotion,
+}: WithFortuneCookieData): JSX.Element | null => {
   const { darkModeActive, theme } = useContext(ThemeContext)
+  const [isTextShown, showText] = useState(false)
 
-  const fortuneCookie = data as FortuneCookieType
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      showText(true)
+    }, 800)
+    return () => clearTimeout(timer)
+  }, [])
 
   if (!fortuneCookie) return null
   const {
@@ -270,27 +351,40 @@ const Message = ({ host }: WithHost): JSX.Element | null => {
   return (
     <>
       <div />
-      <FortuneText
-        color={darkModeActive ? theme.darkTheme.text : theme.lightTheme.text}
-      >
-        {text}
-        {emoji && <span className="fortune-cookie_emoji">{emoji}</span>}
-        <div className="fortune-cookie_source">
-          <a href={source_link} target="_blank">
-            {source_title}
-          </a>{' '}
-          {source_author}
-        </div>
-      </FortuneText>
+      {isTextShown && (
+        <FortuneText
+          color={darkModeActive ? theme.darkTheme.text : theme.lightTheme.text}
+          allowMotion={allowMotion as boolean}
+        >
+          {text}
+          {emoji && <span className="fortune-cookie_emoji">{emoji}</span>}
+          <div className="fortune-cookie_source">
+            <a href={source_link} target="_blank">
+              {source_title}
+            </a>{' '}
+            {source_author}
+          </div>
+        </FortuneText>
+      )}
     </>
   )
 }
 
+type WithFortuneCookieData = {
+  fortuneCookie: FortuneCookieType
+  allowMotion?: boolean
+}
+
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-const StyledMessage: React.FC<WithHost> = styled('article').attrs(
-  (props: WithHost) => ({
-    children: <Message host={props.host} />,
+const StyledMessage: React.FC<WithFortuneCookieData> = styled('article').attrs(
+  (props: WithFortuneCookieData) => ({
+    children: (
+      <Message
+        fortuneCookie={props.fortuneCookie}
+        allowMotion={props.allowMotion}
+      />
+    ),
   }),
 )`
   position: relative;

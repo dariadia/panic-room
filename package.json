@@ -32,6 +32,7 @@
     "@testing-library/jest-dom": "^5.1.0",
     "@testing-library/react": "^11.0.0",
     "@types/cookies": "^0.7.7",
+    "@types/lodash": "^4.14.177",
     "@types/node": "15.0.2",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",

@@ -1,13 +1,22 @@
 import React, { useContext } from 'react'
 import { ThemeContext } from 'styled-components'
 
-export const Loader: React.FC = () => {
+type LoaderProps = {
+  mainColour?: string
+  accentColour?: string
+}
+
+export const Loader: React.FC<LoaderProps> = ({ mainColour, accentColour }) => {
   const { darkModeActive, theme } = useContext(ThemeContext)
-  const loaderFill = darkModeActive
+  const loaderFill = mainColour
+    ? mainColour
+    : darkModeActive
     ? theme.darkTheme.brand
     : theme.lightTheme.brand
 
-  const loaderStroke = darkModeActive
+  const loaderStroke = accentColour
+    ? accentColour
+    : darkModeActive
     ? theme.darkTheme.brandShadow
     : theme.lightTheme.brandShadow
 

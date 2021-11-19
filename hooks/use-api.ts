@@ -5,7 +5,10 @@ import { APP_PRODUCTION } from 'constants/locations'
 
 import { RequestOptions, RequestOption, OptionsType } from 'types'
 
-const buildRequestUrl = (url: string, RequestParams?: RequestOptions) => {
+export const buildRequestUrl = (
+  url: string,
+  RequestParams?: RequestOptions,
+): string => {
   if (!RequestParams) {
     return url
   }
@@ -15,10 +18,10 @@ const buildRequestUrl = (url: string, RequestParams?: RequestOptions) => {
   return `${url}?${queryString}`
 }
 
-const getProtocol = (host: string): string =>
+export const getProtocol = (host: string): string =>
   host.includes('localhost') ? 'http://' : 'https://'
 
-const getDefaultFetcher = (url: string) => () =>
+export const getDefaultFetcher = (url: string) => (): any =>
   fetch(url).then(res => res.json())
 
 export const useAPI = ({

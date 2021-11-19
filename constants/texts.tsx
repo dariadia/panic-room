@@ -18,4 +18,6 @@ export const TEXTS = {
   fortune_cookie: 'fortune cookie',
   how_s_it: `How's it going?`,
   home: 'home',
+  fortune_at_midnight: 'You can get a new fortune past midnight in about',
+  hours: 'hours',
 }
