@@ -14,6 +14,7 @@ import {
 import { BLUE_SHADOW, GOLDEN_SHADOW } from 'utils/theme'
 
 import { Theme } from 'types'
+import { ALLOW_SOUNDS_ARIA, ALLOW_MOTION_ARIA } from 'constants/arias'
 
 export const WelcomeScreen: React.FC<{ theme: Theme }> = styled('div')<{
   theme: Theme
@@ -79,6 +80,7 @@ export const WelcomeMessage: React.FC<{
       </p>
       <article>
         <PreferenceCheckbox
+          aria-label={ALLOW_MOTION_ARIA}
           id={TEXTS.motion}
           name={ALLOW_MOTION}
           onChange={onCheckboxChange}
@@ -91,6 +93,7 @@ export const WelcomeMessage: React.FC<{
           <span>{TEXTS.motion}</span>
         </PreferenceCheckbox>
         <PreferenceCheckbox
+          aria-label={ALLOW_SOUNDS_ARIA}
           id={TEXTS.sounds}
           name={ALLOW_SOUNDS}
           onChange={onCheckboxChange}
