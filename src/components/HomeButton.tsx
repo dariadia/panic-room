@@ -25,7 +25,7 @@ export const HomeButton: React.FC = () => {
 
 const StyledButton = styled('button').attrs({
   role: NAVIGATION,
-  ariaLabel: 'Home button',
+  'aria-label': 'Home button',
 })`
   cursor: pointer;
 `

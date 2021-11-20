@@ -418,7 +418,7 @@ const StyledMessage: React.FC<WithFortuneCookieData> = styled('article').attrs(
   (props: WithFortuneCookieData) => ({
     title: MESSAGE_ARIA,
     role: 'img',
-    ariaLabel: MESSAGE_ARIA,
+    'aria-label': MESSAGE_ARIA,
     children: (
       <Message
         fortuneCookie={props.fortuneCookie}

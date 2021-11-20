@@ -114,10 +114,7 @@ export const MenuWrapper: React.FC<{
   )
 }
 
-const MenuDropdown = styled('nav').attrs({
-  role: NAVIGATION,
-  ariaLabel: SETTINGS_MENU,
-})`
+const MenuDropdown = styled('nav')`
   position: absolute;
   padding: 16px;
   background: ${({ theme }) => theme.brand};
@@ -125,7 +122,10 @@ const MenuDropdown = styled('nav').attrs({
   border-radius: 4px;
 `
 
-export const Menu = styled('button')`
+export const Menu = styled('button').attrs({
+  role: NAVIGATION,
+  'aria-label': SETTINGS_MENU,
+})`
   background: transparent;
   border: none;
   padding: 8px;
