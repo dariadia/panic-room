@@ -1,6 +1,7 @@
 [
   {
     "id": "0",
+    "uuid": "",
     "emoji": "🕯",
     "aria_label": "candle",
     "source_link": "https://bookmate.com/books/scnysZIs",
@@ -65,7 +66,7 @@
   {
     "id": "7",
     "emoji": "🍰",
-    "aria_label": "cake",
+    "aria_label": "piece of cake",
     "source_link": "https://bookmate.com/books/scnysZIs",
     "source_title": "Courage: The Joy of Living Dangerously (Osho Insights for a New Way of Living)",
     "source_author": "Osho",
@@ -92,7 +93,7 @@
   {
     "id": "10",
     "emoji": "🫂",
-    "aria_label": "two people huggig",
+    "aria_label": "two people hugging",
     "source_link": "https://bookmate.com/books/b3BPm2Bj",
     "source_title": "The Chakra Book",
     "source_author": "Osho",
