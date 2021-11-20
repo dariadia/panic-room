@@ -198,9 +198,9 @@ const CookieSVG: React.FC = () => (
     viewBox="0 0 465 353"
     aria-labelledby="fortune-cookie fortune-cookie-description"
   >
-    <title id="fortune-cookie">Fortune cookie</title>
+    <title id="fortune-cookie">A fortune cookie</title>
     <desc id="fortune-cookie-description">
-      This is a glowing golden fortune cookie. Click to crack it
+      This is a glowing golden fortune cookie. Click to crack it.
     </desc>
     <g transform="translate(-2365.4 1838.7)">
       <g transform="translate(1.223)">
