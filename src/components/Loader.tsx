@@ -31,7 +31,14 @@ export const Loader: React.FC<LoaderProps> = ({ mainColour, accentColour }) => {
       viewBox="0 0 150 150"
       xmlSpace="preserve"
       style={{ margin: '0 auto', display: 'block' }}
+      aria-labelledby="circles-icon circles-icon-description"
     >
+      <title id="circles-icon">
+        A moving circle inside another larger circle
+      </title>
+      <desc id="circles-icon-description">
+        A moving circle means this page is loading.
+      </desc>
       <radialGradient
         id="SVGID_1_"
         cx="75"
