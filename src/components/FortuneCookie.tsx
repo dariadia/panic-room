@@ -192,7 +192,16 @@ export const FortuneCookie: React.FC<{
 }
 
 const CookieSVG: React.FC = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 465 353">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    version="1.1"
+    viewBox="0 0 465 353"
+    aria-labelledby="fortune-cookie fortune-cookie-description"
+  >
+    <title id="fortune-cookie">Fortune cookie</title>
+    <desc id="fortune-cookie-description">
+      This is a glowing golden fortune cookie. Click to crack it
+    </desc>
     <g transform="translate(-2365.4 1838.7)">
       <g transform="translate(1.223)">
         <path
