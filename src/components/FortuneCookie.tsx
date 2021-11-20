@@ -19,7 +19,7 @@ import { useCookies } from 'react-cookie'
 import { buildRequestUrl, getProtocol } from 'hooks/use-api'
 import isEmpty from 'lodash/isEmpty'
 
-import { Loader } from './Loader'
+import { Loader, Emoji } from '.'
 
 import {
   FORTUNE_COOKIES_PATH_COUNT,
@@ -106,6 +106,11 @@ const MidnightCaption = styled('div')`
   margin: 20px auto;
   width: fit-content;
   animation: ${appearSlow} 2s 1;
+  @media (max-width: 500px) {
+    font: 0.8rem/1.6rem monospace;
+    max-width: 80vw;
+    text-align: center;
+  }
 `
 
 export const FortuneCookie: React.FC<{
@@ -183,7 +188,9 @@ export const FortuneCookie: React.FC<{
             allowMotion={allowMotion}
           />
           <MidnightCaption color={darkModeActive ? 'pink' : 'hotpink'}>
-            🦦 {TEXTS.fortune_at_midnight} {tillMidnightHours} {TEXTS.hours} 🍀
+            <Emoji label="otter">🦦</Emoji> {TEXTS.fortune_at_midnight}{' '}
+            {tillMidnightHours} {TEXTS.hours}{' '}
+            <Emoji label="four leaf clover">🍀</Emoji>
           </MidnightCaption>
         </>
       )}
@@ -192,7 +199,16 @@ export const FortuneCookie: React.FC<{
 }
 
 const CookieSVG: React.FC = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 465 353">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    version="1.1"
+    viewBox="0 0 465 353"
+    aria-labelledby="fortune-cookie fortune-cookie-description"
+  >
+    <title id="fortune-cookie">A fortune cookie</title>
+    <desc id="fortune-cookie-description">
+      This is a glowing golden fortune cookie. Click to crack it.
+    </desc>
     <g transform="translate(-2365.4 1838.7)">
       <g transform="translate(1.223)">
         <path
@@ -332,6 +348,7 @@ const FortuneText: React.FC<TextProps> = styled('span')<TextProps>`
   @media (max-width: 500px) {
     font: 1rem/2rem monospace;
     padding-top: 40vw;
+    max-width: 80vw;
   }
 `
 
@@ -353,6 +370,7 @@ const Message = ({
   const {
     text,
     emoji,
+    aria_label,
     source_link,
     source_title,
     source_author,
@@ -367,7 +385,14 @@ const Message = ({
           allowMotion={allowMotion as boolean}
         >
           {text}
-          {emoji && <span className="fortune-cookie_emoji">{emoji}</span>}
+          {emoji && (
+            <Emoji
+              className="fortune-cookie_emoji"
+              label={aria_label as string}
+            >
+              {emoji}
+            </Emoji>
+          )}
           <div className="fortune-cookie_source">
             <a href={source_link} target="_blank">
               {source_title}
@@ -385,10 +410,15 @@ type WithFortuneCookieData = {
   allowMotion?: boolean
 }
 
+const MESSAGE_ARIA = 'An open scroll of glowing parchment'
+
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 const StyledMessage: React.FC<WithFortuneCookieData> = styled('article').attrs(
   (props: WithFortuneCookieData) => ({
+    title: MESSAGE_ARIA,
+    role: 'img',
+    'aria-label': MESSAGE_ARIA,
     children: (
       <Message
         fortuneCookie={props.fortuneCookie}

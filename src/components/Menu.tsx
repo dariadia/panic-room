@@ -17,8 +17,14 @@ import {
   PANIC_ROOM_PREFERENCES,
 } from 'constants/theme'
 import { TEXTS } from 'constants/texts'
+import {
+  ALLOW_MOTION_ARIA,
+  ALLOW_SOUNDS_ARIA,
+  NAVIGATION,
+  SETTINGS_MENU,
+} from 'constants/arias'
 
-import { Button, PreferenceCheckbox } from '.'
+import { Button, Emoji, PreferenceCheckbox } from '.'
 
 export const MenuWrapper: React.FC<{
   isMenuFocused: boolean
@@ -76,13 +82,14 @@ export const MenuWrapper: React.FC<{
       // @ts-ignore
       onClick={(event: Event) => onMenuClick(event.target)}
     >
-      <span>⚙️</span>
+      <Emoji label="cog">⚙️</Emoji>
       {isMenuOpen && (
         <MenuDropdown
           id={MENU_ID}
           theme={darkModeActive ? theme.darkTheme : theme.lightTheme}
         >
           <PreferenceCheckbox
+            aria-label={ALLOW_MOTION_ARIA}
             checked={preferences?.allowMotion}
             labelId={MENU_OPTION_MOTION}
             id={TEXTS.motion}
@@ -94,6 +101,7 @@ export const MenuWrapper: React.FC<{
             <span>{TEXTS.motion}</span>
           </PreferenceCheckbox>
           <PreferenceCheckbox
+            aria-label={ALLOW_SOUNDS_ARIA}
             checked={preferences?.allowSounds}
             labelId={MENU_OPTION_SOUNDS}
             id={TEXTS.sounds}
@@ -121,7 +129,10 @@ const MenuDropdown = styled('nav')`
   border-radius: 4px;
 `
 
-export const Menu = styled('button')`
+export const Menu = styled('button').attrs({
+  role: NAVIGATION,
+  'aria-label': SETTINGS_MENU,
+})`
   background: transparent;
   border: none;
   padding: 8px;

@@ -1,4 +1,5 @@
 export * from './Checkmark'
+export * from './Emoji'
 export * from './FortuneCookie'
 export * from './Loader'
 export * from './HomeButton'

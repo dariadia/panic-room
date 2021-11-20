@@ -2,6 +2,7 @@
   {
     "id": "0",
     "emoji": "🕯",
+    "aria_label": "candle",
     "source_link": "https://bookmate.com/books/scnysZIs",
     "source_title": "Courage: The Joy of Living Dangerously (Osho Insights for a New Way of Living)",
     "source_author": "Osho",
@@ -10,6 +11,7 @@
   {
     "id": "1",
     "emoji": "🧗",
+    "aria_label": "person climbing a mountain",
     "source_link": "https://bookmate.com/books/scnysZIs",
     "source_title": "Courage: The Joy of Living Dangerously (Osho Insights for a New Way of Living)",
     "source_author": "Osho",
@@ -18,6 +20,7 @@
   {
     "id": "2",
     "emoji": "🧘🏽",
+    "aria_label": "person in lotus position",
     "source_link": "https://bookmate.com/books/scnysZIs",
     "source_title": "Courage: The Joy of Living Dangerously (Osho Insights for a New Way of Living)",
     "source_author": "Osho",
@@ -26,6 +29,7 @@
   {
     "id": "3",
     "emoji": "❤️‍🩹",
+    "aria_label": "bandaged heart",
     "source_link": "https://bookmate.com/books/scnysZIs",
     "source_title": "Courage: The Joy of Living Dangerously (Osho Insights for a New Way of Living)",
     "source_author": "Osho",
@@ -34,6 +38,7 @@
   {
     "id": "4",
     "emoji": "🏃",
+    "aria_label": "person running",
     "source_link": "https://bookmate.com/books/scnysZIs",
     "source_title": "Courage: The Joy of Living Dangerously (Osho Insights for a New Way of Living)",
     "source_author": "Osho",
@@ -42,6 +47,7 @@
   {
     "id": "5",
     "emoji": "🌌",
+    "aria_label": "stars",
     "source_link": "https://bookmate.com/books/scnysZIs",
     "source_title": "Courage: The Joy of Living Dangerously (Osho Insights for a New Way of Living)",
     "source_author": "Osho",
@@ -50,6 +56,7 @@
   {
     "id": "6",
     "emoji": "🗣",
+    "aria_label": "person speaking",
     "source_link": "https://bookmate.com/books/scnysZIs",
     "source_title": "Courage: The Joy of Living Dangerously (Osho Insights for a New Way of Living)",
     "source_author": "Osho",
@@ -58,6 +65,7 @@
   {
     "id": "7",
     "emoji": "🍰",
+    "aria_label": "piece of cake",
     "source_link": "https://bookmate.com/books/scnysZIs",
     "source_title": "Courage: The Joy of Living Dangerously (Osho Insights for a New Way of Living)",
     "source_author": "Osho",
@@ -66,6 +74,7 @@
   {
     "id": "8",
     "emoji": "😴",
+    "aria_label": "sleeping face",
     "source_link": "https://bookmate.com/books/INgyQ8jU",
     "source_title": "Meditation for Busy People",
     "source_author": "Osho",
@@ -74,6 +83,7 @@
   {
     "id": "9",
     "emoji": "🖇",
+    "aria_label": "linked paperclips",
     "source_link": "https://bookmate.com/books/scnysZIs",
     "source_title": "Courage: The Joy of Living Dangerously (Osho Insights for a New Way of Living)",
     "source_author": "Osho",
@@ -82,6 +92,7 @@
   {
     "id": "10",
     "emoji": "🫂",
+    "aria_label": "two people hugging",
     "source_link": "https://bookmate.com/books/b3BPm2Bj",
     "source_title": "The Chakra Book",
     "source_author": "Osho",
@@ -90,6 +101,7 @@
   {
     "id": "11",
     "emoji": "🕺🏿",
+    "aria_label": "person dancing",
     "source_link": "https://bookmate.com/books/b3BPm2Bj",
     "source_title": "The Chakra Book",
     "source_author": "Osho",
@@ -98,6 +110,7 @@
   {
     "id": "12",
     "emoji": "🧑🏽‍⚖️",
+    "aria_label": "person with a gavel",
     "source_link": "https://bookmate.com/books/b3BPm2Bj",
     "source_title": "The Chakra Book",
     "source_author": "Osho",
@@ -106,6 +119,7 @@
   {
     "id": "13",
     "emoji": "🚴🏻",
+    "aria_label": "person cycling",
     "source_link": "https://bookmate.com/books/WEB8bU0D",
     "source_title": "Pagan Portals – Celtic Witchcraft",
     "source_author": "Mabh Savage",
@@ -114,6 +128,7 @@
   {
     "id": "14",
     "emoji": "🧘🏽",
+    "aria_label": "person in lotus position",
     "source_link": "https://bookmate.com/books/WEB8bU0D",
     "source_title": "Pagan Portals – Celtic Witchcraft",
     "source_author": "Mabh Savage",
@@ -122,6 +137,7 @@
   {
     "id": "15",
     "emoji": "🕯",
+    "aria_label": "candle",
     "source_link": "https://bookmate.com/books/WEB8bU0D",
     "source_title": "Pagan Portals – Celtic Witchcraft",
     "source_author": "Mabh Savage",
@@ -130,6 +146,7 @@
   {
     "id": "16",
     "emoji": "🧘🏿",
+    "aria_label": "person in lotus position",
     "source_link": "https://bookmate.com/books/Y1q6glzk",
     "source_title": "First in the Morning",
     "source_author": "Osho",
@@ -138,6 +155,7 @@
   {
     "id": "17",
     "emoji": "😌",
+    "aria_label": "happy face",
     "source_link": "https://bookmate.com/books/Y1q6glzk",
     "source_title": "First in the Morning",
     "source_author": "Osho",
@@ -146,6 +164,7 @@
   {
     "id": "18",
     "emoji": "⛓",
+    "aria_label": "chains",
     "source_link": "https://bookmate.com/books/Y1q6glzk",
     "source_title": "First in the Morning",
     "source_author": "Osho",
@@ -154,6 +173,7 @@
   {
     "id": "19",
     "emoji": "⛓",
+    "aria_label": "chains",
     "source_link": "https://bookmate.com/books/Y1q6glzk",
     "source_title": "First in the Morning",
     "source_author": "Osho",
@@ -162,6 +182,7 @@
   {
     "id": "20",
     "emoji": "💰",
+    "aria_label": "money bag",
     "source_link": "https://bookmate.com/books/Y1q6glzk",
     "source_title": "First in the Morning",
     "source_author": "Osho",
@@ -170,6 +191,7 @@
   {
     "id": "21",
     "emoji": "🙋",
+    "aria_label": "person raising a hand",
     "source_link": "https://bookmate.com/books/Y1q6glzk",
     "source_title": "First in the Morning",
     "source_author": "Osho",
@@ -178,6 +200,7 @@
   {
     "id": "22",
     "emoji": "👩🏼‍🎤",
+    "aria_label": "singer",
     "source_link": "https://bookmate.com/books/Y1q6glzk",
     "source_title": "First in the Morning",
     "source_author": "Osho",
@@ -186,6 +209,7 @@
   {
     "id": "23",
     "emoji": "🧑🏾‍🎤",
+    "aria_label": "singer",
     "source_link": "https://bookmate.com/books/Y1q6glzk",
     "source_title": "First in the Morning",
     "source_author": "Osho",
@@ -194,6 +218,7 @@
   {
     "id": "24",
     "emoji": "🏔",
+    "aria_label": "mountain",
     "source_link": "https://bookmate.com/books/Y1q6glzk",
     "source_title": "First in the Morning",
     "source_author": "Osho",
@@ -202,6 +227,7 @@
   {
     "id": "25",
     "emoji": "🌠",
+    "aria_label": "star",
     "source_link": "https://bookmate.com/books/Y1q6glzk",
     "source_title": "First in the Morning",
     "source_author": "Osho",
@@ -210,6 +236,7 @@
   {
     "id": "26",
     "emoji": "🧑🏼‍❤️‍💋‍🧑🏿",
+    "aria_label": "two people in love",
     "source_link": "https://bookmate.com/books/Y1q6glzk",
     "source_title": "First in the Morning",
     "source_author": "Osho",
