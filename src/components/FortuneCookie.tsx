@@ -106,6 +106,11 @@ const MidnightCaption = styled('div')`
   margin: 20px auto;
   width: fit-content;
   animation: ${appearSlow} 2s 1;
+  @media (max-width: 500px) {
+    font: 0.8rem/1.6rem monospace;
+    max-width: 80vw;
+    text-align: center;
+  }
 `
 
 export const FortuneCookie: React.FC<{
@@ -341,6 +346,7 @@ const FortuneText: React.FC<TextProps> = styled('span')<TextProps>`
   @media (max-width: 500px) {
     font: 1rem/2rem monospace;
     padding-top: 40vw;
+    max-width: 80vw;
   }
 `
 
