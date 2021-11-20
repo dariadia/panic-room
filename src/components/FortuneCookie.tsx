@@ -19,7 +19,7 @@ import { useCookies } from 'react-cookie'
 import { buildRequestUrl, getProtocol } from 'hooks/use-api'
 import isEmpty from 'lodash/isEmpty'
 
-import { Loader } from './Loader'
+import { Loader, Emoji } from '.'
 
 import {
   FORTUNE_COOKIES_PATH_COUNT,
@@ -188,7 +188,9 @@ export const FortuneCookie: React.FC<{
             allowMotion={allowMotion}
           />
           <MidnightCaption color={darkModeActive ? 'pink' : 'hotpink'}>
-            🦦 {TEXTS.fortune_at_midnight} {tillMidnightHours} {TEXTS.hours} 🍀
+            <Emoji label="otter">🦦</Emoji> {TEXTS.fortune_at_midnight}{' '}
+            {tillMidnightHours} {TEXTS.hours}{' '}
+            <Emoji label="four leaf clover">🍀</Emoji>
           </MidnightCaption>
         </>
       )}
