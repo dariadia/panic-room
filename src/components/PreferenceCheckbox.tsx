@@ -50,6 +50,7 @@ type PreferenceCheckboxProps = {
   color: string
   shadow?: string
   checked?: boolean
+  'aria-label'?: string
 }
 
 export const PreferenceCheckbox: React.FC<PreferenceCheckboxProps> = ({
@@ -61,8 +62,9 @@ export const PreferenceCheckbox: React.FC<PreferenceCheckboxProps> = ({
   children,
   shadow,
   checked,
+  ...props
 }) => (
-  <Checkbox htmlFor={id} color={color} id={labelId} shadow={shadow}>
+  <Checkbox htmlFor={id} color={color} id={labelId} shadow={shadow} {...props}>
     <input
       checked={checked}
       type="checkbox"
