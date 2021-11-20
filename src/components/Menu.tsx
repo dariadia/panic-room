@@ -17,8 +17,9 @@ import {
   PANIC_ROOM_PREFERENCES,
 } from 'constants/theme'
 import { TEXTS } from 'constants/texts'
+import { NAVIGATION, SETTINGS_MENU } from 'constants/arias'
 
-import { Button, PreferenceCheckbox } from '.'
+import { Button, Emoji, PreferenceCheckbox } from '.'
 
 export const MenuWrapper: React.FC<{
   isMenuFocused: boolean
@@ -76,7 +77,7 @@ export const MenuWrapper: React.FC<{
       // @ts-ignore
       onClick={(event: Event) => onMenuClick(event.target)}
     >
-      <span>⚙️</span>
+      <Emoji label="cog">⚙️</Emoji>
       {isMenuOpen && (
         <MenuDropdown
           id={MENU_ID}
@@ -113,7 +114,10 @@ export const MenuWrapper: React.FC<{
   )
 }
 
-const MenuDropdown = styled('nav')`
+const MenuDropdown = styled('nav').attrs({
+  role: NAVIGATION,
+  ariaLabel: SETTINGS_MENU,
+})`
   position: absolute;
   padding: 16px;
   background: ${({ theme }) => theme.brand};
