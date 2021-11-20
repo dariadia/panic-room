@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import { DANNI_GITHUB, DANNI_LOGIN } from 'constants/locations'
 
-import { ModeSwitcher } from '@/components'
+import { Emoji, ModeSwitcher } from '@/components'
 
 const PROJECT_START_YEAR = 2021
 const currentYear = new Date().getFullYear()
@@ -15,7 +15,7 @@ export const Footer: React.FC<{ color?: string }> = styled('footer').attrs({
     <>
       <span>
         <a href={DANNI_GITHUB} target="_blank">
-          👩🏽‍🦰 {DANNI_LOGIN} ©
+          <Emoji label="redhead">👩🏽‍🦰</Emoji> {DANNI_LOGIN} ©
         </a>{' '}
         {PROJECT_START_YEAR}
         {currentYear !== PROJECT_START_YEAR && ` – ${currentYear}`}
