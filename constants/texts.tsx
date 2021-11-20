@@ -21,3 +21,8 @@ export const TEXTS = {
   fortune_at_midnight: 'You can get a new fortune past midnight in about',
   hours: 'hours',
 }
+
+export const META_TEXTS = {
+  fortune_title: "I've had a fortune cookie, and you? 🥠",
+  fortune_description: 'Crack a fortune cookie',
+}
