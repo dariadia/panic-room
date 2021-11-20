@@ -394,10 +394,15 @@ type WithFortuneCookieData = {
   allowMotion?: boolean
 }
 
+const MESSAGE_ARIA = 'An open scroll of glowing parchment'
+
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 const StyledMessage: React.FC<WithFortuneCookieData> = styled('article').attrs(
   (props: WithFortuneCookieData) => ({
+    title: MESSAGE_ARIA,
+    role: 'img',
+    ariaLabel: MESSAGE_ARIA,
     children: (
       <Message
         fortuneCookie={props.fortuneCookie}
