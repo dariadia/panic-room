@@ -370,6 +370,7 @@ const Message = ({
   const {
     text,
     emoji,
+    aria_label,
     source_link,
     source_title,
     source_author,
@@ -384,7 +385,14 @@ const Message = ({
           allowMotion={allowMotion as boolean}
         >
           {text}
-          {emoji && <span className="fortune-cookie_emoji">{emoji}</span>}
+          {emoji && (
+            <Emoji
+              className="fortune-cookie_emoji"
+              label={aria_label as string}
+            >
+              {emoji}
+            </Emoji>
+          )}
           <div className="fortune-cookie_source">
             <a href={source_link} target="_blank">
               {source_title}
