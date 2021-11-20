@@ -1,3 +1,5 @@
+export type Rune = keyof typeof ANGLO_SAXON_RUNES
+
 export const ANGLO_SAXON_RUNES = {
   feh: { unicode: 'ᚠ', meaning: 'wealth, cattle', letter: 'f' },
   ur: { unicode: 'ᚢ', meaning: 'aurochs', letter: 'u' },
@@ -32,3 +34,5 @@ export const ANGLO_SAXON_RUNES = {
   ear: { unicode: 'ᛠ', meaning: 'grave soil', letter: 'ea' },
   yr: { unicode: 'ᚣ', meaning: 'yewen bow', letter: 'y' },
 }
+
+export const ANGLO_SAXON_RUNES_COUNT = Object.keys(ANGLO_SAXON_RUNES).length
