@@ -15,8 +15,12 @@ export const scrambleId = (id: number): string => {
       : ANGLO_SAXON_RUNES_NAMES[Math.round(id / 13)]
 
   const keyRune = ANGLO_SAXON_RUNES[key as Rune]
+  const unicode = keyRune.unicode
+    .split('')
+    .map(symbol => symbol.charCodeAt(0))
+    .join('')
 
-  return `${keyRune.unicode.charCodeAt(0)}${keyRune.letter.toUpperCase()}${id}`
+  return `${unicode}${keyRune.letter.toUpperCase()}${id}`
 }
 
 export const descrambleId = (id: string): number => Number(/\d+$/.exec(id))
