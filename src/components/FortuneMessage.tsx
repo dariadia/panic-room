@@ -132,6 +132,9 @@ export const StyledMessage: React.FC<WithFortuneCookieData> = styled(
   .fortune-cookie_source > a {
     color: green;
     font-family: Caveat;
+    &:visited {
+      color: teal;
+    }
     &:hover {
       color: ${GOLDEN_SHADOW};
       transition: color 0.2s;
