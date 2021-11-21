@@ -1,15 +1,18 @@
 import React from 'react'
+import styled from 'styled-components'
+
 import Head from 'next/head'
+import Link from 'next/link'
 import { NextApiRequest, NextApiResponse } from 'next'
 
 import { useCookies } from 'react-cookie'
 import Cookies from 'cookies'
 
 import { MainLayout } from '@/layouts'
-import { StyledMessage as FortuneMessage } from '@/components'
+import { Emoji, StyledMessage as FortuneMessage } from '@/components'
 
 import { descrambleId } from 'utils/randomiser'
-import { getValueFromCookieString } from 'utils/theme'
+import { getValueFromCookieString, GOLDEN_SHADOW } from 'utils/theme'
 
 import { buildRequestUrl, getProtocol } from 'hooks/use-api'
 
@@ -18,8 +21,11 @@ import {
   FORTUNE_COOKIE,
   PANIC_ROOM_PREFERENCES,
 } from 'constants/theme'
-import { FORTUNE_COOKIES_PATH_ONE } from 'constants/locations'
-import { META_TEXTS } from 'constants/texts'
+import {
+  FORTUNE_COOKIES_PATH_ONE,
+  FORTUNE_COOKIE_ROOM,
+} from 'constants/locations'
+import { META_TEXTS, TEXTS } from 'constants/texts'
 
 import type { Page, FortunePage, Preferences } from 'types'
 
@@ -56,9 +62,37 @@ const FortuneReadPage: Page<FortunePage> = ({ fortuneCookie, preferences }) => {
         <meta name="twitter:image" content={metaImagePath} />
       </Head>
       <FortuneMessage fortuneCookie={fortuneCookie} allowMotion={allowMotion} />
+      <Link href={FORTUNE_COOKIE_ROOM}>
+        <StyledText>
+          <Emoji label="fortune cookie">🥠</Emoji> {TEXTS.get_cookie}{' '}
+          <Emoji label="magic wand">🪄</Emoji>
+        </StyledText>
+      </Link>
     </>
   )
 }
+
+const StyledText = styled('button')`
+  font: 2rem/4rem monospace;
+  display: block;
+  outline: none;
+  background: transparent;
+  margin: 1rem auto;
+  width: fit-content;
+  padding: 1em;
+  border: 1px solid ${GOLDEN_SHADOW};
+  border-radius: 4px;
+  color: inherit;
+  &:hover {
+    cursor: pointer;
+    transition: 0.2s all;
+    border: 1px solid green;
+    color: green;
+  }
+  &:focus {
+    filter: drop-shadow(1px 2px 8px ${GOLDEN_SHADOW});
+  }
+`
 
 FortuneReadPage.Layout = ({ children, ...props }) => (
   <MainLayout {...props}>{children}</MainLayout>
