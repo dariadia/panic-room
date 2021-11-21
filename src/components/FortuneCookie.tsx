@@ -8,7 +8,11 @@ import React, {
 import styled, { keyframes, css, ThemeContext } from 'styled-components'
 
 import { TEXTS } from 'constants/texts'
-import { FORTUNE_COOKIE } from 'constants/theme'
+import { FORTUNE_COOKIE, SHARE_ICON_SIZE } from 'constants/theme'
+import {
+  FORTUNE_COOKIES_PATH_COUNT,
+  FORTUNE_COOKIES_PATH_ONE,
+} from 'constants/locations'
 
 import { GOLDEN_SHADOW, MAIN_PADDING } from 'utils/theme'
 import { getRandomInt } from 'utils/randomiser'
@@ -22,9 +26,25 @@ import isEmpty from 'lodash/isEmpty'
 import { Loader, Emoji } from '.'
 
 import {
-  FORTUNE_COOKIES_PATH_COUNT,
-  FORTUNE_COOKIES_PATH_ONE,
-} from 'constants/locations'
+  EmailShareButton,
+  FacebookShareButton,
+  LivejournalShareButton,
+  TelegramShareButton,
+  TumblrShareButton,
+  TwitterShareButton,
+  ViberShareButton,
+  VKShareButton,
+  WhatsappShareButton,
+  EmailIcon,
+  FacebookIcon,
+  LivejournalIcon,
+  TelegramIcon,
+  TumblrIcon,
+  TwitterIcon,
+  ViberIcon,
+  VKIcon,
+  WhatsappIcon,
+} from 'react-share'
 
 import type { FortuneCookie as FortuneCookieType } from 'types'
 
@@ -117,7 +137,8 @@ export const FortuneCookie: React.FC<{
   allowMotion: boolean
   allowSounds: boolean
   host?: string
-}> = ({ allowMotion, allowSounds, host }) => {
+  shareUrl?: string
+}> = ({ allowMotion, allowSounds, host, shareUrl }) => {
   const { darkModeActive } = useContext(ThemeContext)
 
   const [isFortuneLoading, setFortuneLoading] = useState(false)
@@ -187,6 +208,7 @@ export const FortuneCookie: React.FC<{
             fortuneCookie={userFortune as FortuneCookieType}
             allowMotion={allowMotion}
           />
+          <ShareIcons url={shareUrl as string} />
           <MidnightCaption color={darkModeActive ? 'pink' : 'hotpink'}>
             <Emoji label="otter">🦦</Emoji> {TEXTS.fortune_at_midnight}{' '}
             {tillMidnightHours} {TEXTS.hours}{' '}
@@ -197,6 +219,64 @@ export const FortuneCookie: React.FC<{
     </section>
   )
 }
+
+type ShareRowProps = {
+  url: string
+}
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+const ShareIcons: React.FC<ShareRowProps> = styled('div').attrs(
+  (props: ShareRowProps) => ({
+    children: (
+      <>
+        <div>
+          <FacebookShareButton url={props.url}>
+            <FacebookIcon size={SHARE_ICON_SIZE} round />
+          </FacebookShareButton>
+          <TwitterShareButton url={props.url}>
+            <TwitterIcon size={SHARE_ICON_SIZE} round />
+          </TwitterShareButton>
+          <TumblrShareButton url={props.url}>
+            <TumblrIcon size={SHARE_ICON_SIZE} round />
+          </TumblrShareButton>
+          <VKShareButton url={props.url}>
+            <VKIcon size={SHARE_ICON_SIZE} round />
+          </VKShareButton>
+          <LivejournalShareButton url={props.url}>
+            <LivejournalIcon size={SHARE_ICON_SIZE} round />
+          </LivejournalShareButton>
+        </div>
+        <div>
+          <TelegramShareButton url={props.url}>
+            <TelegramIcon size={SHARE_ICON_SIZE} round />
+          </TelegramShareButton>
+          <ViberShareButton url={props.url}>
+            <ViberIcon size={SHARE_ICON_SIZE} round />
+          </ViberShareButton>
+          <WhatsappShareButton url={props.url}>
+            <WhatsappIcon size={SHARE_ICON_SIZE} round />
+          </WhatsappShareButton>
+          <EmailShareButton url={props.url}>
+            <EmailIcon size={SHARE_ICON_SIZE} round />
+          </EmailShareButton>
+        </div>
+      </>
+    ),
+  }),
+)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+  > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+`
 
 const CookieSVG: React.FC = () => (
   <svg
