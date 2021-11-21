@@ -46,9 +46,11 @@ const FortuneCookiesPage: Page<FortunePage> = ({
   const fortuneId = fortuneCookieId || cookies[FORTUNE_COOKIE]
 
   let shareUrl = ''
+  const roomUrl = `${getProtocol(host as string)}${host}${url}`
+
   if (fortuneId) {
     const scrambledId = scrambleId(fortuneId)
-    shareUrl = `${getProtocol(host as string)}${host}${url}/${scrambledId}`
+    shareUrl = `${roomUrl}/${scrambledId}`
   }
   const metaImagePath = `/assets/${
     fortuneCookie?.meta_image_key
@@ -97,6 +99,8 @@ const FortuneCookiesPage: Page<FortunePage> = ({
           allowSounds={allowSounds}
           host={host}
           shareUrl={shareUrl}
+          metaImagePath={metaImagePath}
+          roomUrl={roomUrl}
         />
       ) : (
         <WelcomeScreen

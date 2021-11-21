@@ -7,7 +7,7 @@ import React, {
 } from 'react'
 import styled, { keyframes, css, ThemeContext } from 'styled-components'
 
-import { TEXTS } from 'constants/texts'
+import { META_TEXTS, TEXTS } from 'constants/texts'
 import { FORTUNE_COOKIE, SHARE_ICON_SIZE } from 'constants/theme'
 import {
   FORTUNE_COOKIES_PATH_COUNT,
@@ -138,7 +138,9 @@ export const FortuneCookie: React.FC<{
   allowSounds: boolean
   host?: string
   shareUrl?: string
-}> = ({ allowMotion, allowSounds, host, shareUrl }) => {
+  metaImagePath: string
+  roomUrl?: string
+}> = ({ allowMotion, allowSounds, host, shareUrl, metaImagePath, roomUrl }) => {
   const { darkModeActive } = useContext(ThemeContext)
 
   const [isFortuneLoading, setFortuneLoading] = useState(false)
@@ -208,7 +210,11 @@ export const FortuneCookie: React.FC<{
             fortuneCookie={userFortune as FortuneCookieType}
             allowMotion={allowMotion}
           />
-          <ShareIcons url={shareUrl as string} />
+          <ShareIcons
+            shareUrl={shareUrl as string}
+            roomUrl={roomUrl as string}
+            metaImagePath={metaImagePath}
+          />
           <MidnightCaption color={darkModeActive ? 'pink' : 'hotpink'}>
             <Emoji label="otter">🦦</Emoji> {TEXTS.fortune_at_midnight}{' '}
             {tillMidnightHours} {TEXTS.hours}{' '}
@@ -221,7 +227,9 @@ export const FortuneCookie: React.FC<{
 }
 
 type ShareRowProps = {
-  url: string
+  shareUrl: string
+  roomUrl: string
+  metaImagePath: string
 }
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -231,33 +239,38 @@ const ShareIcons: React.FC<ShareRowProps> = styled('div').attrs(
     children: (
       <>
         <div>
-          <FacebookShareButton url={props.url}>
+          <FacebookShareButton url={props.shareUrl}>
             <FacebookIcon size={SHARE_ICON_SIZE} round />
           </FacebookShareButton>
-          <TwitterShareButton url={props.url}>
+          <TwitterShareButton url={props.shareUrl}>
             <TwitterIcon size={SHARE_ICON_SIZE} round />
           </TwitterShareButton>
-          <TumblrShareButton url={props.url}>
+          <TumblrShareButton url={props.shareUrl}>
             <TumblrIcon size={SHARE_ICON_SIZE} round />
           </TumblrShareButton>
-          <VKShareButton url={props.url}>
+          <VKShareButton url={props.shareUrl}>
             <VKIcon size={SHARE_ICON_SIZE} round />
           </VKShareButton>
-          <LivejournalShareButton url={props.url}>
+          <LivejournalShareButton url={props.shareUrl}>
             <LivejournalIcon size={SHARE_ICON_SIZE} round />
           </LivejournalShareButton>
         </div>
         <div>
-          <TelegramShareButton url={props.url}>
+          <TelegramShareButton url={props.shareUrl}>
             <TelegramIcon size={SHARE_ICON_SIZE} round />
           </TelegramShareButton>
-          <ViberShareButton url={props.url}>
+          <ViberShareButton url={props.shareUrl}>
             <ViberIcon size={SHARE_ICON_SIZE} round />
           </ViberShareButton>
-          <WhatsappShareButton url={props.url}>
+          <WhatsappShareButton url={props.shareUrl}>
             <WhatsappIcon size={SHARE_ICON_SIZE} round />
           </WhatsappShareButton>
-          <EmailShareButton url={props.url}>
+          <EmailShareButton
+            url={props.roomUrl}
+            subject={META_TEXTS.fortune_title}
+            body={`See mine here ${props.shareUrl}\n\OR\n\n${META_TEXTS.fortune_description}`}
+            separator={`\n\n 🥠 💙 💙 💙 🥠 \n`}
+          >
             <EmailIcon size={SHARE_ICON_SIZE} round />
           </EmailShareButton>
         </div>
