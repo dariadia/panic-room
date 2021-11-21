@@ -7,7 +7,12 @@ import React, {
 } from 'react'
 import styled, { keyframes, css, ThemeContext } from 'styled-components'
 
-import { META_TEXTS, PANIC_ROOM_HASHTAG, TEXTS } from 'constants/texts'
+import {
+  META_TEXTS,
+  PANIC_ROOM_HASHTAG,
+  PANIC_ROOM_HASHTAGS,
+  TEXTS,
+} from 'constants/texts'
 import { FORTUNE_COOKIE, SHARE_ICON_SIZE } from 'constants/theme'
 import {
   FORTUNE_COOKIES_PATH_COUNT,
@@ -258,10 +263,19 @@ const ShareIcons: React.FC<ShareRowProps> = styled('div').attrs(
           >
             <FacebookIcon size={SHARE_ICON_SIZE} round />
           </FacebookShareButton>
-          <TwitterShareButton url={props.shareUrl}>
+          <TwitterShareButton
+            url={props.shareUrl}
+            hashtags={PANIC_ROOM_HASHTAGS}
+            title={META_TEXTS.fortune_title}
+          >
             <TwitterIcon size={SHARE_ICON_SIZE} round />
           </TwitterShareButton>
-          <TumblrShareButton url={props.shareUrl}>
+          <TumblrShareButton
+            url={props.shareUrl}
+            title={META_TEXTS.fortune_title}
+            caption={`${META_TEXTS.fortune_told_me}: ${props.truncatedText}`}
+            tags={PANIC_ROOM_HASHTAGS}
+          >
             <TumblrIcon size={SHARE_ICON_SIZE} round />
           </TumblrShareButton>
           <VKShareButton url={props.shareUrl}>
