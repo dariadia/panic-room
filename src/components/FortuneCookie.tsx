@@ -278,7 +278,12 @@ const ShareIcons: React.FC<ShareRowProps> = styled('div').attrs(
           >
             <TumblrIcon size={SHARE_ICON_SIZE} round />
           </TumblrShareButton>
-          <VKShareButton url={props.shareUrl}>
+          {console.log(props.metaImagePath)}
+          <VKShareButton
+            url={props.shareUrl}
+            title={META_TEXTS.fortune_title}
+            image={props.metaImagePath}
+          >
             <VKIcon size={SHARE_ICON_SIZE} round />
           </VKShareButton>
           <LivejournalShareButton
@@ -303,7 +308,11 @@ const ShareIcons: React.FC<ShareRowProps> = styled('div').attrs(
           >
             <FacebookMessengerIcon size={SHARE_ICON_SIZE} round />
           </FacebookMessengerShareButton>
-          <ViberShareButton url={props.shareUrl}>
+          <ViberShareButton
+            url={props.shareUrl}
+            separator={`\n`}
+            title={META_TEXTS.fortune_title}
+          >
             <ViberIcon size={SHARE_ICON_SIZE} round />
           </ViberShareButton>
           <WhatsappShareButton url={props.shareUrl}>

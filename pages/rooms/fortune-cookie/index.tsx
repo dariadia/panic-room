@@ -46,7 +46,8 @@ const FortuneCookiesPage: Page<FortunePage> = ({
   const fortuneId = fortuneCookieId || cookies[FORTUNE_COOKIE]
 
   let shareUrl = ''
-  const roomUrl = `${getProtocol(host as string)}${host}${url}`
+  const appHostWithProtocol = `${getProtocol(host as string)}${host}`
+  const roomUrl = `${appHostWithProtocol}${url}`
 
   if (fortuneId) {
     const scrambledId = scrambleId(fortuneId)
@@ -99,7 +100,7 @@ const FortuneCookiesPage: Page<FortunePage> = ({
           allowSounds={allowSounds}
           host={host}
           shareUrl={shareUrl}
-          metaImagePath={metaImagePath}
+          metaImagePath={`${appHostWithProtocol}${metaImagePath}`}
           roomUrl={roomUrl}
         />
       ) : (
