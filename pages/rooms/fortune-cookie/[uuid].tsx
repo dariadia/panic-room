@@ -1,24 +1,42 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import Head from 'next/head'
 import { NextApiRequest, NextApiResponse } from 'next'
 
-import { ThemeContext } from 'styled-components'
+import { useCookies } from 'react-cookie'
 import Cookies from 'cookies'
 
 import { MainLayout } from '@/layouts'
+import { StyledMessage as FortuneMessage } from '@/components'
 
 import { descrambleId } from 'utils/randomiser'
+import { getValueFromCookieString } from 'utils/theme'
+
 import { buildRequestUrl, getProtocol } from 'hooks/use-api'
 
-import { FORTUNE_COOKIE, PANIC_ROOM_PREFERENCES } from 'constants/theme'
+import {
+  ALLOW_MOTION,
+  FORTUNE_COOKIE,
+  PANIC_ROOM_PREFERENCES,
+} from 'constants/theme'
 import { FORTUNE_COOKIES_PATH_ONE } from 'constants/locations'
 import { META_TEXTS } from 'constants/texts'
 
-import type { Page, FortunePage } from 'types'
+import type { Page, FortunePage, Preferences } from 'types'
 
-const FortuneReadPage: Page<FortunePage> = ({ fortuneCookie }) => {
-  const { darkModeActive, theme } = useContext(ThemeContext)
-  console.log(darkModeActive, theme)
+const FortuneReadPage: Page<FortunePage> = ({ fortuneCookie, preferences }) => {
+  const [cookies] = useCookies([PANIC_ROOM_PREFERENCES])
+
+  const userPreferences =
+    preferences || (cookies[PANIC_ROOM_PREFERENCES] as Preferences)
+
+  const allowMotion =
+    typeof userPreferences === 'string'
+      ? getValueFromCookieString({
+          cookie: preferences as string,
+          value: ALLOW_MOTION,
+        })
+      : userPreferences?.allowMotion
+
   if (!fortuneCookie) return null
 
   const { meta_image_key } = fortuneCookie
@@ -33,7 +51,7 @@ const FortuneReadPage: Page<FortunePage> = ({ fortuneCookie }) => {
         <meta name="og:image" property="og:image" content={metaImagePath} />
         <meta name="twitter:image" content={metaImagePath} />
       </Head>
-      <span>hello world</span>
+      <FortuneMessage fortuneCookie={fortuneCookie} allowMotion={allowMotion} />
     </>
   )
 }
