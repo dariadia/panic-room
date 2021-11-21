@@ -13,3 +13,5 @@ export const FORTUNE_COOKIE = 'fortune-cookie'
 
 export const LIGHT = 'light'
 export const DARK = 'dark'
+
+export const SHARE_ICON_SIZE = 32
