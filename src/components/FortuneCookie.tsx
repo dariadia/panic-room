@@ -7,7 +7,7 @@ import React, {
 } from 'react'
 import styled, { keyframes, css, ThemeContext } from 'styled-components'
 
-import { META_TEXTS, TEXTS } from 'constants/texts'
+import { META_TEXTS, PANIC_ROOM_HASHTAG, TEXTS } from 'constants/texts'
 import { FORTUNE_COOKIE, SHARE_ICON_SIZE } from 'constants/theme'
 import {
   FORTUNE_COOKIES_PATH_COUNT,
@@ -16,6 +16,7 @@ import {
 
 import { GOLDEN_SHADOW, MAIN_PADDING } from 'utils/theme'
 import { getRandomInt } from 'utils/randomiser'
+import { truncateText } from 'utils/texts'
 import { getTimeTillMidnight, getHoursFromSeconds } from 'utils/dates'
 import { lighten } from 'polished'
 
@@ -44,6 +45,8 @@ import {
   ViberIcon,
   VKIcon,
   WhatsappIcon,
+  FacebookMessengerIcon,
+  FacebookMessengerShareButton,
 } from 'react-share'
 
 import type { FortuneCookie as FortuneCookieType } from 'types'
@@ -195,6 +198,13 @@ export const FortuneCookie: React.FC<{
   const isLoading =
     isFortuneLoading || (fortuneCrackedBefore && isEmpty(userFortune))
 
+  let truncatedText = ''
+  if (!isEmpty(userFortune)) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    truncatedText = truncateText({ text: userFortune.text })
+  }
+
   return isLoading ? (
     <Loader mainColour={GOLDEN_SHADOW} accentColour={lighten(0.2, 'gold')} />
   ) : (
@@ -214,6 +224,7 @@ export const FortuneCookie: React.FC<{
             shareUrl={shareUrl as string}
             roomUrl={roomUrl as string}
             metaImagePath={metaImagePath}
+            truncatedText={truncatedText}
           />
           <MidnightCaption color={darkModeActive ? 'pink' : 'hotpink'}>
             <Emoji label="otter">🦦</Emoji> {TEXTS.fortune_at_midnight}{' '}
@@ -230,6 +241,7 @@ type ShareRowProps = {
   shareUrl: string
   roomUrl: string
   metaImagePath: string
+  truncatedText?: string
 }
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -239,7 +251,11 @@ const ShareIcons: React.FC<ShareRowProps> = styled('div').attrs(
     children: (
       <>
         <div>
-          <FacebookShareButton url={props.shareUrl}>
+          <FacebookShareButton
+            url={props.shareUrl}
+            quote={`${META_TEXTS.fortune_told_me}: ${props.truncatedText}`}
+            hashtag={PANIC_ROOM_HASHTAG}
+          >
             <FacebookIcon size={SHARE_ICON_SIZE} round />
           </FacebookShareButton>
           <TwitterShareButton url={props.shareUrl}>
@@ -251,14 +267,28 @@ const ShareIcons: React.FC<ShareRowProps> = styled('div').attrs(
           <VKShareButton url={props.shareUrl}>
             <VKIcon size={SHARE_ICON_SIZE} round />
           </VKShareButton>
-          <LivejournalShareButton url={props.shareUrl}>
+          <LivejournalShareButton
+            url={props.shareUrl}
+            title={META_TEXTS.fortune_title}
+            description={`${META_TEXTS.fortune_told_me}: ${props.truncatedText}`}
+          >
             <LivejournalIcon size={SHARE_ICON_SIZE} round />
           </LivejournalShareButton>
         </div>
         <div>
-          <TelegramShareButton url={props.shareUrl}>
+          <TelegramShareButton
+            url={props.shareUrl}
+            title={META_TEXTS.fortune_title}
+          >
             <TelegramIcon size={SHARE_ICON_SIZE} round />
           </TelegramShareButton>
+          <FacebookMessengerShareButton
+            url={props.shareUrl}
+            appId="2001449690035746"
+            redirectUri={props.roomUrl}
+          >
+            <FacebookMessengerIcon size={SHARE_ICON_SIZE} round />
+          </FacebookMessengerShareButton>
           <ViberShareButton url={props.shareUrl}>
             <ViberIcon size={SHARE_ICON_SIZE} round />
           </ViberShareButton>
