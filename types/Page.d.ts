@@ -15,7 +15,8 @@ export interface SinglePage {
 }
 
 export interface FortunePage extends SinglePage {
-  fortuneCookie: FortuneCookie
+  fortuneCookie?: FortuneCookie
+  fortuneCookieId?: number
 }
 
 export type Theme = typeof theme
