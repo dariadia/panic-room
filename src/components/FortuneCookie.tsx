@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useContext, useState } from 'react'
-import styled, { keyframes, css, ThemeContext } from 'styled-components'
+import styled, { css, ThemeContext } from 'styled-components'
 
 import { TEXTS } from 'constants/texts'
 import { FORTUNE_COOKIE } from 'constants/theme'
@@ -12,6 +12,8 @@ import { GOLDEN_SHADOW } from 'utils/theme'
 import { getRandomInt } from 'utils/randomiser'
 import { truncateText } from 'utils/texts'
 import { getTimeTillMidnight, getHoursFromSeconds } from 'utils/dates'
+
+import { appear, stay, appearSlow, lowerIn, vibrate } from 'utils/animations'
 import { lighten } from 'polished'
 
 import { useCookies } from 'react-cookie'
@@ -21,68 +23,6 @@ import isEmpty from 'lodash/isEmpty'
 import { Loader, Emoji, StyledMessage, ShareIcons } from '.'
 
 import type { FortuneCookie as FortuneCookieType } from 'types'
-
-const appear = keyframes`
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-`
-
-export const appearSlow = keyframes`
-  0%, 85% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-`
-
-const stay = keyframes`
-  0% {
-    opacity: 0.6;
-  }
-  100% {
-    opacity: 1;
-  }
-`
-
-const lowerIn = keyframes`
-  0% {
-    opacity: 0;
-    margin-top: -50px;
-  }
-  100% {
-    opacity: 1;
-    margin-top: 0px;
-  }
-`
-
-const vibrate = keyframes`
-  0% {
-    transform: rotate(0deg);
-  }
-  30% {
-    transform: rotate(0deg);
-  }
-  40% {
-    transform: rotate(20deg);
-  }
-  45% {
-    transform: rotate(-10deg);
-  }
-  50% {
-    transform: rotate(10deg);
-  }
-  55% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(0deg);
-  }
-`
 
 const Title = styled('h1')<{ allowMotion: boolean }>`
   font: 6rem/8rem 'Caveat', cursiv;
