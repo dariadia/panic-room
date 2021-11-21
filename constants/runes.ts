@@ -36,3 +36,5 @@ export const ANGLO_SAXON_RUNES = {
 }
 
 export const ANGLO_SAXON_RUNES_COUNT = Object.keys(ANGLO_SAXON_RUNES).length
+
+export const ANGLO_SAXON_RUNES_NAMES = Object.keys(ANGLO_SAXON_RUNES)
