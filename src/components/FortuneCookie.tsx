@@ -268,8 +268,8 @@ const ShareIcons: React.FC<ShareRowProps> = styled('div').attrs(
           <EmailShareButton
             url={props.roomUrl}
             subject={META_TEXTS.fortune_title}
-            body={`See mine here ${props.shareUrl}\n\OR\n\n${META_TEXTS.fortune_description}`}
-            separator={`\n\n 🥠 💙 💙 💙 🥠 \n`}
+            body={`See mine here ${props.shareUrl}\n\nOR\n\n${META_TEXTS.fortune_description}`}
+            separator={`\n 🥠 💙 💙 💙 🥠 \n`}
           >
             <EmailIcon size={SHARE_ICON_SIZE} round />
           </EmailShareButton>
