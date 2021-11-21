@@ -32,8 +32,7 @@ import {
 } from 'react-share'
 
 import { GOLDEN_SHADOW } from 'utils/theme'
-
-import { appearSlow } from '.'
+import { appearSlow } from 'utils/animations'
 
 type ShareRowProps = {
   shareUrl: string
