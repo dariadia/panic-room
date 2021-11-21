@@ -24,5 +24,5 @@ export const TEXTS = {
 
 export const META_TEXTS = {
   fortune_title: "I've had a fortune cookie, and you? 🥠",
-  fortune_description: 'Crack a fortune cookie',
+  fortune_description: 'Find out your fortune for the day!',
 }
