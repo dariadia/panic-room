@@ -46,6 +46,10 @@ const FortuneReadPage: Page<FortunePage> = ({ fortuneCookie, preferences }) => {
   return (
     <>
       <Head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Caveat"
+          rel="stylesheet"
+        />
         <title>{META_TEXTS.fortune_title}</title>
         <meta name="description" content={META_TEXTS.fortune_description} />
         <meta name="og:image" property="og:image" content={metaImagePath} />
