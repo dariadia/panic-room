@@ -1,94 +1,28 @@
-import React, {
-  Dispatch,
-  SetStateAction,
-  useContext,
-  useState,
-  useEffect,
-} from 'react'
-import styled, { keyframes, css, ThemeContext } from 'styled-components'
+import React, { Dispatch, SetStateAction, useContext, useState } from 'react'
+import styled, { css, ThemeContext } from 'styled-components'
 
 import { TEXTS } from 'constants/texts'
 import { FORTUNE_COOKIE } from 'constants/theme'
+import {
+  FORTUNE_COOKIES_PATH_COUNT,
+  FORTUNE_COOKIES_PATH_ONE,
+} from 'constants/locations'
 
-import { GOLDEN_SHADOW, MAIN_PADDING } from 'utils/theme'
+import { GOLDEN_SHADOW } from 'utils/theme'
 import { getRandomInt } from 'utils/randomiser'
+import { truncateText } from 'utils/texts'
 import { getTimeTillMidnight, getHoursFromSeconds } from 'utils/dates'
+
+import { appear, stay, appearSlow, lowerIn, vibrate } from 'utils/animations'
 import { lighten } from 'polished'
 
 import { useCookies } from 'react-cookie'
 import { buildRequestUrl, getProtocol } from 'hooks/use-api'
 import isEmpty from 'lodash/isEmpty'
 
-import { Loader, Emoji } from '.'
-
-import {
-  FORTUNE_COOKIES_PATH_COUNT,
-  FORTUNE_COOKIES_PATH_ONE,
-} from 'constants/locations'
+import { Loader, Emoji, StyledMessage, ShareIcons } from '.'
 
 import type { FortuneCookie as FortuneCookieType } from 'types'
-
-const appear = keyframes`
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-`
-
-const appearSlow = keyframes`
-  0%, 85% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-`
-
-const stay = keyframes`
-  0% {
-    opacity: 0.6;
-  }
-  100% {
-    opacity: 1;
-  }
-`
-
-const lowerIn = keyframes`
-  0% {
-    opacity: 0;
-    margin-top: -50px;
-  }
-  100% {
-    opacity: 1;
-    margin-top: 0px;
-  }
-`
-
-const vibrate = keyframes`
-  0% {
-    transform: rotate(0deg);
-  }
-  30% {
-    transform: rotate(0deg);
-  }
-  40% {
-    transform: rotate(20deg);
-  }
-  45% {
-    transform: rotate(-10deg);
-  }
-  50% {
-    transform: rotate(10deg);
-  }
-  55% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(0deg);
-  }
-`
 
 const Title = styled('h1')<{ allowMotion: boolean }>`
   font: 6rem/8rem 'Caveat', cursiv;
@@ -117,7 +51,10 @@ export const FortuneCookie: React.FC<{
   allowMotion: boolean
   allowSounds: boolean
   host?: string
-}> = ({ allowMotion, allowSounds, host }) => {
+  shareUrl?: string
+  metaImagePath: string
+  roomUrl?: string
+}> = ({ allowMotion, allowSounds, host, shareUrl, metaImagePath, roomUrl }) => {
   const { darkModeActive } = useContext(ThemeContext)
 
   const [isFortuneLoading, setFortuneLoading] = useState(false)
@@ -172,6 +109,13 @@ export const FortuneCookie: React.FC<{
   const isLoading =
     isFortuneLoading || (fortuneCrackedBefore && isEmpty(userFortune))
 
+  let truncatedText = ''
+  if (!isEmpty(userFortune)) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    truncatedText = truncateText({ text: userFortune.text })
+  }
+
   return isLoading ? (
     <Loader mainColour={GOLDEN_SHADOW} accentColour={lighten(0.2, 'gold')} />
   ) : (
@@ -186,6 +130,12 @@ export const FortuneCookie: React.FC<{
           <StyledMessage
             fortuneCookie={userFortune as FortuneCookieType}
             allowMotion={allowMotion}
+          />
+          <ShareIcons
+            shareUrl={shareUrl as string}
+            roomUrl={roomUrl as string}
+            metaImagePath={metaImagePath}
+            truncatedText={truncatedText}
           />
           <MidnightCaption color={darkModeActive ? 'pink' : 'hotpink'}>
             <Emoji label="otter">🦦</Emoji> {TEXTS.fortune_at_midnight}{' '}
@@ -294,176 +244,5 @@ const StyledCookie = styled('article').attrs({ children: <CookieSVG /> })<{
   &:focus {
     transform: rotate(-10deg);
     transition: ease-in transform 0.2s;
-  }
-`
-
-const rollOutGlow = keyframes`
-  0% {
-    height: 0.5vw;
-    opacity: 0;
-    top: -20vw;
-    filter: drop-shadow(8px 16px 48px ${GOLDEN_SHADOW});
-  }
-  25% {
-    height: 5vw;
-    opacity: 1;
-    top: -10vw;
-  }
-  100% {
-    height: 30vw;
-    top: -10vw;
-  }
-`
-
-const rollOut = keyframes`
-  0% {
-    height: 1vw;
-    opacity: 0;
-    filter: drop-shadow(8px 16px 48px ${GOLDEN_SHADOW});
-    background: center / 15vw 1vw no-repeat url('/assets/parchement.svg');
-  }
-  25% {
-    height: 5vw;
-    opacity: 1;
-    background: center / 15vw 5vw no-repeat url('/assets/parchement.svg');
-  }
-  100% {
-    height: 30vw;
-    margin: 50px 0 0 -50px;
-    background: center / 15vw 30vw no-repeat url('/assets/parchement.svg');
-  }
-`
-
-type TextProps = { color: string; allowMotion: boolean }
-
-const FortuneText: React.FC<TextProps> = styled('span')<TextProps>`
-  color: ${({ color }) => color};
-  display: block;
-  max-width: 60vw;
-  margin: auto;
-  padding-top: 22vw;
-  text-align: center;
-  font: 2rem/4rem monospace;
-  animation: ${({ allowMotion }) => (allowMotion ? appear : stay)} 1.5s 1;
-  @media (max-width: 500px) {
-    font: 1rem/2rem monospace;
-    padding-top: 40vw;
-    max-width: 80vw;
-  }
-`
-
-const Message = ({
-  fortuneCookie,
-  allowMotion,
-}: WithFortuneCookieData): JSX.Element | null => {
-  const { darkModeActive, theme } = useContext(ThemeContext)
-  const [isTextShown, showText] = useState(false)
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      showText(true)
-    }, 800)
-    return () => clearTimeout(timer)
-  }, [])
-
-  if (!fortuneCookie) return null
-  const {
-    text,
-    emoji,
-    aria_label,
-    source_link,
-    source_title,
-    source_author,
-  } = fortuneCookie
-
-  return (
-    <>
-      <div />
-      {isTextShown && (
-        <FortuneText
-          color={darkModeActive ? theme.darkTheme.text : theme.lightTheme.text}
-          allowMotion={allowMotion as boolean}
-        >
-          {text}
-          {emoji && (
-            <Emoji
-              className="fortune-cookie_emoji"
-              label={aria_label as string}
-            >
-              {emoji}
-            </Emoji>
-          )}
-          <div className="fortune-cookie_source">
-            <a href={source_link} target="_blank">
-              {source_title}
-            </a>{' '}
-            {source_author}
-          </div>
-        </FortuneText>
-      )}
-    </>
-  )
-}
-
-type WithFortuneCookieData = {
-  fortuneCookie: FortuneCookieType
-  allowMotion?: boolean
-}
-
-const MESSAGE_ARIA = 'An open scroll of glowing parchment'
-
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-const StyledMessage: React.FC<WithFortuneCookieData> = styled('article').attrs(
-  (props: WithFortuneCookieData) => ({
-    title: MESSAGE_ARIA,
-    role: 'img',
-    'aria-label': MESSAGE_ARIA,
-    children: (
-      <Message
-        fortuneCookie={props.fortuneCookie}
-        allowMotion={props.allowMotion}
-      />
-    ),
-  }),
-)`
-  position: relative;
-  margin: 0 auto;
-  width: calc(100vw - ${MAIN_PADDING * 2}px);
-  > div {
-    animation: ${rollOutGlow} 1.5s 1;
-    height: 30vw;
-    width: 15vw;
-    position: absolute;
-    left: calc((100vw - 15vw) / 2);
-    z-index: 1;
-    top: -10vw;
-  }
-  > div::before {
-    display: block;
-    content: '';
-    animation: ${rollOut} 1.5s 1;
-    margin: 50px 0 0 -50px;
-    height: 30vw;
-    background: center / 15vw 30vw no-repeat url('/assets/parchement.svg');
-    transform: rotate(90deg);
-    filter: drop-shadow(1px 2px 8px ${GOLDEN_SHADOW});
-  }
-  .fortune-cookie_emoji {
-    font: 4rem/8rem emoji;
-    display: block;
-  }
-  @media (max-width: 500px) {
-    .fortune-cookie_emoji {
-      font: 2rem/4rem emoji;
-    }
-  }
-  .fortune-cookie_source > a {
-    color: green;
-    font-family: Caveat;
-    &:hover {
-      color: ${GOLDEN_SHADOW};
-      transition: color 0.2s;
-    }
   }
 `

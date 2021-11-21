@@ -3,6 +3,7 @@
     "id": "0",
     "emoji": "🕯",
     "aria_label": "candle",
+    "meta_image_key": "candle",
     "source_link": "https://bookmate.com/books/scnysZIs",
     "source_title": "Courage: The Joy of Living Dangerously (Osho Insights for a New Way of Living)",
     "source_author": "Osho",
@@ -11,6 +12,7 @@
   {
     "id": "1",
     "emoji": "🧗",
+    "meta_image_key": "climber",
     "aria_label": "person climbing a mountain",
     "source_link": "https://bookmate.com/books/scnysZIs",
     "source_title": "Courage: The Joy of Living Dangerously (Osho Insights for a New Way of Living)",
@@ -20,6 +22,7 @@
   {
     "id": "2",
     "emoji": "🧘🏽",
+    "meta_image_key": "lotus",
     "aria_label": "person in lotus position",
     "source_link": "https://bookmate.com/books/scnysZIs",
     "source_title": "Courage: The Joy of Living Dangerously (Osho Insights for a New Way of Living)",
@@ -29,6 +32,7 @@
   {
     "id": "3",
     "emoji": "❤️‍🩹",
+    "meta_image_key": "heart",
     "aria_label": "bandaged heart",
     "source_link": "https://bookmate.com/books/scnysZIs",
     "source_title": "Courage: The Joy of Living Dangerously (Osho Insights for a New Way of Living)",
@@ -38,6 +42,7 @@
   {
     "id": "4",
     "emoji": "🏃",
+    "meta_image_key": "runner",
     "aria_label": "person running",
     "source_link": "https://bookmate.com/books/scnysZIs",
     "source_title": "Courage: The Joy of Living Dangerously (Osho Insights for a New Way of Living)",

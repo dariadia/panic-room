@@ -23,7 +23,7 @@ const ModeIcon: React.FC<ModeIconProps> = styled('input').attrs({
     height: 48px;
     width: 48px;
     transition: transform 600ms cubic-bezier(0.02, 0.94, 0.09, 0.97);
-    background: url(../assets/${({ isDarkMode }) =>
+    background: url(/assets/${({ isDarkMode }) =>
       isDarkMode ? 'dark.svg' : 'light.svg'});
     background-size: contain;
   }
