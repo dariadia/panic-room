@@ -278,7 +278,6 @@ const ShareIcons: React.FC<ShareRowProps> = styled('div').attrs(
           >
             <TumblrIcon size={SHARE_ICON_SIZE} round />
           </TumblrShareButton>
-          {console.log(props.metaImagePath)}
           <VKShareButton
             url={props.shareUrl}
             title={META_TEXTS.fortune_title}
