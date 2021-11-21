@@ -20,6 +20,7 @@ export const TEXTS = {
   home: 'home',
   fortune_at_midnight: 'You can get a new fortune past midnight in about',
   hours: 'hours',
+  get_cookie: 'Get my own!',
 }
 
 export const META_TEXTS = {
