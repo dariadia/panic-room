@@ -275,6 +275,13 @@ const ShareIcons: React.FC<ShareRowProps> = styled('div').attrs(
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    > button {
+      margin: 13px 7px;
+      :hover {
+        filter: drop-shadow(0.5px 1px 4px ${GOLDEN_SHADOW});
+        transition: 0.2s filter;
+      }
+    }
   }
 `
 
