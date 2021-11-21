@@ -28,4 +28,11 @@ export const META_TEXTS = {
   fortune_told_me: 'My fortune cookie told me',
 }
 
-export const PANIC_ROOM_HASHTAG = '#panicRoom'
+export const PANIC_ROOM_HASHTAG = '#panicroom'
+
+export const PANIC_ROOM_HASHTAGS = [
+  'panicroom',
+  'fortunecookies',
+  'fortunecookie',
+  'selfhelpapp',
+]
