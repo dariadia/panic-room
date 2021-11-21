@@ -1,25 +1,14 @@
-import React, {
-  Dispatch,
-  SetStateAction,
-  useContext,
-  useState,
-  useEffect,
-} from 'react'
+import React, { Dispatch, SetStateAction, useContext, useState } from 'react'
 import styled, { keyframes, css, ThemeContext } from 'styled-components'
 
-import {
-  META_TEXTS,
-  PANIC_ROOM_HASHTAG,
-  PANIC_ROOM_HASHTAGS,
-  TEXTS,
-} from 'constants/texts'
-import { FORTUNE_COOKIE, SHARE_ICON_SIZE } from 'constants/theme'
+import { TEXTS } from 'constants/texts'
+import { FORTUNE_COOKIE } from 'constants/theme'
 import {
   FORTUNE_COOKIES_PATH_COUNT,
   FORTUNE_COOKIES_PATH_ONE,
 } from 'constants/locations'
 
-import { GOLDEN_SHADOW, MAIN_PADDING } from 'utils/theme'
+import { GOLDEN_SHADOW } from 'utils/theme'
 import { getRandomInt } from 'utils/randomiser'
 import { truncateText } from 'utils/texts'
 import { getTimeTillMidnight, getHoursFromSeconds } from 'utils/dates'
@@ -29,30 +18,7 @@ import { useCookies } from 'react-cookie'
 import { buildRequestUrl, getProtocol } from 'hooks/use-api'
 import isEmpty from 'lodash/isEmpty'
 
-import { Loader, Emoji } from '.'
-
-import {
-  EmailShareButton,
-  FacebookShareButton,
-  LivejournalShareButton,
-  TelegramShareButton,
-  TumblrShareButton,
-  TwitterShareButton,
-  ViberShareButton,
-  VKShareButton,
-  WhatsappShareButton,
-  EmailIcon,
-  FacebookIcon,
-  LivejournalIcon,
-  TelegramIcon,
-  TumblrIcon,
-  TwitterIcon,
-  ViberIcon,
-  VKIcon,
-  WhatsappIcon,
-  FacebookMessengerIcon,
-  FacebookMessengerShareButton,
-} from 'react-share'
+import { Loader, Emoji, StyledMessage, ShareIcons } from '.'
 
 import type { FortuneCookie as FortuneCookieType } from 'types'
 
@@ -65,7 +31,7 @@ const appear = keyframes`
   }
 `
 
-const appearSlow = keyframes`
+export const appearSlow = keyframes`
   0%, 85% {
     opacity: 0;
   }
@@ -242,119 +208,6 @@ export const FortuneCookie: React.FC<{
   )
 }
 
-type ShareRowProps = {
-  shareUrl: string
-  roomUrl: string
-  metaImagePath: string
-  truncatedText?: string
-}
-
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-const ShareIcons: React.FC<ShareRowProps> = styled('div').attrs(
-  (props: ShareRowProps) => ({
-    children: (
-      <>
-        <div>
-          <FacebookShareButton
-            url={props.shareUrl}
-            quote={`${META_TEXTS.fortune_told_me}: ${props.truncatedText}`}
-            hashtag={PANIC_ROOM_HASHTAG}
-          >
-            <FacebookIcon size={SHARE_ICON_SIZE} round />
-          </FacebookShareButton>
-          <TwitterShareButton
-            url={props.shareUrl}
-            hashtags={PANIC_ROOM_HASHTAGS}
-            title={META_TEXTS.fortune_title}
-          >
-            <TwitterIcon size={SHARE_ICON_SIZE} round />
-          </TwitterShareButton>
-          <TumblrShareButton
-            url={props.shareUrl}
-            title={META_TEXTS.fortune_title}
-            caption={`${META_TEXTS.fortune_told_me}: ${props.truncatedText}`}
-            tags={PANIC_ROOM_HASHTAGS}
-          >
-            <TumblrIcon size={SHARE_ICON_SIZE} round />
-          </TumblrShareButton>
-          <VKShareButton
-            url={props.shareUrl}
-            title={META_TEXTS.fortune_title}
-            image={props.metaImagePath}
-          >
-            <VKIcon size={SHARE_ICON_SIZE} round />
-          </VKShareButton>
-          <LivejournalShareButton
-            url={props.shareUrl}
-            title={META_TEXTS.fortune_title}
-            description={`${META_TEXTS.fortune_told_me}: ${props.truncatedText}`}
-          >
-            <LivejournalIcon size={SHARE_ICON_SIZE} round />
-          </LivejournalShareButton>
-        </div>
-        <div>
-          <TelegramShareButton
-            url={props.shareUrl}
-            title={META_TEXTS.fortune_title}
-          >
-            <TelegramIcon size={SHARE_ICON_SIZE} round />
-          </TelegramShareButton>
-          <FacebookMessengerShareButton
-            url={props.shareUrl}
-            appId="2001449690035746"
-            redirectUri={props.roomUrl}
-          >
-            <FacebookMessengerIcon size={SHARE_ICON_SIZE} round />
-          </FacebookMessengerShareButton>
-          <ViberShareButton
-            url={props.shareUrl}
-            separator={`\n`}
-            title={META_TEXTS.fortune_title}
-          >
-            <ViberIcon size={SHARE_ICON_SIZE} round />
-          </ViberShareButton>
-          <WhatsappShareButton
-            url={props.shareUrl}
-            title={META_TEXTS.fortune_title}
-            separator={`\n`}
-          >
-            <WhatsappIcon size={SHARE_ICON_SIZE} round />
-          </WhatsappShareButton>
-          <EmailShareButton
-            url={props.roomUrl}
-            subject={META_TEXTS.fortune_title}
-            body={`See mine here ${props.shareUrl}\n\nOR\n\n${META_TEXTS.fortune_description}`}
-            separator={`\n 🥠 💙 💙 💙 🥠 \n`}
-          >
-            <EmailIcon size={SHARE_ICON_SIZE} round />
-          </EmailShareButton>
-        </div>
-      </>
-    ),
-  }),
-)`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 2rem 0;
-  animation: ${appearSlow} 2s 1;
-  > div {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    > button {
-      margin: 13px 7px;
-      :hover {
-        filter: drop-shadow(0.5px 1px 4px ${GOLDEN_SHADOW});
-        transition: 0.2s filter;
-      }
-    }
-  }
-`
-
 const CookieSVG: React.FC = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -451,173 +304,5 @@ const StyledCookie = styled('article').attrs({ children: <CookieSVG /> })<{
   &:focus {
     transform: rotate(-10deg);
     transition: ease-in transform 0.2s;
-  }
-`
-
-const rollOutGlow = keyframes`
-  0% {
-    height: 0.5vw;
-    opacity: 0;
-    top: -20vw;
-    filter: drop-shadow(8px 16px 48px ${GOLDEN_SHADOW});
-  }
-  25% {
-    height: 5vw;
-    opacity: 1;
-    top: -10vw;
-  }
-  100% {
-    height: 30vw;
-    top: -10vw;
-  }
-`
-
-const rollOut = keyframes`
-  0% {
-    height: 1vw;
-    opacity: 0;
-    filter: drop-shadow(8px 16px 48px ${GOLDEN_SHADOW});
-    background: center / 15vw 1vw no-repeat url('/assets/parchement.svg');
-  }
-  25% {
-    height: 5vw;
-    opacity: 1;
-    background: center / 15vw 5vw no-repeat url('/assets/parchement.svg');
-  }
-  100% {
-    height: 30vw;
-    margin: 50px 0 0 -50px;
-    background: center / 15vw 30vw no-repeat url('/assets/parchement.svg');
-  }
-`
-
-type TextProps = { color: string; allowMotion: boolean }
-
-const FortuneText: React.FC<TextProps> = styled('span')<TextProps>`
-  color: ${({ color }) => color};
-  display: block;
-  max-width: 60vw;
-  margin: auto;
-  padding-top: 22vw;
-  text-align: center;
-  font: 2rem/4rem monospace;
-  animation: ${({ allowMotion }) => (allowMotion ? appear : stay)} 1.5s 1;
-  @media (max-width: 500px) {
-    font: 1rem/2rem monospace;
-    padding-top: 40vw;
-    max-width: 80vw;
-  }
-`
-
-const Message = ({
-  fortuneCookie,
-  allowMotion,
-}: WithFortuneCookieData): JSX.Element | null => {
-  const { darkModeActive, theme } = useContext(ThemeContext)
-  const [isTextShown, showText] = useState(false)
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      showText(true)
-    }, 800)
-    return () => clearTimeout(timer)
-  }, [])
-
-  if (!fortuneCookie) return null
-  const {
-    text,
-    emoji,
-    aria_label,
-    source_link,
-    source_title,
-    source_author,
-  } = fortuneCookie
-
-  return (
-    <>
-      <div title={MESSAGE_ARIA} role="img" aria-label={MESSAGE_ARIA} />
-      {isTextShown && (
-        <FortuneText
-          color={darkModeActive ? theme.darkTheme.text : theme.lightTheme.text}
-          allowMotion={allowMotion as boolean}
-        >
-          {text}
-          {emoji && (
-            <Emoji
-              className="fortune-cookie_emoji"
-              label={aria_label as string}
-            >
-              {emoji}
-            </Emoji>
-          )}
-          <div className="fortune-cookie_source">
-            <a href={source_link} target="_blank">
-              {source_title}
-            </a>{' '}
-            {source_author}
-          </div>
-        </FortuneText>
-      )}
-    </>
-  )
-}
-
-type WithFortuneCookieData = {
-  fortuneCookie: FortuneCookieType
-  allowMotion?: boolean
-}
-
-const MESSAGE_ARIA = 'An open scroll of glowing parchment'
-
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-const StyledMessage: React.FC<WithFortuneCookieData> = styled('article').attrs(
-  (props: WithFortuneCookieData) => ({
-    children: (
-      <Message
-        fortuneCookie={props.fortuneCookie}
-        allowMotion={props.allowMotion}
-      />
-    ),
-  }),
-)`
-  position: relative;
-  margin: 0 auto;
-  width: calc(100vw - ${MAIN_PADDING * 2}px);
-  > div {
-    animation: ${rollOutGlow} 1.5s 1;
-    height: 30vw;
-    width: 15vw;
-    position: absolute;
-    left: calc((100vw - 15vw) / 2);
-    z-index: 1;
-    top: -10vw;
-  }
-  > div::before {
-    display: block;
-    content: '';
-    animation: ${rollOut} 1.5s 1;
-    margin: 50px 0 0 -50px;
-    height: 30vw;
-    background: center / 15vw 30vw no-repeat url('/assets/parchement.svg');
-    transform: rotate(90deg);
-    filter: drop-shadow(1px 2px 8px ${GOLDEN_SHADOW});
-  }
-  .fortune-cookie_emoji {
-    font: 4rem/8rem emoji;
-    display: block;
-  }
-  @media (max-width: 500px) {
-    .fortune-cookie_emoji {
-      font: 2rem/4rem emoji;
-    }
-  }
-  .fortune-cookie_source > a {
-    color: green;
-    font-family: Caveat;
-    &:hover {
-      color: ${GOLDEN_SHADOW};
-      transition: color 0.2s;
-    }
   }
 `
