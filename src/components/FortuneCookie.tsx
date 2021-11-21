@@ -314,7 +314,11 @@ const ShareIcons: React.FC<ShareRowProps> = styled('div').attrs(
           >
             <ViberIcon size={SHARE_ICON_SIZE} round />
           </ViberShareButton>
-          <WhatsappShareButton url={props.shareUrl}>
+          <WhatsappShareButton
+            url={props.shareUrl}
+            title={META_TEXTS.fortune_title}
+            separator={`\n`}
+          >
             <WhatsappIcon size={SHARE_ICON_SIZE} round />
           </WhatsappShareButton>
           <EmailShareButton
