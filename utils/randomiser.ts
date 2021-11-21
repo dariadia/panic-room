@@ -1,4 +1,5 @@
 import {
+  ANGLO_SAXON_RUNES_NAMES,
   ANGLO_SAXON_RUNES,
   ANGLO_SAXON_RUNES_COUNT,
   Rune,
@@ -10,9 +11,12 @@ export const getRandomInt = (max: number): number =>
 export const scrambleId = (id: number): string => {
   const key =
     id <= ANGLO_SAXON_RUNES_COUNT
-      ? ANGLO_SAXON_RUNES[(id as unknown) as Rune]
-      : ANGLO_SAXON_RUNES[((id / 13) as unknown) as Rune]
-  return `${key.unicode.charCodeAt(0)}${key.letter.toUpperCase()}${id}`
+      ? ANGLO_SAXON_RUNES_NAMES[id]
+      : ANGLO_SAXON_RUNES_NAMES[Math.round(id / 13)]
+
+  const keyRune = ANGLO_SAXON_RUNES[key as Rune]
+
+  return `${keyRune.unicode.charCodeAt(0)}${keyRune.letter.toUpperCase()}${id}`
 }
 
 export const descrambleId = (id: string): number => Number(/\d+$/.exec(id))
