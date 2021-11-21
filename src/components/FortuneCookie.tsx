@@ -270,6 +270,7 @@ const ShareIcons: React.FC<ShareRowProps> = styled('div').attrs(
   justify-content: center;
   align-items: center;
   margin: 2rem 0;
+  animation: ${appearSlow} 2s 1;
   > div {
     display: flex;
     flex-direction: row;
@@ -465,7 +466,7 @@ const Message = ({
 
   return (
     <>
-      <div />
+      <div title={MESSAGE_ARIA} role="img" aria-label={MESSAGE_ARIA} />
       {isTextShown && (
         <FortuneText
           color={darkModeActive ? theme.darkTheme.text : theme.lightTheme.text}
@@ -503,9 +504,6 @@ const MESSAGE_ARIA = 'An open scroll of glowing parchment'
 // @ts-ignore
 const StyledMessage: React.FC<WithFortuneCookieData> = styled('article').attrs(
   (props: WithFortuneCookieData) => ({
-    title: MESSAGE_ARIA,
-    role: 'img',
-    'aria-label': MESSAGE_ARIA,
     children: (
       <Message
         fortuneCookie={props.fortuneCookie}
