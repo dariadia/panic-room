@@ -7,7 +7,7 @@ import { useCookies } from 'react-cookie'
 
 import { getValueFromCookieString } from 'utils/theme'
 import { scrambleId } from 'utils/randomiser'
-import { getProtocol } from 'hooks/use-api'
+import { buildRequestUrl, getProtocol } from 'hooks/use-api'
 
 import { ThemeContext } from 'styled-components'
 import { MainLayout } from '@/layouts'
@@ -24,6 +24,8 @@ import {
   FORTUNE_COOKIE,
   PANIC_ROOM_PREFERENCES,
 } from 'constants/theme'
+import { FORTUNE_COOKIES_PATH_ONE } from 'constants/locations'
+import { META_TEXTS } from 'constants/texts'
 
 import type { Page, Preferences, FortunePage } from 'types'
 
@@ -32,6 +34,7 @@ const FortuneCookiesPage: Page<FortunePage> = ({
   host,
   url,
   fortuneCookieId,
+  fortuneCookie,
 }) => {
   const hasSavedPreferences = preferences
 
@@ -47,6 +50,11 @@ const FortuneCookiesPage: Page<FortunePage> = ({
     const scrambledId = scrambleId(fortuneId)
     shareUrl = `${getProtocol(host as string)}${host}${url}/${scrambledId}`
   }
+  const metaImagePath = `/assets/${
+    fortuneCookie?.meta_image_key
+      ? `fortune-covers/${fortuneCookie?.meta_image_key}`
+      : 'panic-room'
+  }.png`
 
   const userPreferences =
     preferences || (cookies[PANIC_ROOM_PREFERENCES] as Preferences)
@@ -74,6 +82,10 @@ const FortuneCookiesPage: Page<FortunePage> = ({
           href="https://fonts.googleapis.com/css2?family=Caveat"
           rel="stylesheet"
         />
+        <title>{META_TEXTS.fortune_title}</title>
+        <meta name="description" content={META_TEXTS.fortune_description} />
+        <meta name="og:image" property="og:image" content={metaImagePath} />
+        <meta name="twitter:image" content={metaImagePath} />
       </Head>
       <MenuWrapper
         isMenuFocused={isMenuFocused}
@@ -113,12 +125,22 @@ export async function getServerSideProps({
   const fortuneCookieId = Number(cookies.get(FORTUNE_COOKIE)) || 0
   const host = req.headers.host
 
+  const fortuneCookie = await fetch(
+    `${getProtocol(host as string)}${host}/api${buildRequestUrl(
+      `${FORTUNE_COOKIES_PATH_ONE}${fortuneCookieId}`,
+    )}`,
+    {
+      method: 'GET',
+    },
+  ).then(result => result.json())
+
   return {
     props: {
       preferences,
       host,
       url: req.url,
       fortuneCookieId,
+      fortuneCookie,
     },
   }
 }
