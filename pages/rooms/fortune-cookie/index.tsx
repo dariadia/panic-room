@@ -34,7 +34,6 @@ const FortuneCookiesPage: Page<FortunePage> = ({
   host,
   url,
   fortuneCookieId,
-  fortuneCookie,
 }) => {
   const hasSavedPreferences = preferences
 
@@ -53,11 +52,7 @@ const FortuneCookiesPage: Page<FortunePage> = ({
     const scrambledId = scrambleId(fortuneId)
     shareUrl = `${roomUrl}/${scrambledId}`
   }
-  const metaImagePath = `/assets/${
-    fortuneCookie?.meta_image_key
-      ? `fortune-covers/${fortuneCookie?.meta_image_key}`
-      : 'fortune-cookie-room'
-  }.png`
+  const metaImagePath = '/assets/fortune-cookie-room.png'
 
   const userPreferences =
     preferences || (cookies[PANIC_ROOM_PREFERENCES] as Preferences)
@@ -130,14 +125,17 @@ export async function getServerSideProps({
   const fortuneCookieId = Number(cookies.get(FORTUNE_COOKIE))
   const host = req.headers.host
 
-  const fortuneCookie = await fetch(
-    `${getProtocol(host as string)}${host}/api${buildRequestUrl(
-      `${FORTUNE_COOKIES_PATH_ONE}${fortuneCookieId}`,
-    )}`,
-    {
-      method: 'GET',
-    },
-  ).then(result => result.json())
+  let fortuneCookie = null
+  if (fortuneCookieId) {
+    fortuneCookie = await fetch(
+      `${getProtocol(host as string)}${host}/api${buildRequestUrl(
+        `${FORTUNE_COOKIES_PATH_ONE}${fortuneCookieId}`,
+      )}`,
+      {
+        method: 'GET',
+      },
+    ).then(result => result.json())
+  }
 
   return {
     props: {
@@ -145,7 +143,7 @@ export async function getServerSideProps({
       host,
       url: req.url,
       fortuneCookieId,
-      fortuneCookie: fortuneCookieId ? fortuneCookie : null,
+      fortuneCookie,
     },
   }
 }
