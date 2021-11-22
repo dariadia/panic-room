@@ -22,6 +22,7 @@ import {
   PANIC_ROOM_PREFERENCES,
 } from 'constants/theme'
 import {
+  APP_PRODUCTION,
   FORTUNE_COOKIES_PATH_ONE,
   FORTUNE_COOKIE_ROOM,
 } from 'constants/locations'
@@ -45,7 +46,7 @@ const FortuneReadPage: Page<FortunePage> = ({ fortuneCookie, preferences }) => {
 
   if (!fortuneCookie) return null
 
-  const metaImagePath = `/assets/fortune-cookie-room.png`
+  const metaImagePath = `${APP_PRODUCTION}/assets/fortune-room.png`
 
   return (
     <>

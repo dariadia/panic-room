@@ -24,7 +24,7 @@ import {
   FORTUNE_COOKIE,
   PANIC_ROOM_PREFERENCES,
 } from 'constants/theme'
-import { FORTUNE_COOKIES_PATH_ONE } from 'constants/locations'
+import { APP_PRODUCTION, FORTUNE_COOKIES_PATH_ONE } from 'constants/locations'
 import { META_TEXTS } from 'constants/texts'
 
 import type { Page, Preferences, FortunePage } from 'types'
@@ -52,7 +52,7 @@ const FortuneCookiesPage: Page<FortunePage> = ({
     const scrambledId = scrambleId(fortuneId)
     shareUrl = `${roomUrl}/${scrambledId}`
   }
-  const metaImagePath = '/assets/fortune-cookie-room.png'
+  const metaImagePath = `${APP_PRODUCTION}/assets/fortune-room.png`
 
   const userPreferences =
     preferences || (cookies[PANIC_ROOM_PREFERENCES] as Preferences)
