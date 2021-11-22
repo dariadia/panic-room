@@ -56,7 +56,7 @@ const FortuneCookiesPage: Page<FortunePage> = ({
   const metaImagePath = `/assets/${
     fortuneCookie?.meta_image_key
       ? `fortune-covers/${fortuneCookie?.meta_image_key}`
-      : 'panic-room'
+      : 'fortune-cookie-room'
   }.png`
 
   const userPreferences =
@@ -85,7 +85,7 @@ const FortuneCookiesPage: Page<FortunePage> = ({
           href="https://fonts.googleapis.com/css2?family=Caveat"
           rel="stylesheet"
         />
-        <title>{META_TEXTS.fortune_title}</title>
+        <title>{META_TEXTS.fortune_told_me}...</title>
         <meta name="description" content={META_TEXTS.fortune_description} />
         <meta name="og:image" property="og:image" content={metaImagePath} />
         <meta name="twitter:image" content={metaImagePath} />
