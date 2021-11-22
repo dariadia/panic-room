@@ -127,7 +127,7 @@ export async function getServerSideProps({
 }): Promise<{ props: FortunePage }> {
   const cookies = new Cookies(req, res)
   const preferences = cookies.get(PANIC_ROOM_PREFERENCES) || null
-  const fortuneCookieId = Number(cookies.get(FORTUNE_COOKIE)) || 0
+  const fortuneCookieId = Number(cookies.get(FORTUNE_COOKIE))
   const host = req.headers.host
 
   const fortuneCookie = await fetch(
@@ -145,7 +145,7 @@ export async function getServerSideProps({
       host,
       url: req.url,
       fortuneCookieId,
-      fortuneCookie,
+      fortuneCookie: fortuneCookieId ? fortuneCookie : null,
     },
   }
 }
