@@ -45,9 +45,7 @@ const FortuneReadPage: Page<FortunePage> = ({ fortuneCookie, preferences }) => {
 
   if (!fortuneCookie) return null
 
-  const { meta_image_key } = fortuneCookie
-
-  const metaImagePath = `/assets/${meta_image_key}.png`
+  const metaImagePath = `/assets/fortune-cookie-room.png`
 
   return (
     <>
