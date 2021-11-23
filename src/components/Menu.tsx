@@ -130,6 +130,7 @@ const MenuDropdown = styled('nav')`
 `
 
 export const Menu = styled('button').attrs({
+  id: 'menu',
   role: NAVIGATION,
   'aria-label': SETTINGS_MENU,
 })`

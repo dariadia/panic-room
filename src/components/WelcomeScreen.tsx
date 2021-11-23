@@ -72,6 +72,7 @@ export const WelcomeMessage: React.FC<{
       <p style={{ marginBottom: '32px' }}>
         {TEXTS.greeting_intro}
         <button
+          aria-controls="menu"
           onClick={() => triggerMenuFocus(true)}
           style={{ cursor: 'pointer' }}
         >
