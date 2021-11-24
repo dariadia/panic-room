@@ -12,6 +12,7 @@ import withDarkMode from 'next-dark-mode'
 import { TEXTS } from 'constants/texts'
 import { theme } from 'utils/theme'
 import { Loader } from '@/components'
+import { APP_PRODUCTION } from 'constants/locations'
 
 const GlobalStyle = createGlobalStyle`
  ${normalize}
@@ -62,9 +63,12 @@ const App: React.FC<ApplicationProps> = ({
         <meta
           name="og:image"
           property="og:image"
-          content="/assets/panic-room_v2.png"
+          content={`${APP_PRODUCTION}/assets/panic-room_v2.png`}
         />
-        <meta name="twitter:image" content="/assets/panic-room_v2.png" />
+        <meta
+          name="twitter:image"
+          content={`${APP_PRODUCTION}/assets/panic-room_v2.png`}
+        />
         <link rel="manifest" href="/favicon/site.webmanifest.json" />
         <link rel="icon" href="/favicon/favicon.ico" />
         <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png" />
