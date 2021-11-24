@@ -13,7 +13,6 @@ import {
   FacebookShareButton,
   LivejournalShareButton,
   TelegramShareButton,
-  TumblrShareButton,
   TwitterShareButton,
   ViberShareButton,
   VKShareButton,
@@ -22,7 +21,6 @@ import {
   FacebookIcon,
   LivejournalIcon,
   TelegramIcon,
-  TumblrIcon,
   TwitterIcon,
   ViberIcon,
   VKIcon,
@@ -62,14 +60,6 @@ export const ShareIcons: React.FC<ShareRowProps> = styled('div').attrs(
           >
             <TwitterIcon size={SHARE_ICON_SIZE} round />
           </TwitterShareButton>
-          <TumblrShareButton
-            url={props.shareUrl}
-            title={META_TEXTS.fortune_title}
-            caption={`${META_TEXTS.fortune_told_me}: ${props.truncatedText}`}
-            tags={PANIC_ROOM_HASHTAGS}
-          >
-            <TumblrIcon size={SHARE_ICON_SIZE} round />
-          </TumblrShareButton>
           <VKShareButton
             url={props.shareUrl}
             title={META_TEXTS.fortune_title}
