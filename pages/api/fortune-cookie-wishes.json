@@ -245,6 +245,7 @@
   {
     "id": "27",
     "emoji": "🙋",
+    "aria_label": "person raising a hand",
     "source_link": "https://bookmate.com/books/JYFC5tbW",
     "source_title": "The Art of Being Normal",
     "source_author": "Lisa Williamson",
@@ -253,6 +254,7 @@
   {
     "id": "28",
     "emoji": "🏃",
+    "aria_label": "person running",
     "source_link": "https://bookmate.com/books/scnysZIs",
     "source_title": "Courage: The Joy of Living Dangerously (Osho Insights for a New Way of Living)",
     "source_author": "Osho",
@@ -261,6 +263,7 @@
   {
     "id": "29",
     "emoji": "🦸🏽",
+    "aria_label": "hero",
     "source_link": "https://bookmate.com/books/scnysZIs",
     "source_title": "Courage: The Joy of Living Dangerously (Osho Insights for a New Way of Living)",
     "source_author": "Osho",
@@ -269,6 +272,7 @@
   {
     "id": "30",
     "emoji": "🚪",
+    "aria_label": "door",
     "source_link": "https://bookmate.com/books/scnysZIs",
     "source_title": "Courage: The Joy of Living Dangerously (Osho Insights for a New Way of Living)",
     "source_author": "Osho",
@@ -277,6 +281,7 @@
   {
     "id": "31",
     "emoji": "💃🏽🕺🏿",
+    "aria_label": "people dancing",
     "source_link": "https://bookmate.com/books/scnysZIs",
     "source_title": "Courage: The Joy of Living Dangerously (Osho Insights for a New Way of Living)",
     "source_author": "Osho",
@@ -285,6 +290,7 @@
   {
     "id": "32",
     "emoji": "💃🏽🕺🏿",
+    "aria_label": "people dancing",
     "source_link": "https://bookmate.com/books/scnysZIs",
     "source_title": "Courage: The Joy of Living Dangerously (Osho Insights for a New Way of Living)",
     "source_author": "Osho",
@@ -293,6 +299,7 @@
   {
     "id": "33",
     "emoji": "🩰",
+    "aria_label": "dancing shoes",
     "source_link": "https://bookmate.com/books/scnysZIs",
     "source_title": "Courage: The Joy of Living Dangerously (Osho Insights for a New Way of Living)",
     "source_author": "Osho",
@@ -301,6 +308,7 @@
   {
     "id": "34",
     "emoji": "🫂",
+    "aria_label": "people hugging",
     "source_link": "https://bookmate.com/books/scnysZIs",
     "source_title": "Courage: The Joy of Living Dangerously (Osho Insights for a New Way of Living)",
     "source_author": "Osho",
@@ -309,6 +317,7 @@
   {
     "id": "35",
     "emoji": "🧘🏽",
+    "aria_label": "person in lotus position",
     "source_link": "https://bookmate.com/books/scnysZIs",
     "source_title": "Courage: The Joy of Living Dangerously (Osho Insights for a New Way of Living)",
     "source_author": "Osho",
@@ -317,6 +326,7 @@
   {
     "id": "36",
     "emoji": "💖",
+    "aria_label": "heart with sparkles",
     "source_link": "https://bookmate.com/books/scnysZIs",
     "source_title": "Courage: The Joy of Living Dangerously (Osho Insights for a New Way of Living)",
     "source_author": "Osho",
@@ -325,6 +335,7 @@
   {
     "id": "37",
     "emoji": "🌊",
+    "aria_label": "wave",
     "source_link": "https://bookmate.com/books/scnysZIs",
     "source_title": "Courage: The Joy of Living Dangerously (Osho Insights for a New Way of Living)",
     "source_author": "Osho",
@@ -333,6 +344,7 @@
   {
     "id": "38",
     "emoji": "🌀",
+    "aria_label": "swirl",
     "source_link": "https://bookmate.com/books/scnysZIs",
     "source_title": "Courage: The Joy of Living Dangerously (Osho Insights for a New Way of Living)",
     "source_author": "Osho",
@@ -341,6 +353,7 @@
   {
     "id": "39",
     "emoji": "🕯",
+    "aria_label": "candle",
     "source_link": "https://bookmate.com/books/DuNJuglR",
     "source_title": "Love Letters to Life",
     "source_author": "Osho",
@@ -349,6 +362,7 @@
   {
     "id": "40",
     "emoji": "🪶",
+    "aria_label": "bird feather",
     "source_link": "https://bookmate.com/books/DuNJuglR",
     "source_title": "Love Letters to Life",
     "source_author": "Osho",
@@ -357,6 +371,7 @@
   {
     "id": "41",
     "emoji": "🌊",
+    "aria_label": "wave",
     "source_link": "https://bookmate.com/books/DuNJuglR",
     "source_title": "Love Letters to Life",
     "source_author": "Osho",
@@ -365,6 +380,7 @@
   {
     "id": "42",
     "emoji": "👹",
+    "aria_label": "mask",
     "source_link": "https://bookmate.com/books/DuNJuglR",
     "source_title": "Love Letters to Life",
     "source_author": "Osho",
@@ -373,6 +389,7 @@
   {
     "id": "43",
     "emoji": "🌅",
+    "aria_label": "sunrise",
     "source_link": "https://bookmate.com/books/DuNJuglR",
     "source_title": "Love Letters to Life",
     "source_author": "Osho",
@@ -381,6 +398,7 @@
   {
     "id": "44",
     "emoji": "🌄",
+    "aria_label": "sunrise",
     "source_link": "https://bookmate.com/books/DuNJuglR",
     "source_title": "Love Letters to Life",
     "source_author": "Osho",
@@ -389,6 +407,7 @@
   {
     "id": "45",
     "emoji": "🌌",
+    "aria_label": "night sky",
     "source_link": "https://bookmate.com/books/DuNJuglR",
     "source_title": "Love Letters to Life",
     "source_author": "Osho",
@@ -397,6 +416,7 @@
   {
     "id": "46",
     "emoji": "🍅",
+    "aria_label": "tomato",
     "source_link": "https://bookmate.com/books/DuNJuglR",
     "source_title": "Love Letters to Life",
     "source_author": "Osho",
@@ -405,6 +425,7 @@
   {
     "id": "47",
     "emoji": "🧑🏼‍🌾",
+    "aria_label": "farmer",
     "source_link": "https://bookmate.com/books/AJrEEEqg",
     "source_title": "Living Lightly",
     "source_author": "Dale Curd, Kimberly Alexander",
@@ -413,6 +434,7 @@
   {
     "id": "48",
     "emoji": "🔖",
+    "aria_label": "note",
     "source_link": "https://bookmate.com/books/AJrEEEqg",
     "source_title": "Living Lightly",
     "source_author": "Dale Curd, Kimberly Alexander",
@@ -421,6 +443,7 @@
   {
     "id": "49",
     "emoji": "📖",
+    "aria_label": "open book",
     "source_link": "https://bookmate.com/books/AJrEEEqg",
     "source_title": "Living Lightly",
     "source_author": "Dale Curd, Kimberly Alexander",
@@ -429,6 +452,7 @@
   {
     "id": "50",
     "emoji": "🔭",
+    "aria_label": "telescope",
     "source_link": "https://bookmate.com/books/AJrEEEqg",
     "source_title": "Living Lightly",
     "source_author": "Dale Curd, Kimberly Alexander",
@@ -437,6 +461,7 @@
   {
     "id": "51",
     "emoji": "🤸🏻",
+    "aria_label": "person doing a cartwheel",
     "source_link": "https://bookmate.com/books/AJrEEEqg",
     "source_title": "Living Lightly",
     "source_author": "Dale Curd, Kimberly Alexander",
@@ -445,6 +470,7 @@
   {
     "id": "52",
     "emoji": "🔭",
+    "aria_label": "telescope",
     "source_link": "https://bookmate.com/books/AJrEEEqg",
     "source_title": "Living Lightly",
     "source_author": "Dale Curd, Kimberly Alexander",
@@ -453,6 +479,7 @@
   {
     "id": "53",
     "emoji": "❤️‍🩹",
+    "aria_label": "bandaged heart",
     "source_link": "https://bookmate.com/books/TTXHftS7",
     "source_title": "Basic Witches",
     "source_author": "Jaya Saxena",
@@ -461,6 +488,7 @@
   {
     "id": "54",
     "emoji": "🪞",
+    "aria_label": "mirror",
     "source_link": "https://bookmate.com/books/azSXVNsE",
     "source_title": "It's All In Your Head",
     "source_author": "Russ",
@@ -469,6 +497,7 @@
   {
     "id": "55",
     "emoji": "🗺",
+    "aria_label": "world map",
     "source_link": "https://bookmate.com/books/azSXVNsE",
     "source_title": "It's All In Your Head",
     "source_author": "Russ",
@@ -477,6 +506,7 @@
   {
     "id": "56",
     "emoji": "🧭",
+    "aria_label": "compas",
     "source_link": "https://bookmate.com/books/azSXVNsE",
     "source_title": "It's All In Your Head",
     "source_author": "Russ",
@@ -485,6 +515,7 @@
   {
     "id": "57",
     "emoji": "🙆",
+    "aria_label": "person with hands up",
     "source_link": "https://bookmate.com/books/azSXVNsE",
     "source_title": "It's All In Your Head",
     "source_author": "Russ",
@@ -493,6 +524,7 @@
   {
     "id": "58",
     "emoji": "🏋🏾‍♀️",
+    "aria_label": "person weight lifting",
     "source_link": "https://bookmate.com/books/azSXVNsE",
     "source_title": "It's All In Your Head",
     "source_author": "Russ",
@@ -501,6 +533,7 @@
   {
     "id": "59",
     "emoji": "✌🏽",
+    "aria_label": "okay gesture",
     "source_link": "https://bookmate.com/books/azSXVNsE",
     "source_title": "It's All In Your Head",
     "source_author": "Russ",
@@ -509,6 +542,7 @@
   {
     "id": "60",
     "emoji": "🪞",
+    "aria_label": "mirror",
     "source_link": "https://bookmate.com/books/azSXVNsE",
     "source_title": "It's All In Your Head",
     "source_author": "Russ",
@@ -517,6 +551,7 @@
   {
     "id": "61",
     "emoji": "🎰",
+    "aria_label": "slot machine",
     "source_link": "https://bookmate.com/books/azSXVNsE",
     "source_title": "It's All In Your Head",
     "source_author": "Russ",
@@ -525,6 +560,7 @@
   {
     "id": "62",
     "emoji": "🎳",
+    "aria_label": "bowling",
     "source_link": "https://bookmate.com/books/azSXVNsE",
     "source_title": "It's All In Your Head",
     "source_author": "Russ",
@@ -533,6 +569,7 @@
   {
     "id": "63",
     "emoji": "🕰",
+    "aria_label": "clock",
     "source_link": "https://bookmate.com/books/JqvwDNme",
     "source_title": "Discworld - Equal Rites",
     "source_author": "Terry David John Pratchett",
@@ -541,6 +578,7 @@
   {
     "id": "64",
     "emoji": "💡",
+    "aria_label": "light bulb",
     "source_link": "https://bookmate.com/books/vc2bIL7E",
     "source_title": "More Notes of a Dirty Old Man",
     "source_author": "Charles Bukowski",
@@ -549,6 +587,7 @@
   {
     "id": "65",
     "emoji": "🤨",
+    "aria_label": "confused face",
     "source_link": "https://bookmate.com/books/vc2bIL7E",
     "source_title": "More Notes of a Dirty Old Man",
     "source_author": "Charles Bukowski",
@@ -557,6 +596,7 @@
   {
     "id": "67",
     "emoji": "🏌🏿",
+    "aria_label": "person playing golf",
     "source_link": "https://bookmate.com/books/al0Ermj3",
     "source_title": "The Power of Now",
     "source_author": "Eckhart Tolle",
@@ -565,6 +605,7 @@
   {
     "id": "68",
     "emoji": "⚡️",
+    "aria_label": "lightning",
     "source_link": "https://bookmate.com/books/al0Ermj3",
     "source_title": "The Power of Now",
     "source_author": "Eckhart Tolle",
@@ -573,6 +614,7 @@
   {
     "id": "69",
     "emoji": "🗺",
+    "aria_label": "world map",
     "source_link": "https://bookmate.com/books/al0Ermj3",
     "source_title": "The Power of Now",
     "source_author": "Eckhart Tolle",
@@ -581,6 +623,7 @@
   {
     "id": "70",
     "emoji": "🔦",
+    "aria_label": "torch",
     "source_link": "https://bookmate.com/books/al0Ermj3",
     "source_title": "The Power of Now",
     "source_author": "Eckhart Tolle",
@@ -589,6 +632,7 @@
   {
     "id": "71",
     "emoji": "😌",
+    "aria_label": "content face",
     "source_link": "https://bookmate.com/books/al0Ermj3",
     "source_title": "The Power of Now",
     "source_author": "Eckhart Tolle",
@@ -597,6 +641,7 @@
   {
     "id": "72",
     "emoji": "🔥",
+    "aria_label": "fire",
     "source_link": "https://bookmate.com/books/al0Ermj3",
     "source_title": "The Power of Now",
     "source_author": "Eckhart Tolle",
@@ -605,6 +650,7 @@
   {
     "id": "73",
     "emoji": "📌",
+    "aria_label": "pin",
     "source_link": "https://bookmate.com/books/TagzJV3D",
     "source_title": "The Untethered Soul",
     "source_author": "Jefferson A. Singer",
@@ -613,6 +659,7 @@
   {
     "id": "74",
     "emoji": "🪞",
+    "aria_label": "mirror",
     "source_link": "https://bookmate.com/books/c5MyEQtr",
     "source_title": "Every Word You Cannot Say",
     "source_author": "Iain S.Thomas",
@@ -621,6 +668,7 @@
   {
     "id": "75",
     "emoji": "🛁",
+    "aria_label": "bathtube with bubbles",
     "source_link": "https://bookmate.com/books/c5MyEQtr",
     "source_title": "Every Word You Cannot Say",
     "source_author": "Iain S.Thomas",
@@ -629,6 +677,7 @@
   {
     "id": "76",
     "emoji": "💢",
+    "aria_label": "anger icon",
     "source_link": "https://bookmate.com/books/c5MyEQtr",
     "source_title": "Every Word You Cannot Say",
     "source_author": "Iain S.Thomas",
@@ -637,6 +686,7 @@
   {
     "id": "77",
     "emoji": "🌬",
+    "aria_label": "wind blowing",
     "source_link": "https://bookmate.com/books/c5MyEQtr",
     "source_title": "Every Word You Cannot Say",
     "source_author": "Iain S.Thomas",
