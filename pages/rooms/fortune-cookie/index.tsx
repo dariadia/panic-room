@@ -121,7 +121,7 @@ export async function getServerSideProps({
   res: NextApiResponse
 }): Promise<{ props: FortunePage }> {
   const cookies = new Cookies(req, res)
-  const preferences = cookies.get(PANIC_ROOM_PREFERENCES) || null
+  // const preferences = cookies.get(PANIC_ROOM_PREFERENCES) || null
   const fortuneCookieId = Number(cookies.get(FORTUNE_COOKIE))
   const host = req.headers.host
 
@@ -139,7 +139,7 @@ export async function getServerSideProps({
 
   return {
     props: {
-      preferences,
+      preferences: '%7B%22allowMotion%22%3Atrue%2C%22allowSounds%22%3Atrue%7D',
       host,
       url: req.url,
       fortuneCookieId,
