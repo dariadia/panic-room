@@ -13,6 +13,7 @@ import { Emoji, StyledMessage as FortuneMessage } from '@/components'
 
 import { descrambleId } from 'utils/randomiser'
 import { getValueFromCookieString, GOLDEN_SHADOW } from 'utils/theme'
+import { appearSlow } from 'utils/animations'
 
 import { buildRequestUrl, getProtocol } from 'hooks/use-api'
 
@@ -82,6 +83,7 @@ const StyledText = styled('button')`
   border: 1px solid ${GOLDEN_SHADOW};
   border-radius: 4px;
   color: inherit;
+  animation: ${appearSlow} 2s 1;
   &:hover {
     cursor: pointer;
     transition: 0.2s all;
