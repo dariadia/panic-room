@@ -28,7 +28,7 @@ const line = keyframes`
   }
 `
 
-export const Background = styled('div')<{
+const Background = styled('div')<{
   theme: Theme
   className?: string
   position: { top: number; left: number }
@@ -267,9 +267,45 @@ export const HomeScreen: React.FC<{ preferences: string }> = () => {
   //     : userPreferences.allowMotion
 
   return (
-    <div>
-      {darkModeActive}
-      {typeof theme}
-    </div>
+    <>
+      <Background
+        className="night-sky"
+        theme={darkModeActive ? theme.darkTheme : theme.lightTheme}
+        // allowMotion={Boolean(allowMotion)}
+        position={{ top: 60, left: 75 }}
+      >
+        <div className="star-box">
+          <div className="star" id="twinkle-star-1"></div>
+          <div className="star" id="twinkle-star-2"></div>
+          <div className="star" id="twinkle-star-3"></div>
+          <div className="star" id="twinkle-star-4"></div>
+          <div className="star" id="twinkle-star-5"></div>
+          <div className="star" id="twinkle-star-6"></div>
+          <div className="star" id="twinkle-star-7"></div>
+          <div className="line" id="line-1"></div>
+          <div className="line" id="line-2"></div>
+          <div className="line" id="line-3"></div>
+          <div className="line" id="line-4"></div>
+          <div className="line" id="line-5"></div>
+          <div className="line" id="line-6"></div>
+          <div className="line" id="line-7"></div>
+        </div>
+      </Background>
+      <Background
+        className="night-sky"
+        theme={darkModeActive ? theme.darkTheme : theme.lightTheme}
+        position={{ top: -10, left: 3 }}
+        // allowMotion={Boolean(allowMotion)}
+      >
+        <div className="star-box">
+          <div className="star" id="twinkle-star-8"></div>
+          <div className="star" id="twinkle-star-9"></div>
+          <div className="star" id="twinkle-star-10"></div>
+          <div className="star" id="twinkle-star-11"></div>
+          <div className="star" id="twinkle-star-12"></div>
+          <div className="star" id="twinkle-star-13"></div>
+        </div>
+      </Background>
+    </>
   )
 }
