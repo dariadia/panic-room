@@ -236,8 +236,8 @@ const StyledCookie = styled('article').attrs({ children: <CookieSVG /> })<{
   animation-duration: 1s, 2s;
   animation-delay: 0s, 0.5s;
   animation-iteration-count: 1, 1;
+  cursor: pointer;
   &:hover {
-    cursor: pointer;
     transform: rotate(10deg);
     transition: ease-out transform 0.2s;
   }

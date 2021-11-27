@@ -141,6 +141,7 @@ export const Menu = styled('button').attrs({
   position: absolute;
   z-index: 2;
   top: 14px;
+  cursor: pointer;
   :focus {
     outline: none;
     filter: drop-shadow(1px 2px 8px hsl(220deg 60% 50%));

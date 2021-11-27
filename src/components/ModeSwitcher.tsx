@@ -15,9 +15,11 @@ const ModeIcon: React.FC<ModeIconProps> = styled('input').attrs({
   -moz-appearance: none;
   -ms-appearance: none;
   appearance: none;
+  cursor: pointer;
   &:after {
     content: '';
     position: absolute;
+    cursor: pointer;
     top: -40px;
     left: -40px;
     height: 48px;
