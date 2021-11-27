@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react'
 import { NextApiRequest, NextApiResponse } from 'next'
 
 import { ThemeContext } from 'styled-components'
-import Cookies from 'cookies'
+// import Cookies from 'cookies'
 
 import { MainLayout } from '@/layouts'
 
@@ -12,7 +12,7 @@ import {
   WelcomeScreen,
   HomeScreen,
 } from '@/components'
-import { PANIC_ROOM_PREFERENCES } from 'constants/theme'
+// import { PANIC_ROOM_PREFERENCES } from 'constants/theme'
 
 import type { Page, SinglePage as SinglePageProps } from 'types'
 
@@ -48,17 +48,17 @@ HomePage.Layout = ({ children, ...props }) => (
 
 export async function getServerSideProps({
   req,
-  res,
-}: {
+}: //  res,
+{
   req: NextApiRequest
   res: NextApiResponse
 }): Promise<{ props: SinglePageProps }> {
-  const cookies = new Cookies(req, res)
-  const preferences = cookies.get(PANIC_ROOM_PREFERENCES) || null
+  // const cookies = new Cookies(req, res)
+  // const preferences = cookies.get(PANIC_ROOM_PREFERENCES) || null
 
   return {
     props: {
-      preferences,
+      preferences: '%7B%22allowMotion%22%3Atrue%2C%22allowSounds%22%3Atrue%7D',
       url: req.url,
     },
   }
