@@ -50,6 +50,7 @@ export const WelcomeMessage: React.FC<{
   const [, setCookie] = useCookies([PANIC_ROOM_PREFERENCES])
 
   const savePreferences = () => {
+    alert('save preferences')
     setCookie(PANIC_ROOM_PREFERENCES, JSON.stringify(preferences))
     window.location.reload()
   }
