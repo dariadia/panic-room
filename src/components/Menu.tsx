@@ -10,9 +10,21 @@ import styled, { ThemeContext } from 'styled-components'
 import { useCookies } from 'react-cookie'
 
 import { GOLDEN_SHADOW, BLUE_SHADOW } from 'utils/theme'
-import { PANIC_ROOM_PREFERENCES } from 'constants/theme'
-import { Button, PreferenceCheckbox } from '.'
+import {
+  ALLOW_MOTION,
+  ALLOW_SOUNDS,
+  DEFAULT_PREFERENCES,
+  PANIC_ROOM_PREFERENCES,
+} from 'constants/theme'
 import { TEXTS } from 'constants/texts'
+import {
+  ALLOW_MOTION_ARIA,
+  ALLOW_SOUNDS_ARIA,
+  NAVIGATION,
+  SETTINGS_MENU,
+} from 'constants/arias'
+
+import { Button, Emoji, PreferenceCheckbox } from '.'
 
 export const MenuWrapper: React.FC<{
   isMenuFocused: boolean
@@ -53,7 +65,7 @@ export const MenuWrapper: React.FC<{
   }
 
   const [cookies, setCookie] = useCookies([PANIC_ROOM_PREFERENCES])
-  const userPreferences = cookies[PANIC_ROOM_PREFERENCES]
+  const userPreferences = cookies[PANIC_ROOM_PREFERENCES] || DEFAULT_PREFERENCES
   const [preferences, setPreferences] = useState(userPreferences)
   const onCheckboxChange = (target: EventTarget & HTMLInputElement) =>
     setPreferences({ ...preferences, [target.name]: target.checked })
@@ -70,17 +82,18 @@ export const MenuWrapper: React.FC<{
       // @ts-ignore
       onClick={(event: Event) => onMenuClick(event.target)}
     >
-      <span>⚙️</span>
+      <Emoji label="cog">⚙️</Emoji>
       {isMenuOpen && (
         <MenuDropdown
           id={MENU_ID}
           theme={darkModeActive ? theme.darkTheme : theme.lightTheme}
         >
           <PreferenceCheckbox
-            checked={preferences.allowMotion}
+            aria-label={ALLOW_MOTION_ARIA}
+            checked={preferences?.allowMotion}
             labelId={MENU_OPTION_MOTION}
             id={TEXTS.motion}
-            name="allowMotion"
+            name={ALLOW_MOTION}
             onChange={onCheckboxChange}
             color="gold"
             shadow={darkModeActive ? GOLDEN_SHADOW : BLUE_SHADOW}
@@ -88,10 +101,11 @@ export const MenuWrapper: React.FC<{
             <span>{TEXTS.motion}</span>
           </PreferenceCheckbox>
           <PreferenceCheckbox
-            checked={preferences.allowSounds}
+            aria-label={ALLOW_SOUNDS_ARIA}
+            checked={preferences?.allowSounds}
             labelId={MENU_OPTION_SOUNDS}
             id={TEXTS.sounds}
-            name="allowSounds"
+            name={ALLOW_SOUNDS}
             onChange={onCheckboxChange}
             color="gold"
             shadow={darkModeActive ? GOLDEN_SHADOW : BLUE_SHADOW}
@@ -107,7 +121,7 @@ export const MenuWrapper: React.FC<{
   )
 }
 
-const MenuDropdown = styled('div')`
+const MenuDropdown = styled('nav')`
   position: absolute;
   padding: 16px;
   background: ${({ theme }) => theme.brand};
@@ -115,7 +129,11 @@ const MenuDropdown = styled('div')`
   border-radius: 4px;
 `
 
-export const Menu = styled('button')`
+export const Menu = styled('button').attrs({
+  id: 'menu',
+  role: NAVIGATION,
+  'aria-label': SETTINGS_MENU,
+})`
   background: transparent;
   border: none;
   padding: 8px;

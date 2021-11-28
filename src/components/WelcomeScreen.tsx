@@ -4,11 +4,17 @@ import styled, { ThemeContext } from 'styled-components'
 import { useCookies } from 'react-cookie'
 import { PreferenceCheckbox } from '.'
 import { TEXTS } from 'constants/texts'
-import { PANIC_ROOM_PREFERENCES, DEFAULT_PREFERENCES } from 'constants/theme'
+import {
+  PANIC_ROOM_PREFERENCES,
+  DEFAULT_PREFERENCES,
+  ALLOW_MOTION,
+  ALLOW_SOUNDS,
+} from 'constants/theme'
 
 import { BLUE_SHADOW, GOLDEN_SHADOW } from 'utils/theme'
 
 import { Theme } from 'types'
+import { ALLOW_SOUNDS_ARIA, ALLOW_MOTION_ARIA } from 'constants/arias'
 
 export const WelcomeScreen: React.FC<{ theme: Theme }> = styled('div')<{
   theme: Theme
@@ -66,6 +72,7 @@ export const WelcomeMessage: React.FC<{
       <p style={{ marginBottom: '32px' }}>
         {TEXTS.greeting_intro}
         <button
+          aria-controls="menu"
           onClick={() => triggerMenuFocus(true)}
           style={{ cursor: 'pointer' }}
         >
@@ -74,24 +81,28 @@ export const WelcomeMessage: React.FC<{
       </p>
       <article>
         <PreferenceCheckbox
+          aria-label={ALLOW_MOTION_ARIA}
           id={TEXTS.motion}
-          name="allowMotion"
+          name={ALLOW_MOTION}
           onChange={onCheckboxChange}
           color={
             darkModeActive ? theme.darkTheme.brand : theme.lightTheme.brand
           }
           shadow={darkModeActive ? BLUE_SHADOW : GOLDEN_SHADOW}
+          checked={preferences?.allowMotion}
         >
           <span>{TEXTS.motion}</span>
         </PreferenceCheckbox>
         <PreferenceCheckbox
+          aria-label={ALLOW_SOUNDS_ARIA}
           id={TEXTS.sounds}
-          name="allowSounds"
+          name={ALLOW_SOUNDS}
           onChange={onCheckboxChange}
           color={
             darkModeActive ? theme.darkTheme.brand : theme.lightTheme.brand
           }
           shadow={darkModeActive ? BLUE_SHADOW : GOLDEN_SHADOW}
+          checked={preferences?.allowSounds}
         >
           <span>{TEXTS.sounds}</span>
         </PreferenceCheckbox>
