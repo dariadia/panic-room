@@ -3,13 +3,22 @@ import { NextPage } from 'next'
 
 import { theme } from 'utils/theme'
 
-import { Locale, Preferences } from '.'
+import { FortuneCookie, Locale } from '.'
 
 export type Page<T> = NextPage<T> & { Layout?: React.FC }
 
 export interface SinglePage {
   locale?: Locale
-  preferences?: Preferences
+  preferences?: string | null
+  host?: string
+  url?: string
+}
+
+export interface FortunePage extends SinglePage {
+  fortuneCookie?: FortuneCookie
+  fortuneCookieId?: number
 }
 
 export type Theme = typeof theme
+
+export type WithHost = { host?: string }
