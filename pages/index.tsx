@@ -26,7 +26,7 @@ const HomePage: Page<SinglePageProps> = ({ preferences }) => {
         triggerMenuFocus={triggerMenuFocus}
       />
       {hasSavedPreferences ? (
-        <HomeScreen />
+        <HomeScreen preferences="%7B%22allowMotion%22%3Atrue%2C%22allowSounds%22%3Atrue%7D" />
       ) : (
         <WelcomeScreen
           theme={darkModeActive ? theme.darkTheme : theme.lightTheme}
