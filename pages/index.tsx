@@ -10,7 +10,7 @@ import { MenuWrapper, WelcomeMessage, WelcomeScreen } from '@/components'
 import { HomeScreen } from '@/components/HomeScreen'
 import { PANIC_ROOM_PREFERENCES } from 'constants/theme'
 
-import type { Page, Preferences, SinglePage as SinglePageProps } from 'types'
+import type { Page, SinglePage as SinglePageProps } from 'types'
 
 const HomePage: Page<SinglePageProps> = ({ preferences }) => {
   const hasSavedPreferences = preferences
@@ -54,7 +54,7 @@ export async function getServerSideProps({
 
   return {
     props: {
-      preferences: (preferences as unknown) as Preferences,
+      preferences,
     },
   }
 }
