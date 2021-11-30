@@ -37,14 +37,14 @@ const Main = styled('main')`
   overflow-clip-margin: ${MAIN_PADDING}px;
 `
 
-export const MainLayout: React.FC<SinglePage> = ({ children, url }) => {
+export const MainLayout: React.FC<SinglePage> = ({ url }) => {
   const { darkModeActive, theme } = useContext(ThemeContext)
 
   return (
     <Body theme={darkModeActive ? theme.darkTheme : theme.lightTheme}>
-      <button onClick={() => alert('hello!')}>hello</button>
+      <button onClick={() => alert('hello!')}>hello world</button>
       {url !== HOME && <HomeButton />}
-      <Main>{children}</Main>
+      <Main>hello world</Main>
       <Footer
         color={darkModeActive ? theme.darkTheme.text : theme.lightTheme.text}
       />
