@@ -1,11 +1,7 @@
 import React, { useContext } from 'react'
-import { useCookies } from 'react-cookie'
 import styled, { keyframes, ThemeContext } from 'styled-components'
 
-import { ALLOW_MOTION, PANIC_ROOM_PREFERENCES } from 'constants/theme'
-import { getValueFromCookieString } from 'utils/theme'
-
-import { Preferences, Theme } from 'types'
+import { Theme } from 'types'
 
 const twinkle = keyframes`
   0% {
@@ -301,17 +297,9 @@ const Background = styled('div')<{
   }
 `
 
-export const HomeScreen: React.FC<{ preferences: string }> = ({
-  preferences,
-}) => {
+export const HomeScreenShadow: React.FC = () => {
   const { darkModeActive, theme } = useContext(ThemeContext)
-  const [cookies] = useCookies([PANIC_ROOM_PREFERENCES])
-  const userPreferences =
-    preferences || (cookies[PANIC_ROOM_PREFERENCES] as Preferences)
-  const allowMotion =
-    typeof userPreferences === 'string'
-      ? getValueFromCookieString({ cookie: preferences, value: ALLOW_MOTION })
-      : userPreferences.allowMotion
+  const allowMotion = true
 
   return (
     <>
@@ -321,7 +309,37 @@ export const HomeScreen: React.FC<{ preferences: string }> = ({
         allowMotion={Boolean(allowMotion)}
         position={{ top: 60, left: 75 }}
       >
-        hello world
+        <div className="star-box">
+          <div className="star" id="twinkle-star-1"></div>
+          <div className="star" id="twinkle-star-2"></div>
+          <div className="star" id="twinkle-star-3"></div>
+          <div className="star" id="twinkle-star-4"></div>
+          <div className="star" id="twinkle-star-5"></div>
+          <div className="star" id="twinkle-star-6"></div>
+          <div className="star" id="twinkle-star-7"></div>
+          <div className="line" id="line-1"></div>
+          <div className="line" id="line-2"></div>
+          <div className="line" id="line-3"></div>
+          <div className="line" id="line-4"></div>
+          <div className="line" id="line-5"></div>
+          <div className="line" id="line-6"></div>
+          <div className="line" id="line-7"></div>
+        </div>
+      </Background>
+      <Background
+        className="night-sky"
+        theme={darkModeActive ? theme.darkTheme : theme.lightTheme}
+        position={{ top: -10, left: 3 }}
+        allowMotion={Boolean(allowMotion)}
+      >
+        <div className="star-box">
+          <div className="star" id="twinkle-star-8"></div>
+          <div className="star" id="twinkle-star-9"></div>
+          <div className="star" id="twinkle-star-10"></div>
+          <div className="star" id="twinkle-star-11"></div>
+          <div className="star" id="twinkle-star-12"></div>
+          <div className="star" id="twinkle-star-13"></div>
+        </div>
       </Background>
     </>
   )
