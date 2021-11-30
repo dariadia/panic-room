@@ -25,6 +25,7 @@ const HomePage: Page<SinglePageProps> = ({ preferences }) => {
 
   return (
     <>
+      <button onClick={() => alert('hello!')}>hello</button>
       <MenuWrapper
         isMenuFocused={isMenuFocused}
         triggerMenuFocus={triggerMenuFocus}
