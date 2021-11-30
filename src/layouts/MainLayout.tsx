@@ -42,6 +42,7 @@ export const MainLayout: React.FC<SinglePage> = ({ children, url }) => {
 
   return (
     <Body theme={darkModeActive ? theme.darkTheme : theme.lightTheme}>
+      <button onClick={() => alert('hello!')}>hello</button>
       {url !== HOME && <HomeButton />}
       <Main>{children}</Main>
       <Footer
