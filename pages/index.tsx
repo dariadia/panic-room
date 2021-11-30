@@ -10,7 +10,7 @@ import {
   MenuWrapper,
   WelcomeMessage,
   WelcomeScreen,
-  HomeScreen,
+  // HomeScreen,
 } from '@/components'
 import { PANIC_ROOM_PREFERENCES } from 'constants/theme'
 
@@ -30,7 +30,7 @@ const HomePage: Page<SinglePageProps> = ({ preferences }) => {
         triggerMenuFocus={triggerMenuFocus}
       />
       {hasSavedPreferences ? (
-        <HomeScreen preferences={preferences} />
+        <div>hello world</div>
       ) : (
         <WelcomeScreen
           theme={darkModeActive ? theme.darkTheme : theme.lightTheme}
