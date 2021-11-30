@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { NextApiRequest, NextApiResponse } from 'next'
 
 import { ThemeContext } from 'styled-components'
@@ -7,6 +7,7 @@ import Cookies from 'cookies'
 import { MainLayout } from '@/layouts'
 
 import { MenuWrapper, WelcomeMessage, WelcomeScreen } from '@/components'
+
 import { PANIC_ROOM_PREFERENCES } from 'constants/theme'
 
 import type { Page, SinglePage as SinglePageProps } from 'types'
@@ -54,6 +55,7 @@ export async function getServerSideProps({
   return {
     props: {
       preferences,
+      url: req.url,
     },
   }
 }

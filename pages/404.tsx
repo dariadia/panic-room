@@ -19,7 +19,9 @@ const Page404: Page<SinglePageProps> = () => {
 }
 
 Page404.Layout = ({ children, ...props }) => (
-  <MainLayout {...props}>{children}</MainLayout>
+  <MainLayout {...props} url="404">
+    {children}
+  </MainLayout>
 )
 
 export default Page404
