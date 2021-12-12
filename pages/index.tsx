@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { NextApiRequest, NextApiResponse } from 'next'
 
 import { ThemeContext } from 'styled-components'
@@ -59,6 +59,7 @@ export async function getServerSideProps({
   return {
     props: {
       preferences,
+      url: req.url,
     },
   }
 }

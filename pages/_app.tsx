@@ -1,4 +1,5 @@
-import React, { ComponentType } from 'react'
+import React, { ComponentType, useState, useEffect } from 'react'
+import Router from 'next/router'
 import Head from 'next/head'
 
 import { AppProps } from 'next/app'
@@ -10,6 +11,8 @@ import withDarkMode from 'next-dark-mode'
 
 import { TEXTS } from 'constants/texts'
 import { theme } from 'utils/theme'
+import { Loader } from '@/components'
+import { APP_PRODUCTION } from 'constants/locations'
 
 const GlobalStyle = createGlobalStyle`
  ${normalize}
@@ -37,6 +40,19 @@ const App: React.FC<ApplicationProps> = ({
 }) => {
   const Layout: ComponentType = Component.Layout || React.Fragment
 
+  const [loading, setLoading] = useState(false)
+  const startLoading = () => setLoading(true)
+  const stopLoading = () => setLoading(false)
+
+  useEffect(() => {
+    Router.events.on('routeChangeStart', startLoading)
+    Router.events.on('routeChangeComplete', stopLoading)
+    return () => {
+      Router.events.off('routeChangeStart', startLoading)
+      Router.events.off('routeChangeComplete', stopLoading)
+    }
+  }, [])
+
   return (
     <>
       <Head>
@@ -47,9 +63,12 @@ const App: React.FC<ApplicationProps> = ({
         <meta
           name="og:image"
           property="og:image"
-          content="/assets/panic-room_v2.png"
+          content={`${APP_PRODUCTION}/assets/panic-room_v2.png`}
         />
-        <meta name="twitter:image" content="/assets/panic-room_v2.png" />
+        <meta
+          name="twitter:image"
+          content={`${APP_PRODUCTION}/assets/panic-room_v2.png`}
+        />
         <link rel="manifest" href="/favicon/site.webmanifest.json" />
         <link rel="icon" href="/favicon/favicon.ico" />
         <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png" />
@@ -58,7 +77,7 @@ const App: React.FC<ApplicationProps> = ({
         <CookiesProvider>
           {Component.Layout ? (
             <Layout {...pageProps}>
-              <Component {...pageProps} />
+              {loading ? <Loader /> : <Component {...pageProps} />}
             </Layout>
           ) : (
             <Component {...pageProps} />
