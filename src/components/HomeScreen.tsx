@@ -297,7 +297,7 @@ const Background = styled('div')<{
   }
 `
 
-export const HomeScreen: React.FC<{ preferences: string }> = () => {
+export const HomeScreen: React.FC = () => {
   const { darkModeActive, theme } = useContext(ThemeContext)
   const allowMotion = true
   return (
