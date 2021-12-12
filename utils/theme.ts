@@ -45,6 +45,7 @@ export const getValueFromCookieString = ({
   cookie: string
   value: typeof ALLOW_MOTION | typeof ALLOW_SOUNDS
 }): boolean => {
+  if (!cookie) return false
   let match
   if (value === ALLOW_MOTION) {
     match = /(?<=allowMotion.{6})\w+/.exec(cookie)

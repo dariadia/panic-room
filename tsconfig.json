@@ -24,8 +24,11 @@
     "isolatedModules": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-    }
+      "@/*": [
+        "src/*"
+      ]
+    },
+    "incremental": true
   },
   "exclude": [
     "node_modules"
@@ -34,6 +37,6 @@
     "node_modules/dariadia/danni-s-design-system/**/*.d.ts",
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx",
+    "**/*.tsx"
   ]
 }
