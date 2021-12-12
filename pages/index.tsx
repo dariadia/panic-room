@@ -7,10 +7,10 @@ import Cookies from 'cookies'
 import { MainLayout } from '@/layouts'
 
 import {
+  HomeScreen,
   MenuWrapper,
   WelcomeMessage,
   WelcomeScreen,
-  HomeScreen,
 } from '@/components'
 import { PANIC_ROOM_PREFERENCES } from 'constants/theme'
 
@@ -30,7 +30,7 @@ const HomePage: Page<SinglePageProps> = ({ preferences }) => {
         triggerMenuFocus={triggerMenuFocus}
       />
       {hasSavedPreferences ? (
-        <HomeScreen preferences={preferences} />
+        <HomeScreen />
       ) : (
         <WelcomeScreen
           theme={darkModeActive ? theme.darkTheme : theme.lightTheme}

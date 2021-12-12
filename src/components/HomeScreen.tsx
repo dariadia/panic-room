@@ -1,11 +1,7 @@
 import React, { useContext } from 'react'
-import { useCookies } from 'react-cookie'
 import styled, { keyframes, ThemeContext } from 'styled-components'
 
-import { ALLOW_MOTION, PANIC_ROOM_PREFERENCES } from 'constants/theme'
-import { getValueFromCookieString } from 'utils/theme'
-
-import { Preferences, Theme } from 'types'
+import { Theme } from 'types'
 
 const twinkle = keyframes`
   0% {
@@ -301,18 +297,9 @@ const Background = styled('div')<{
   }
 `
 
-export const HomeScreen: React.FC<{ preferences: string }> = ({
-  preferences,
-}) => {
+export const HomeScreen: React.FC = () => {
   const { darkModeActive, theme } = useContext(ThemeContext)
-  const [cookies] = useCookies([PANIC_ROOM_PREFERENCES])
-  const userPreferences =
-    preferences || (cookies[PANIC_ROOM_PREFERENCES] as Preferences)
-  const allowMotion =
-    typeof userPreferences === 'string'
-      ? getValueFromCookieString({ cookie: preferences, value: ALLOW_MOTION })
-      : userPreferences.allowMotion
-
+  const allowMotion = true
   return (
     <>
       <Background
